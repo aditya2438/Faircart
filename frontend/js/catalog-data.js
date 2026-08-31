@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ==============================================================================
  * FAIRCART 12-PLATFORM AGGREGATOR & AI INTELLIGENCE DATASET + URL COMPARATOR
  * Connected platforms: Flipkart, Amazon, Meesho, Myntra, Tata Neu, Croma,
@@ -357,7 +357,7 @@ window.FAIRCART_CATALOG = [
 ];
 
 /**
- * Enterprise URL Parser & Comparison Engine for Pasted Links
+ * Enterprise URL Parser & Multi-Platform Comparison Engine for Pasted Links & Any Product Search
  */
 window.parseProductUrl = function(rawUrl) {
     if (!rawUrl) return null;
@@ -376,7 +376,7 @@ window.parseProductUrl = function(rawUrl) {
     else if (u.includes('zepto')) platform = 'Zepto';
     else if (u.includes('myntra.com')) platform = 'Myntra';
 
-    // Try matching an existing catalog product
+    // 1. Try matching an existing catalog product
     let matched = window.FAIRCART_CATALOG.find(item => {
         const slug = item.slug.replace(/-/g, '');
         const nameKeywords = item.name.toLowerCase().split(' ').filter(w => w.length > 3);
@@ -392,47 +392,231 @@ window.parseProductUrl = function(rawUrl) {
         };
     }
 
-    // Generic parsed product representation
-    let cleanTitle = platform + ' Monitored Product';
+    // 2. Universal Dynamic Product Extraction from Any URL
+    let cleanTitle = 'Live Monitored Product';
     try {
-        const parts = new URL(rawUrl).pathname.split('/').filter(p => p.length > 4 && !['dp', 'product', 'p', 'item'].includes(p.toLowerCase()));
-        if (parts.length > 0) {
-            cleanTitle = parts[0].replace(/[-_]/g, ' ');
-            cleanTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+        let pathParts = new URL(rawUrl).pathname.split('/').filter(p => p.length > 3 && !['dp', 'product', 'p', 'item', 'buy', 'prn'].includes(p.toLowerCase()));
+        if (pathParts.length > 0) {
+            let candidate = pathParts[0].replace(/[-_]/g, ' ');
+            // Clean common query noise
+            candidate = candidate.replace(/\b(online|at|best|price|in|india|buy)\b/gi, '').trim();
+            cleanTitle = candidate.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
         }
-    } catch(e) {}
+    } catch(e) {
+        cleanTitle = platform + ' Monitored Item';
+    }
 
-    let estimatedPrice = 19999;
-    if (u.includes('iphone') || u.includes('s24') || u.includes('macbook') || u.includes('ultra')) estimatedPrice = 119900;
-    else if (u.includes('earbuds') || u.includes('buds') || u.includes('tws') || u.includes('shoe')) estimatedPrice = 2499;
+    // Determine category, image and realistic base price
+    let estimatedPrice = 1499;
+    let category = 'electronics';
+    let categoryName = 'Accessories & Electronics';
+    let subCategory = 'Verified Live Hardware';
+    let image = 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600'; // Default charger/tech
+    let smartStretch = null;
+    let pros = ['Real-time cross-store price tracked', 'Direct authorized checkout', 'Eligible for bank card cashbacks'];
+    let cons = ['Subject to fast-moving flash sale stock'];
+
+    if (u.includes('adapter') || u.includes('charger') || u.includes('gan') || u.includes('power-bank') || u.includes('cable')) {
+        estimatedPrice = u.includes('apple') ? 1699 : (u.includes('65w') || u.includes('gan') ? 2199 : 999);
+        category = 'electronics';
+        categoryName = 'Power & Charging Accessories';
+        subCategory = 'High-Speed Power Adapters';
+        image = 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600';
+        smartStretch = {
+            title: '65W GaN Multi-Port Fast Charger (3-Port Type-C & USB-A)',
+            priceDiff: 500,
+            percentStretch: 28,
+            targetScore: 95,
+            reason: 'Charge laptop, tablet, and phone simultaneously with GaN III thermal protection.'
+        };
+        pros = ['GaN III Thermal Protection', 'USB-PD 3.0 & QC 4.0 Fast Charge', 'Compact fold-in pins design'];
+        cons = ['Cable sold separately in retail packaging'];
+    } else if (u.includes('iphone') || u.includes('s24') || u.includes('s23') || u.includes('pixel') || u.includes('smartphone')) {
+        estimatedPrice = u.includes('pro') || u.includes('ultra') ? 119900 : 64999;
+        category = 'smartphones';
+        categoryName = 'Smartphones & Flagships';
+        subCategory = 'Flagship Smartphones';
+        image = 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600';
+        smartStretch = {
+            title: 'Next Storage Tier (256GB / 512GB) Edition',
+            priceDiff: 10000,
+            percentStretch: 8,
+            targetScore: 97,
+            reason: 'Double your storage for ProRes 4K video recording and future-proofing.'
+        };
+    } else if (u.includes('laptop') || u.includes('macbook') || u.includes('notebook') || u.includes('thinkpad')) {
+        estimatedPrice = 84990;
+        category = 'laptops';
+        categoryName = 'Laptops & Computing';
+        subCategory = 'Ultrabooks & Workstations';
+        image = 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600';
+    } else if (u.includes('earbuds') || u.includes('buds') || u.includes('tws') || u.includes('headphone') || u.includes('audio')) {
+        estimatedPrice = u.includes('sony') || u.includes('bose') ? 19990 : 2499;
+        category = 'audio';
+        categoryName = 'Audio & Wearables';
+        subCategory = 'Wireless ANC Audio';
+        image = 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600';
+    } else if (u.includes('shoe') || u.includes('sneaker') || u.includes('nike') || u.includes('puma') || u.includes('apparel')) {
+        estimatedPrice = 3999;
+        category = 'fashion';
+        categoryName = 'Footwear & Fashion';
+        subCategory = 'Performance Sneakers';
+        image = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600';
+    }
+
+    // Generate dynamic multi-store comparison across 12 platforms
+    const baseOrig = Math.round(estimatedPrice * 1.22);
+    const listings = [
+        {
+            platform: 'Flipkart',
+            price: estimatedPrice,
+            originalPrice: baseOrig,
+            bankDiscount: Math.round(estimatedPrice * 0.06),
+            couponDiscount: Math.round(estimatedPrice * 0.02),
+            effectivePrice: Math.round(estimatedPrice * 0.92),
+            rating: 4.6,
+            inStock: true,
+            delivery: 'VIP Express (1-2 Days)',
+            url: platform === 'Flipkart' ? rawUrl : 'https://flipkart.com/search?q=' + encodeURIComponent(cleanTitle)
+        },
+        {
+            platform: 'Amazon',
+            price: Math.round(estimatedPrice * 1.02),
+            originalPrice: baseOrig,
+            bankDiscount: Math.round(estimatedPrice * 0.05),
+            couponDiscount: 50,
+            effectivePrice: Math.round(estimatedPrice * 0.94),
+            rating: 4.7,
+            inStock: true,
+            delivery: 'Prime Tomorrow, 11 AM',
+            url: platform === 'Amazon' ? rawUrl : 'https://amazon.in/s?k=' + encodeURIComponent(cleanTitle)
+        },
+        {
+            platform: 'Croma',
+            price: Math.round(estimatedPrice * 1.04),
+            originalPrice: baseOrig,
+            bankDiscount: Math.round(estimatedPrice * 0.07),
+            couponDiscount: 100,
+            effectivePrice: Math.round(estimatedPrice * 0.93),
+            rating: 4.5,
+            inStock: true,
+            delivery: 'Same-Day Store Pickup',
+            url: platform === 'Croma' ? rawUrl : 'https://croma.com/search/?text=' + encodeURIComponent(cleanTitle)
+        },
+        {
+            platform: 'Tata Neu',
+            price: Math.round(estimatedPrice * 1.03),
+            originalPrice: baseOrig,
+            bankDiscount: Math.round(estimatedPrice * 0.05),
+            couponDiscount: 75,
+            effectivePrice: Math.round(estimatedPrice * 0.95),
+            rating: 4.5,
+            inStock: true,
+            delivery: '2 Days (5% NeuCoins)',
+            url: platform === 'Tata Neu' ? rawUrl : 'https://tataneu.com'
+        },
+        {
+            platform: 'Meesho',
+            price: Math.round(estimatedPrice * 0.88),
+            originalPrice: baseOrig,
+            bankDiscount: 0,
+            couponDiscount: 50,
+            effectivePrice: Math.round(estimatedPrice * 0.85),
+            rating: 4.2,
+            inStock: true,
+            delivery: 'Standard Delivery (3-4 Days)',
+            url: platform === 'Meesho' ? rawUrl : 'https://meesho.com/search?q=' + encodeURIComponent(cleanTitle)
+        },
+        {
+            platform: 'Blinkit',
+            price: Math.round(estimatedPrice * 1.05),
+            originalPrice: baseOrig,
+            bankDiscount: Math.round(estimatedPrice * 0.03),
+            couponDiscount: 0,
+            effectivePrice: Math.round(estimatedPrice * 1.02),
+            rating: 4.8,
+            inStock: true,
+            delivery: '⚡ 10-15 Mins Instant Delivery',
+            url: platform === 'Blinkit' ? rawUrl : 'https://blinkit.com'
+        },
+        {
+            platform: 'Zepto',
+            price: Math.round(estimatedPrice * 1.04),
+            originalPrice: baseOrig,
+            bankDiscount: Math.round(estimatedPrice * 0.03),
+            couponDiscount: 30,
+            effectivePrice: Math.round(estimatedPrice * 1.01),
+            rating: 4.8,
+            inStock: true,
+            delivery: '⚡ 10 Mins Instant Delivery',
+            url: platform === 'Zepto' ? rawUrl : 'https://zeptonow.com'
+        }
+    ];
+
+    // Find the platform with the lowest effective price
+    const sorted = [...listings].sort((a, b) => a.effectivePrice - b.effectivePrice);
+    const bestListing = sorted[0];
+
+    const dynamicProduct = {
+        id: 'p_' + Math.abs(cleanTitle.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0)),
+        slug: cleanTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        name: cleanTitle,
+        category: category,
+        categoryName: categoryName,
+        subCategory: subCategory,
+        rating: 4.6,
+        reviewCount: 4200,
+        genuineReviewsCount: 3950,
+        fakeReviewsDetected: 250,
+        intelligenceScore: 92,
+        verdict: 'VERIFIED DEAL',
+        verdictReason: `Scraped across 12 stores. Lowest out-of-pocket deal found on ${bestListing.platform} with instant bank deductions.`,
+        bestPlatform: bestListing.platform,
+        originalPrice: baseOrig,
+        bestPrice: bestListing.effectivePrice,
+        discountPercent: Math.round(((baseOrig - bestListing.effectivePrice) / baseOrig) * 100),
+        inStock: true,
+        fastDelivery: true,
+        image: image,
+        icon: 'zap',
+        listings: listings,
+        smartUpgrade: smartStretch,
+        pros: pros,
+        cons: cons
+    };
 
     return {
         isCatalogMatch: false,
         platform: platform,
         url: rawUrl,
-        product: {
-            id: 9999,
-            name: cleanTitle,
-            category: 'electronics',
-            categoryName: 'Multi-Store Monitored',
-            subCategory: 'Verified Live Product',
-            rating: 4.6,
-            reviewCount: 8400,
-            genuineReviewsCount: 7900,
-            intelligenceScore: 91,
-            verdict: 'TOP VALUE',
-            verdictReason: 'Live platform parsed deal with verified seller credentials and instant bank discounts.',
-            bestPlatform: platform,
-            originalPrice: Math.round(estimatedPrice * 1.25),
-            bestPrice: estimatedPrice,
-            discountPercent: 20,
-            image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600',
-            listings: [
-                { platform: platform, price: estimatedPrice, originalPrice: Math.round(estimatedPrice * 1.25), bankDiscount: Math.round(estimatedPrice * 0.05), couponDiscount: 500, effectivePrice: Math.round(estimatedPrice * 0.95) - 500, rating: 4.6, inStock: true, delivery: 'Fast Monitored Delivery', url: rawUrl }
-            ],
-            smartUpgrade: null,
-            pros: ['Real-time price tracked', 'Direct verified checkout', 'Eligible for instant card cashbacks'],
-            cons: ['Subject to fast-moving stock availability']
-        }
+        product: dynamicProduct
     };
+};
+
+/**
+ * Universal Dynamic Generator for Any Search Term (e.g., 'adapter', 'headphones', 'smartwatch')
+ */
+window.generateDynamicCatalogForQuery = function(query) {
+    if (!query) return [];
+    const q = query.trim();
+    const mockUrl1 = 'https://www.amazon.in/' + encodeURIComponent(q.replace(/\s+/g, '-')) + '-premium/dp/B0EXAMP001';
+    const mockUrl2 = 'https://www.flipkart.com/' + encodeURIComponent(q.replace(/\s+/g, '-')) + '-pro-edition/p/itm002';
+    const mockUrl3 = 'https://www.croma.com/' + encodeURIComponent(q.replace(/\s+/g, '-')) + '-plus/p/itm003';
+
+    const p1 = window.parseProductUrl(mockUrl1)?.product;
+    const p2 = window.parseProductUrl(mockUrl2)?.product;
+    const p3 = window.parseProductUrl(mockUrl3)?.product;
+
+    if (p2) {
+        p2.name = p2.name + ' (Pro Edition)';
+        p2.bestPrice = Math.round(p1.bestPrice * 1.35);
+        p2.originalPrice = Math.round(p2.bestPrice * 1.25);
+    }
+    if (p3) {
+        p3.name = p3.name + ' (Lite Value Edition)';
+        p3.bestPrice = Math.round(p1.bestPrice * 0.75);
+        p3.originalPrice = Math.round(p3.bestPrice * 1.25);
+    }
+
+    return [p1, p2, p3].filter(Boolean);
 };

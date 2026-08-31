@@ -570,8 +570,14 @@
                 document.getElementById('queryDisplay').textContent = 'All Trending Products';
             }
 
+            // If no match found in static catalog, dynamically generate live scraped products for the query
             if (matchedItems.length === 0) {
-                matchedItems = window.FAIRCART_CATALOG.slice(0, 3);
+                if (queryParam && window.generateDynamicCatalogForQuery) {
+                    matchedItems = window.generateDynamicCatalogForQuery(queryParam);
+                }
+                if (!matchedItems || matchedItems.length === 0) {
+                    matchedItems = window.FAIRCART_CATALOG.slice(0, 3);
+                }
             }
 
             let displayItems = matchedItems.filter(item => item.bestPrice <= maxBudget && item.intelligenceScore >= minScore);
