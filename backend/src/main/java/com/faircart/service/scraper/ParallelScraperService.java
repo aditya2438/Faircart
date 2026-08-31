@@ -22,9 +22,13 @@ public class ParallelScraperService {
     private static final List<ProductPlatformListing.Platform> TARGET_PLATFORMS = List.of(
             ProductPlatformListing.Platform.AMAZON,
             ProductPlatformListing.Platform.FLIPKART,
+            ProductPlatformListing.Platform.CROMA,
+            ProductPlatformListing.Platform.SAMSUNG,
+            ProductPlatformListing.Platform.APPLE,
             ProductPlatformListing.Platform.TATA_NEU,
-            ProductPlatformListing.Platform.MYNTRA,
-            ProductPlatformListing.Platform.CROMA
+            ProductPlatformListing.Platform.BLINKIT,
+            ProductPlatformListing.Platform.INSTAMART,
+            ProductPlatformListing.Platform.MYNTRA
     );
 
     /**
@@ -76,8 +80,8 @@ public class ParallelScraperService {
         BigDecimal originalPrice = basePrice.multiply(BigDecimal.valueOf(1.20)).setScale(2, RoundingMode.HALF_UP);
 
         // Calculate coupon / bank discounts
-        BigDecimal couponDiscount = platform == ProductPlatformListing.Platform.AMAZON || platform == ProductPlatformListing.Platform.FLIPKART
-                ? basePrice.multiply(BigDecimal.valueOf(0.05)).setScale(2, RoundingMode.HALF_UP)
+        BigDecimal couponDiscount = platform == ProductPlatformListing.Platform.AMAZON || platform == ProductPlatformListing.Platform.FLIPKART || platform == ProductPlatformListing.Platform.MYNTRA
+                ? basePrice.multiply(BigDecimal.valueOf(0.06)).setScale(2, RoundingMode.HALF_UP)
                 : BigDecimal.ZERO;
 
         BigDecimal bankDiscount = basePrice.multiply(BigDecimal.valueOf(0.05)).setScale(2, RoundingMode.HALF_UP);
@@ -88,14 +92,19 @@ public class ParallelScraperService {
                 .multiply(BigDecimal.valueOf(100))
                 .setScale(1, RoundingMode.HALF_UP);
 
-        BigDecimal rating = BigDecimal.valueOf(3.8 + (Math.random() * 1.1)).setScale(1, RoundingMode.HALF_UP);
-        int reviews = 150 + (int)(Math.random() * 4500);
+        BigDecimal rating = BigDecimal.valueOf(4.0 + (Math.random() * 0.9)).setScale(1, RoundingMode.HALF_UP);
+        int reviews = 250 + (int)(Math.random() * 8500);
 
         String delivery = switch (platform) {
+            case BLINKIT -> "⚡ 10-15 Mins Instant Delivery";
+            case INSTAMART -> "⚡ 12-20 Mins Instant Delivery";
             case AMAZON -> "Prime Tomorrow, 11 AM";
-            case FLIPKART -> "Express Delivery in 2 Days";
-            case TATA_NEU -> "NeuPass Standard (2-3 Days)";
+            case FLIPKART -> "Express VIP Delivery in 1-2 Days";
             case CROMA -> "Same-Day Store Pickup / Delivery";
+            case SAMSUNG -> "Samsung Direct (Official 1-Year Care+)";
+            case APPLE -> "Apple Store Official Free Express Delivery";
+            case TATA_NEU -> "NeuPass Standard (5% NeuCoins Cashback)";
+            case MYNTRA -> "Myntra Express Insider (2 Days)";
             default -> "Standard Delivery (3-5 Days)";
         };
 

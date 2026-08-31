@@ -158,6 +158,6 @@ public class ProductPlatformListing extends BaseEntity {
     }
 
     public enum Platform {
-        AMAZON, FLIPKART, TATA_NEU, MYNTRA, CROMA, RELIANCE_DIGITAL, AJIO, NYKAA
+        AMAZON, FLIPKART, TATA_NEU, MYNTRA, CROMA, RELIANCE_DIGITAL, AJIO, NYKAA, SAMSUNG, APPLE, BLINKIT, INSTAMART, ZEPTO
     }
 }

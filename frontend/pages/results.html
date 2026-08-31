@@ -86,14 +86,15 @@
                 </a>
             </div>
         </nav>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-4 pt-28 pb-16">
+    </header>    <main class="max-w-7xl mx-auto px-4 pt-28 pb-16">
         <!-- Search & Control Header -->
         <div class="glass-panel p-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Multi-Platform Aggregator</span>
-                <h1 class="text-2xl font-bold font-['Outfit'] mt-1" id="resultsTitle">Showing Deals for: <span class="text-indigo-400" id="queryDisplay">Earphones under ₹300</span></h1>
+                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Multi-Platform Intelligence Engine</span>
+                <h1 class="text-2xl sm:text-3xl font-bold font-['Outfit'] mt-1 text-white" id="resultsTitle">
+                    Comparing Deals for: <span class="text-indigo-400" id="queryDisplay">All Categories</span>
+                </h1>
+                <p class="text-xs text-slate-400 mt-1" id="resultsSubtitle">Real-time out-of-pocket pricing across Amazon, Flipkart, Tata Neu, Croma & Myntra</p>
             </div>
             <div class="flex items-center gap-3">
                 <button onclick="exportCSV()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white flex items-center gap-2 transition-colors">
@@ -106,192 +107,92 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <!-- Sidebar Filters -->
-            <aside class="glass-panel p-5 h-fit space-y-6">
+            <!-- Sidebar Quick Filters -->
+            <aside class="glass-panel p-5 h-fit space-y-6 lg:sticky lg:top-28">
                 <div>
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2 mb-4">
-                        <i data-lucide="sliders-horizontal" class="w-4 h-4 text-indigo-400"></i> Refine Budget & Stores
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center justify-between mb-4">
+                        <span class="flex items-center gap-2"><i data-lucide="sliders-horizontal" class="w-4 h-4 text-indigo-400"></i> Refine Arena</span>
+                        <button onclick="resetArenaFilters()" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold lowercase">clear</button>
                     </h3>
                     
-                    <!-- Budget Slider -->
+                    <!-- Target Budget Slider -->
                     <div class="space-y-2">
                         <div class="flex justify-between text-xs font-semibold">
                             <span class="text-slate-400">Target Budget:</span>
-                            <span class="text-indigo-400" id="budgetValue">₹300</span>
+                            <span class="text-indigo-400 font-bold" id="budgetValue">₹1,50,000</span>
                         </div>
-                        <input type="range" id="budgetRange" min="100" max="5000" step="50" value="300" 
-                               class="w-full accent-indigo-500 bg-white/10 rounded-lg cursor-pointer">
+                        <input type="range" id="budgetRange" min="300" max="150000" step="500" value="150000" 
+                               class="w-full accent-indigo-500 bg-white/10 rounded-lg cursor-pointer"
+                               oninput="document.getElementById('budgetValue').textContent = '₹' + Number(this.value).toLocaleString('en-IN'); updateArena();">
                     </div>
                 </div>
 
                 <!-- Stores Checkboxes -->
-                <div class="pt-4 border-t border-white/10 space-y-3">
-                    <span class="text-xs font-semibold text-slate-400">Platforms Included:</span>
+                <div class="pt-4 border-t border-white/10 space-y-2.5 max-h-52 overflow-y-auto pr-1">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Live Platforms</span>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
-                        <input type="checkbox" checked class="accent-indigo-500 rounded"> Amazon India (Prime Deals)
+                        <input type="checkbox" checked value="Amazon" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Amazon India (Prime)
                     </label>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
-                        <input type="checkbox" checked class="accent-indigo-500 rounded"> Flipkart SuperCoins
+                        <input type="checkbox" checked value="Flipkart" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Flipkart (VIP Deals)
                     </label>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
-                        <input type="checkbox" checked class="accent-indigo-500 rounded"> Tata NeuPass
+                        <input type="checkbox" checked value="Croma" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Croma Retail
                     </label>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
-                        <input type="checkbox" checked class="accent-indigo-500 rounded"> Croma Retail
+                        <input type="checkbox" checked value="Samsung" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Samsung Direct
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked value="Apple" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Apple Store Official
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked value="Tata Neu" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Tata Neu (NeuPass)
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked value="Blinkit" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> <span class="text-amber-300 font-semibold">⚡ Blinkit (10-min)</span>
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked value="Instamart" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> <span class="text-orange-400 font-semibold">⚡ Instamart (15-min)</span>
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked value="Myntra" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Myntra Fashion
                     </label>
                 </div>
 
                 <!-- Score Filter -->
                 <div class="pt-4 border-t border-white/10 space-y-2">
                     <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-slate-400">Minimum Score:</span>
-                        <span class="text-emerald-400" id="scoreValue">70+</span>
+                        <span class="text-slate-400">Min Intelligence Score:</span>
+                        <span class="text-emerald-400 font-bold" id="scoreValue">0+</span>
                     </div>
-                    <input type="range" id="scoreRange" min="0" max="100" step="5" value="70" 
-                           class="w-full accent-emerald-500 bg-white/10 rounded-lg cursor-pointer">
+                    <input type="range" id="scoreRange" min="0" max="95" step="5" value="0" 
+                           class="w-full accent-emerald-500 bg-white/10 rounded-lg cursor-pointer"
+                           oninput="document.getElementById('scoreValue').textContent = this.value + '+'; updateArena();">
                 </div>
             </aside>
 
             <!-- Main Comparison Arena -->
             <section class="lg:col-span-3 space-y-6">
-                <!-- Smart Stretch Upsell Banner -->
-                <div class="glass-panel smart-stretch-card p-6 rounded-2xl relative overflow-hidden">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                        <div>
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-2">
-                                <i data-lucide="zap" class="w-3.5 h-3.5"></i> Smart Stretch Recommendation Engine
-                            </div>
-                            <h2 class="text-xl font-extrabold text-white">Upgrade Pick: boAt BassHeads 100 Pro</h2>
-                            <p class="text-xs text-slate-300 mt-1 max-w-xl">
-                                Spending <strong>₹70 more</strong> than your ₹300 budget delivers <strong>+65% higher composite value</strong>: 12mm sound drivers, tangle-free braided cable, and 1-year replacement warranty.
-                            </p>
-                        </div>
-                        <div class="text-right shrink-0">
-                            <span class="text-xs text-slate-400">Effective Deal Price</span>
-                            <div class="text-3xl font-black text-amber-400 font-['Outfit']">₹369</div>
-                            <span class="text-[11px] text-emerald-400 font-bold">91 • SMART UPGRADE</span>
-                        </div>
-                    </div>
-                </div>
+                <!-- Smart Stretch Upsell Banner Container -->
+                <div id="smartStretchBannerContainer"></div>
 
                 <!-- Verified Recommendations Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Base Budget Match Card -->
-                    <div class="glass-card p-5 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase">Best Budget Choice</span>
-                                <h3 class="text-base font-bold text-white mt-1">Realme Buds 2 Neo</h3>
-                            </div>
-                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/80 text-white text-xs font-black">
-                                84 • BUY NOW
-                            </span>
-                        </div>
-
-                        <div class="aspect-video rounded-xl bg-slate-800/80 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=60" alt="Realme Buds 2 Neo" class="w-full h-full object-cover">
-                        </div>
-
-                        <!-- Price Breakdown Matrix -->
-                        <div class="space-y-1 text-xs">
-                            <div class="flex justify-between text-slate-400">
-                                <span>Listed Price:</span>
-                                <span class="line-through">₹499</span>
-                            </div>
-                            <div class="flex justify-between text-emerald-400">
-                                <span>Bank Instant Discount:</span>
-                                <span>-₹150</span>
-                            </div>
-                            <div class="flex justify-between text-emerald-400">
-                                <span>Coupon Applied:</span>
-                                <span>-₹50</span>
-                            </div>
-                            <div class="flex justify-between text-white font-bold pt-1 border-t border-white/10 text-sm">
-                                <span>Effective Out-of-Pocket:</span>
-                                <span class="text-indigo-400 font-black">₹299</span>
-                            </div>
-                        </div>
-
-                        <!-- Truth Box Section -->
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2 text-xs">
-                            <div class="font-bold text-slate-300 flex items-center gap-1">
-                                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i> Verified Truth Box
-                            </div>
-                            <p class="text-slate-300"><strong class="text-emerald-400">Pros:</strong> Lightweight deep bass, gold-plated Type-C pin.</p>
-                            <p class="text-slate-300"><strong class="text-rose-400">Cons:</strong> Rubber cable can tangle over time.</p>
-                            <div class="text-[10px] text-slate-400 pt-1 border-t border-white/5 flex justify-between">
-                                <span>Genuine Reviews: <strong>88%</strong></span>
-                                <span>Fake Reviews Detected: <strong>12%</strong></span>
-                            </div>
-                        </div>
-
-                        <a href="https://flipkart.com" target="_blank" class="block w-full py-2.5 text-center rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs transition-colors">
-                            Buy on Flipkart for ₹299
-                        </a>
-                    </div>
-
-                    <!-- Stretch Upgrade Card -->
-                    <div class="glass-card smart-stretch-card p-5 space-y-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <span class="px-2 py-0.5 rounded bg-amber-500/30 text-amber-300 text-[10px] font-bold uppercase">Smart Stretch Choice</span>
-                                <h3 class="text-base font-bold text-white mt-1">boAt BassHeads 100 Pro</h3>
-                            </div>
-                            <span class="px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 text-xs font-black">
-                                91 • SMART UPGRADE
-                            </span>
-                        </div>
-
-                        <div class="aspect-video rounded-xl bg-slate-800/80 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=60" alt="boAt BassHeads 100" class="w-full h-full object-cover">
-                        </div>
-
-                        <!-- Price Breakdown Matrix -->
-                        <div class="space-y-1 text-xs">
-                            <div class="flex justify-between text-slate-400">
-                                <span>Listed Price:</span>
-                                <span class="line-through">₹799</span>
-                            </div>
-                            <div class="flex justify-between text-emerald-400">
-                                <span>Amazon Prime Coupon:</span>
-                                <span>-₹350</span>
-                            </div>
-                            <div class="flex justify-between text-emerald-400">
-                                <span>HDFC Card Cashback:</span>
-                                <span>-₹80</span>
-                            </div>
-                            <div class="flex justify-between text-white font-bold pt-1 border-t border-white/10 text-sm">
-                                <span>Effective Out-of-Pocket:</span>
-                                <span class="text-amber-400 font-black">₹369</span>
-                            </div>
-                        </div>
-
-                        <!-- Truth Box Section -->
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2 text-xs">
-                            <div class="font-bold text-slate-300 flex items-center gap-1">
-                                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-400"></i> Verified Truth Box
-                            </div>
-                            <p class="text-slate-300"><strong class="text-emerald-400">Pros:</strong> Braided tangle-free cord, 12mm punchy drivers, 1-yr replacement.</p>
-                            <p class="text-slate-300"><strong class="text-rose-400">Cons:</strong> Lacks active noise cancellation.</p>
-                            <div class="text-[10px] text-slate-400 pt-1 border-t border-white/5 flex justify-between">
-                                <span>Genuine Reviews: <strong>94%</strong></span>
-                                <span>Fake Reviews Detected: <strong>6%</strong></span>
-                            </div>
-                        </div>
-
-                        <a href="https://amazon.in" target="_blank" class="block w-full py-2.5 text-center rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition-colors">
-                            Buy on Amazon for ₹369
-                        </a>
-                    </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="arenaComparisonGrid">
+                    <!-- Populated dynamically by script -->
                 </div>
 
                 <!-- 90-Day Price History Visualizer -->
                 <div class="glass-panel p-5">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <i data-lucide="line-chart" class="w-4 h-4 text-indigo-400"></i> 90-Day Multi-Platform Price History
-                        </h3>
-                        <span class="text-[11px] text-emerald-400 font-semibold">Currently at 90-Day Historical Low</span>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                        <div>
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                                <i data-lucide="line-chart" class="w-4 h-4 text-indigo-400"></i> 90-Day Multi-Platform Price History
+                            </h3>
+                            <p class="text-[11px] text-slate-400">Aggregated historical fluctuations across Amazon, Flipkart, Tata Neu & Croma</p>
+                        </div>
+                        <span class="text-[11px] text-emerald-400 font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                            Verified Price Stability: High
+                        </span>
                     </div>
                     <div class="h-64">
                         <canvas id="priceHistoryChart"></canvas>
@@ -301,51 +202,258 @@
         </div>
     </main>
 
-    <script src="../js/config.js"></script>
-    <script src="../js/api.js"></script>
+    <script src="../js/catalog-data.js"></script>
     <script src="../js/app.js"></script>
     <script>
-        lucide.createIcons();
+        let priceChartInstance = null;
 
-        // Initialize Price History Chart
-        const ctx = document.getElementById('priceHistoryChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['90d ago', '75d ago', '60d ago', '45d ago', '30d ago', '15d ago', 'Today'],
-                datasets: [
-                    {
-                        label: 'Realme Buds 2 (Flipkart)',
-                        data: [499, 449, 429, 399, 349, 329, 299],
-                        borderColor: '#6366F1',
-                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                        fill: true,
-                        tension: 0.3
-                    },
-                    {
-                        label: 'boAt BassHeads 100 (Amazon)',
-                        data: [599, 549, 499, 449, 399, 389, 369],
-                        borderColor: '#F59E0B',
-                        backgroundColor: 'rgba(245, 158, 11, 0.05)',
-                        fill: true,
-                        tension: 0.3
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: { color: '#94A3B8', font: { size: 11 } }
-                    }
-                },
-                scales: {
-                    x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8' } },
-                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8' } }
-                }
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            updateArena();
         });
+
+        function resetArenaFilters() {
+            document.getElementById('budgetRange').value = 150000;
+            document.getElementById('budgetValue').textContent = '₹1,50,000';
+            document.getElementById('scoreRange').value = 0;
+            document.getElementById('scoreValue').textContent = '0+';
+            document.querySelectorAll('.arena-store-cb').forEach(cb => cb.checked = true);
+            updateArena();
+            showToast("Comparison filters reset", "info");
+        }
+
+        function updateArena() {
+            if (!window.FAIRCART_CATALOG) return;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const queryParam = urlParams.get('q') || urlParams.get('search') || '';
+            const idsParam = urlParams.get('ids') || '';
+            const categoryParam = urlParams.get('category') || '';
+
+            const maxBudget = Number(document.getElementById('budgetRange')?.value || 150000);
+            const minScore = Number(document.getElementById('scoreRange')?.value || 0);
+            const selectedStores = Array.from(document.querySelectorAll('.arena-store-cb:checked')).map(cb => cb.value);
+
+            let matchedItems = [];
+
+            if (idsParam) {
+                const idsList = idsParam.split(',').map(id => Number(id.trim()));
+                matchedItems = window.FAIRCART_CATALOG.filter(item => idsList.includes(item.id));
+                document.getElementById('queryDisplay').textContent = `Custom Comparison (${matchedItems.length} Products)`;
+            } else if (queryParam) {
+                const qLower = queryParam.toLowerCase().trim();
+                matchedItems = window.FAIRCART_CATALOG.filter(item => 
+                    item.name.toLowerCase().includes(qLower) || 
+                    item.categoryName.toLowerCase().includes(qLower) ||
+                    item.subCategory.toLowerCase().includes(qLower) ||
+                    item.category.toLowerCase().includes(qLower)
+                );
+                document.getElementById('queryDisplay').textContent = queryParam;
+            } else if (categoryParam) {
+                matchedItems = window.FAIRCART_CATALOG.filter(item => item.category === categoryParam);
+                document.getElementById('queryDisplay').textContent = categoryParam.toUpperCase();
+            } else {
+                matchedItems = window.FAIRCART_CATALOG.slice(0, 4);
+                document.getElementById('queryDisplay').textContent = 'Top Verified Picks';
+            }
+
+            // If no match found by search, fallback to catalog
+            if (matchedItems.length === 0) {
+                matchedItems = window.FAIRCART_CATALOG.slice(0, 2);
+            }
+
+            // Apply budget & score filters
+            let displayItems = matchedItems.filter(item => item.bestPrice <= maxBudget && item.intelligenceScore >= minScore);
+            if (displayItems.length === 0) displayItems = matchedItems; // keep at least matches visible
+
+            renderSmartStretchBanner(displayItems[0]);
+            renderArenaCards(displayItems, selectedStores);
+            renderPriceChart(displayItems);
+
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function renderSmartStretchBanner(item) {
+            const container = document.getElementById('smartStretchBannerContainer');
+            if (!container) return;
+
+            if (!item || !item.smartUpgrade) {
+                container.innerHTML = `
+                    <div class="glass-panel p-5 rounded-2xl border border-indigo-500/30 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold">
+                                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">AI Deal Optimization Active</h4>
+                                <p class="text-xs text-slate-400">Prices reflect verified out-of-pocket prices with bank & coupon deductions.</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                            100% Anti-Bot Verified
+                        </span>
+                    </div>
+                `;
+                return;
+            }
+
+            const up = item.smartUpgrade;
+            container.innerHTML = `
+                <div class="glass-panel smart-stretch-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-2">
+                                <i data-lucide="zap" class="w-3.5 h-3.5"></i> Smart Stretch Recommendation Engine
+                            </div>
+                            <h2 class="text-xl font-extrabold text-white">Upgrade Opportunity: ${up.title}</h2>
+                            <p class="text-xs text-slate-300 mt-1 max-w-xl">
+                                Spending <strong>₹${Number(up.priceDiff).toLocaleString('en-IN')} more</strong> (+${up.percentStretch}% stretch) delivers <strong>${up.reason}</strong>
+                            </p>
+                        </div>
+                        <div class="text-right shrink-0">
+                            <span class="text-xs text-slate-400">Target Score</span>
+                            <div class="text-3xl font-black text-amber-400 font-['Outfit']">${up.targetScore}/100</div>
+                            <span class="text-[11px] text-emerald-400 font-bold">SMART STRETCH</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderArenaCards(items, selectedStores) {
+            const grid = document.getElementById('arenaComparisonGrid');
+            if (!grid) return;
+
+            grid.innerHTML = items.map((item, idx) => {
+                const availableListings = item.listings.filter(l => selectedStores.includes(l.platform));
+                const topListing = availableListings[0] || item.listings[0];
+
+                return `
+                    <div class="glass-card ${item.intelligenceScore >= 94 ? 'smart-stretch-card' : ''} p-5 space-y-4 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <span class="px-2 py-0.5 rounded ${idx === 0 ? 'bg-indigo-500/20 text-indigo-300' : 'bg-amber-500/20 text-amber-300'} text-[10px] font-bold uppercase">
+                                        ${item.subCategory}
+                                    </span>
+                                    <h3 class="text-base font-bold text-white mt-1 line-clamp-1" title="${item.name}">${item.name}</h3>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-lg ${item.intelligenceScore >= 94 ? 'bg-amber-500 text-slate-950' : 'bg-emerald-500/80 text-white'} text-xs font-black shrink-0">
+                                    ${item.intelligenceScore} • ${item.verdict}
+                                </span>
+                            </div>
+
+                            <!-- Image -->
+                            <div class="aspect-video rounded-xl bg-slate-800/80 overflow-hidden relative border border-white/5 mb-3">
+                                <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover" loading="lazy">
+                                <span class="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/70 backdrop-blur-md text-[10px] font-bold text-amber-400 flex items-center gap-1">
+                                    <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i> ${item.rating} (${Number(item.reviewCount).toLocaleString()} reviews)
+                                </span>
+                            </div>
+
+                            <!-- Price Breakdown Matrix -->
+                            <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-1.5 text-xs mb-3">
+                                <div class="flex justify-between text-slate-400">
+                                    <span>Listed Retail Price:</span>
+                                    <span class="line-through">₹${Number(topListing.originalPrice).toLocaleString('en-IN')}</span>
+                                </div>
+                                <div class="flex justify-between text-emerald-400">
+                                    <span>Instant Bank Discount:</span>
+                                    <span>-₹${Number(topListing.bankDiscount).toLocaleString('en-IN')}</span>
+                                </div>
+                                ${topListing.couponDiscount > 0 ? `
+                                <div class="flex justify-between text-emerald-400">
+                                    <span>Store Coupon Applied:</span>
+                                    <span>-₹${Number(topListing.couponDiscount).toLocaleString('en-IN')}</span>
+                                </div>
+                                ` : ''}
+                                <div class="flex justify-between text-white font-bold pt-1 border-t border-white/10 text-sm">
+                                    <span>Effective Out-of-Pocket:</span>
+                                    <span class="${item.intelligenceScore >= 94 ? 'text-amber-400' : 'text-indigo-400'} font-black">
+                                        ₹${Number(topListing.effectivePrice).toLocaleString('en-IN')}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Truth Box Section -->
+                            <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2 text-xs">
+                                <div class="font-bold text-slate-300 flex items-center justify-between">
+                                    <span class="flex items-center gap-1"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i> Verified Truth Box</span>
+                                    <span class="text-[10px] text-emerald-400 font-bold">${Math.round((item.genuineReviewsCount / item.reviewCount) * 100)}% Genuine</span>
+                                </div>
+                                <p class="text-slate-300"><strong class="text-emerald-400">Pros:</strong> ${item.pros.join(', ')}</p>
+                                <p class="text-slate-300"><strong class="text-rose-400">Cons:</strong> ${item.cons.join(', ')}</p>
+                            </div>
+                        </div>
+
+                        <!-- Buy Action -->
+                        <div class="pt-3 border-t border-white/10 space-y-2">
+                            <a href="${topListing.url}" target="_blank" class="block w-full py-2.5 text-center rounded-xl ${item.intelligenceScore >= 94 ? 'bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold' : 'bg-indigo-600 hover:bg-indigo-700 text-white font-semibold'} text-xs transition-colors shadow-lg">
+                                Buy on ${topListing.platform} for ₹${Number(topListing.effectivePrice).toLocaleString('en-IN')}
+                            </a>
+                            <a href="product-detail.html?id=${item.id}" class="block w-full py-1.5 text-center text-[11px] text-indigo-400 hover:text-indigo-300 font-semibold">
+                                View Full Intelligence Audit →
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderPriceChart(items) {
+            const canvas = document.getElementById('priceHistoryChart');
+            if (!canvas) return;
+
+            if (priceChartInstance) {
+                priceChartInstance.destroy();
+            }
+
+            const ctx = canvas.getContext('2d');
+            const colors = ['#6366F1', '#F59E0B', '#10B981', '#EC4899'];
+
+            const datasets = items.slice(0, 3).map((item, idx) => {
+                const p = item.bestPrice;
+                // Generate 90d trend based on current price
+                const trend = [
+                    Math.round(p * 1.25),
+                    Math.round(p * 1.18),
+                    Math.round(p * 1.15),
+                    Math.round(p * 1.08),
+                    Math.round(p * 1.05),
+                    Math.round(p * 1.02),
+                    p
+                ];
+
+                return {
+                    label: `${item.name.substring(0, 24)}... (${item.bestPlatform})`,
+                    data: trend,
+                    borderColor: colors[idx % colors.length],
+                    backgroundColor: colors[idx % colors.length] + '15',
+                    fill: true,
+                    tension: 0.3
+                };
+            });
+
+            priceChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['90d ago', '75d ago', '60d ago', '45d ago', '30d ago', '15d ago', 'Today'],
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#94A3B8', font: { size: 11 } }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8' } }
+                    }
+                }
+            });
+        }
 
         function exportCSV() {
             exportChatComparisonCSV();
