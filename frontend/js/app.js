@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initToastContainer();
     initMobileNav();
     initAIDealNotificationEngine();
+    initAuthSessionUI();
 });
 
 /* ==========================================================================
@@ -757,4 +758,73 @@ function triggerTestAlert() {
             });
         } catch (e) {}
     }
+}
+
+/* ==========================================================================
+   11. Universal User Authentication & Session State Synchronizer
+   ========================================================================== */
+function initAuthSessionUI() {
+    let currentUser = null;
+    try {
+        const raw = localStorage.getItem('faircart_current_user');
+        if (raw) currentUser = JSON.parse(raw);
+    } catch(e) {}
+
+    if (!currentUser) return;
+
+    // Find account buttons in navbar and upgrade to user profile pill with dropdown
+    const accountLinks = document.querySelectorAll('a[href*="auth.html"]');
+    accountLinks.forEach(link => {
+        const initials = (currentUser.name || 'User')
+            .split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase()
+            .substring(0, 2);
+
+        const container = document.createElement('div');
+        container.className = 'relative group hidden sm:block';
+        container.innerHTML = `
+            <button class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs font-semibold transition-all">
+                <div class="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-[10px] font-extrabold shadow-sm">
+                    ${initials}
+                </div>
+                <span class="max-w-[90px] truncate text-slate-200">${currentUser.name.split(' ')[0]}</span>
+                <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400"></i>
+            </button>
+            <div class="user-profile-menu hidden group-hover:block absolute right-0 mt-1.5 w-52 glass-panel p-2 shadow-2xl z-50 rounded-2xl border border-white/10 bg-[#0F1320]/95 backdrop-blur-xl">
+                <div class="px-3 py-2 border-b border-white/10 mb-1">
+                    <p class="text-xs font-bold text-white truncate">${currentUser.name}</p>
+                    <p class="text-[10px] text-slate-400 truncate">${currentUser.email || currentUser.phone || 'Verified User'}</p>
+                    <span class="inline-block mt-1 text-[9px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">✓ Verified Member</span>
+                </div>
+                <a href="${window.location.pathname.includes('/pages/') ? 'wishlist.html' : 'pages/wishlist.html'}" class="flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:text-white rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="bell" class="w-3.5 h-3.5 text-amber-400"></i> My Price Alerts
+                </a>
+                <a href="${window.location.pathname.includes('/pages/') ? 'cart.html' : 'pages/cart.html'}" class="flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:text-white rounded-xl hover:bg-white/10 transition-colors">
+                    <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-indigo-400"></i> Smart Split Basket
+                </a>
+                <div class="pt-1 mt-1 border-t border-white/10">
+                    <button onclick="handleUserSignOut()" class="w-full text-left flex items-center gap-2 px-3 py-2 text-xs text-rose-400 hover:text-rose-300 rounded-xl hover:bg-rose-500/10 transition-colors font-medium">
+                        <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Sign Out
+                    </button>
+                </div>
+            </div>
+        `;
+
+        if (link.parentNode) {
+            link.parentNode.replaceChild(container, link);
+        }
+    });
+
+    if (window.lucide) lucide.createIcons();
+}
+
+function handleUserSignOut() {
+    localStorage.removeItem('faircart_current_user');
+    localStorage.removeItem('faircart_token');
+    if (window.showToast) showToast('Signed out successfully.', 'info');
+    setTimeout(() => {
+        window.location.reload();
+    }, 600);
 }
