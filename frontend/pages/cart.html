@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Split-Basket — Faircart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <!-- Magnetic Custom Mouse Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating Top Glass Navbar -->
+    <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
+        <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a href="../index.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i> Home</a>
+                <a href="products.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="grid" class="w-4 h-4"></i> Catalog</a>
+                <a href="results.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="compass" class="w-4 h-4"></i> Compare Arena</a>
+                <a href="wishlist.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="bell" class="w-4 h-4"></i> Price Alerts</a>
+                <a href="cart.html" class="text-indigo-400 font-semibold flex items-center gap-1.5"><i data-lucide="shopping-bag" class="w-4 h-4"></i> Smart Basket</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="theme-switch theme-switch-btn" title="Toggle Light/Dark Mode">
+                    <div class="theme-switch-thumb shadow-md">
+                        <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+
+                <a href="auth.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-lg shadow-indigo-600/30 transition-all">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                    <span>Account</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 pt-28 pb-20">
+        
+        <!-- Header Banner -->
+        <div class="py-8 border-b border-white/10 pb-6 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Smart Multi-Store Optimizer
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold font-['Outfit'] tracking-tight">
+                    Smart Split-Basket
+                </h1>
+                <p class="text-slate-400 text-sm mt-1">Faircart allocates each item to its verified cheapest platform, combining instant card offers</p>
+            </div>
+
+            <!-- Savings Badge -->
+            <div class="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                    <i data-lucide="trending-down" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="text-[11px] uppercase font-bold text-emerald-300">Total Optimized Savings</div>
+                    <div class="text-xl font-extrabold text-white">₹430 <span class="text-xs font-normal text-slate-400">vs single-store</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left: Split Store Baskets -->
+            <div class="lg:col-span-8 space-y-6">
+                
+                <!-- Store Group 1: Flipkart Basket -->
+                <div class="glass-panel p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold text-xs flex items-center justify-center">FK</span>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">Flipkart Fulfilled (1 Item)</h3>
+                                <span class="text-[10px] text-emerald-400">Cheapest for audio cables & basic earphones</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-slate-300">Subtotal: ₹299</span>
+                    </div>
+
+                    <!-- Item Row -->
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-indigo-950/50 flex items-center justify-center text-indigo-400 shrink-0">
+                                <i data-lucide="headphones" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Realme Buds 2 Neo (Type-C)</h4>
+                                <div class="text-xs text-slate-400">₹299 <span class="line-through text-slate-500 text-[10px]">₹499</span> • Score: 84/100</div>
+                                <div class="text-[10px] text-emerald-400 mt-0.5">Applied: ₹50 Axis Bank Offer</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between sm:justify-end gap-4">
+                            <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-black/20 text-xs">
+                                <button class="px-2.5 py-1 hover:bg-white/10 text-slate-300">−</button>
+                                <span class="px-3 py-1 font-semibold text-white">1</span>
+                                <button class="px-2.5 py-1 hover:bg-white/10 text-slate-300">+</button>
+                            </div>
+                            <button onclick="showToast('Item removed from basket', 'info')" class="text-slate-500 hover:text-rose-400 p-1.5 transition-colors">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Group 2: Amazon Basket -->
+                <div class="glass-panel p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-lg bg-amber-600 text-white font-bold text-xs flex items-center justify-center">AZ</span>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">Amazon Fulfilled (1 Item)</h3>
+                                <span class="text-[10px] text-amber-300">Cheapest for Smart Stretch upgraded pick</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-slate-300">Subtotal: ₹369</span>
+                    </div>
+
+                    <!-- Item Row -->
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-amber-950/50 flex items-center justify-center text-amber-400 shrink-0">
+                                <i data-lucide="music" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">boAt BassHeads 100 Pro</h4>
+                                <div class="text-xs text-slate-400">₹369 <span class="line-through text-slate-500 text-[10px]">₹599</span> • Score: 91/100</div>
+                                <div class="text-[10px] text-amber-300 mt-0.5">Smart Upgrade • Prime 1-Day Dispatch</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between sm:justify-end gap-4">
+                            <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-black/20 text-xs">
+                                <button class="px-2.5 py-1 hover:bg-white/10 text-slate-300">−</button>
+                                <span class="px-3 py-1 font-semibold text-white">1</span>
+                                <button class="px-2.5 py-1 hover:bg-white/10 text-slate-300">+</button>
+                            </div>
+                            <button onclick="showToast('Item removed from basket', 'info')" class="text-slate-500 hover:text-rose-400 p-1.5 transition-colors">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right: Checkout Summary & Split Order Dispatch -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <div class="glass-panel p-6 space-y-5">
+                    <h3 class="text-base font-bold text-white pb-3 border-b border-white/10">Optimized Order Summary</h3>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div class="flex justify-between text-slate-400">
+                            <span>Flipkart Subtotal (1 item)</span>
+                            <span class="text-slate-200 font-semibold">₹299</span>
+                        </div>
+                        <div class="flex justify-between text-slate-400">
+                            <span>Amazon Subtotal (1 item)</span>
+                            <span class="text-slate-200 font-semibold">₹369</span>
+                        </div>
+                        <div class="flex justify-between text-emerald-400">
+                            <span>Platform Coupon Subtractions</span>
+                            <span class="font-bold">− ₹120</span>
+                        </div>
+                        <div class="flex justify-between text-slate-400">
+                            <span>Estimated Delivery</span>
+                            <span class="text-emerald-400 font-semibold">FREE</span>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 flex justify-between items-baseline">
+                            <div>
+                                <span class="text-sm font-bold text-white">Total Out-of-Pocket</span>
+                                <div class="text-[10px] text-slate-400">Taxes & discounts included</div>
+                            </div>
+                            <span class="text-2xl font-black text-white">₹668</span>
+                        </div>
+                    </div>
+
+                    <!-- 1-Click Multi-Store Checkout Routing -->
+                    <button onclick="dispatchMultiStoreCheckout()" class="w-full py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-cyan-500 hover:opacity-95 text-white font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                        <span>Launch 1-Click Multi-Store Checkout</span>
+                    </button>
+
+                    <div class="p-3 rounded-xl bg-white/5 border border-white/10 text-[11px] text-slate-400 flex items-start gap-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <span>Faircart redirects you directly to the verified checkout pages on Flipkart and Amazon with coupons pre-applied.</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Floating AI Shopping Concierge -->
+    <div class="chat-fab" id="chatFab">
+        <i data-lucide="sparkles" class="w-5 h-5 animate-pulse"></i>
+        <span>AI Deal Concierge</span>
+    </div>
+
+    <!-- AI Chat Drawer -->
+    <div class="chat-drawer glass-panel" id="chatDrawer">
+        <div class="p-4 border-b border-white/10 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
+                    <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                </div>
+                <h4 class="font-bold text-sm">Faircart AI Concierge</h4>
+            </div>
+            <button id="closeChatBtn" class="p-1 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+
+        <div class="flex-1 p-4 overflow-y-auto" id="chatMessages">
+            <div class="flex justify-start mb-4">
+                <div class="max-w-[85%] p-3.5 rounded-2xl text-xs bg-slate-800/90 text-slate-100 border border-white/10">
+                    Hello! I've optimized your basket across Flipkart and Amazon for a total savings of ₹430!
+                </div>
+            </div>
+        </div>
+
+        <div class="p-3 border-t border-white/10 flex items-center gap-2 bg-slate-950/50">
+            <button id="voiceChatBtn" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300" title="Voice Search">
+                <i data-lucide="mic" class="w-4 h-4"></i>
+            </button>
+            <input type="text" id="chatInput" placeholder="Ask AI about basket savings..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-500 outline-none">
+            <button id="sendChatBtn" class="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white">
+                <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="../index.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="grid" class="w-5 h-5"></i>
+            <span>Catalog</span>
+        </a>
+        <a href="results.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Compare</span>
+        </a>
+        <a href="wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span>Alerts</span>
+        </a>
+        <a href="cart.html" class="flex flex-col items-center gap-1 text-[10px] text-indigo-400 font-semibold">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Basket</span>
+        </a>
+    </nav>
+
+    <script src="../js/app.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function dispatchMultiStoreCheckout() {
+            showToast("Opening optimized checkouts on Flipkart and Amazon with coupon links...", "success");
+            setTimeout(() => {
+                window.open('https://www.flipkart.com', '_blank');
+                window.open('https://www.amazon.in', '_blank');
+            }, 800);
+        }
+    </script>
+</body>
+</html>

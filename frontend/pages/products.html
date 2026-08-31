@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Catalog — Faircart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <!-- Magnetic Custom Mouse Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating Top Glass Navbar -->
+    <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
+        <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a href="../index.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i> Home</a>
+                <a href="products.html" class="text-indigo-400 font-semibold flex items-center gap-1.5"><i data-lucide="grid" class="w-4 h-4"></i> Catalog</a>
+                <a href="results.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="compass" class="w-4 h-4"></i> Compare Arena</a>
+                <a href="wishlist.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="bell" class="w-4 h-4"></i> Price Alerts</a>
+                <a href="cart.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="shopping-bag" class="w-4 h-4"></i> Smart Basket</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <div class="theme-switch theme-switch-btn" title="Toggle Light/Dark Mode">
+                    <div class="theme-switch-thumb shadow-md">
+                        <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+
+                <a href="auth.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-lg shadow-indigo-600/30 transition-all">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                    <span>Account</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 pt-28 pb-20">
+        
+        <!-- Header Banner -->
+        <div class="py-8 text-center sm:text-left flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+            <div>
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                    <i data-lucide="layers" class="w-3.5 h-3.5"></i> Verified Aggregated Products
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold font-['Outfit'] tracking-tight">
+                    Smart Product Catalog
+                </h1>
+                <p class="text-slate-400 text-sm mt-1">Real-time intelligence ratings, out-of-pocket prices & verified store allocations</p>
+            </div>
+            
+            <!-- Quick Search Omnibar inside catalog -->
+            <div class="w-full sm:w-80">
+                <div class="glass-panel px-3.5 py-2 flex items-center gap-2">
+                    <i data-lucide="search" class="w-4 h-4 text-indigo-400"></i>
+                    <input type="text" id="catalogSearchInput" placeholder="Filter products... (Ctrl+K)" class="w-full bg-transparent text-xs text-slate-100 placeholder-slate-500 outline-none">
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <!-- Glass Filter Sidebar -->
+            <aside class="glass-panel p-6 h-fit lg:sticky lg:top-28 space-y-6">
+                <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                    <h3 class="font-bold text-base flex items-center gap-2">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4 text-indigo-400"></i>
+                        <span>Filter Arena</span>
+                    </h3>
+                    <button onclick="resetFilters()" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">Reset</button>
+                </div>
+
+                <!-- Category -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Category</label>
+                    <div class="space-y-1.5" id="categoryChips">
+                        <label class="flex items-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer text-xs transition-colors">
+                            <input type="radio" name="category" value="all" checked class="accent-indigo-500" onchange="filterProducts()">
+                            <span class="text-slate-200">All Categories</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer text-xs transition-colors">
+                            <input type="radio" name="category" value="audio" class="accent-indigo-500" onchange="filterProducts()">
+                            <span class="text-slate-200">Audio & Earphones</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer text-xs transition-colors">
+                            <input type="radio" name="category" value="smartphones" class="accent-indigo-500" onchange="filterProducts()">
+                            <span class="text-slate-200">Smartphones & Accessories</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer text-xs transition-colors">
+                            <input type="radio" name="category" value="wearables" class="accent-indigo-500" onchange="filterProducts()">
+                            <span class="text-slate-200">Smartwatches & Wearables</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Price Range Slider -->
+                <div>
+                    <div class="flex justify-between items-center text-xs font-semibold mb-2">
+                        <span class="text-slate-400 uppercase tracking-wider">Max Price</span>
+                        <span class="text-indigo-400 font-bold" id="priceDisplay">₹5,000</span>
+                    </div>
+                    <input type="range" id="priceSlider" min="200" max="10000" step="100" value="5000" 
+                           class="w-full accent-indigo-500 cursor-pointer"
+                           oninput="document.getElementById('priceDisplay').textContent = '₹' + Number(this.value).toLocaleString('en-IN'); filterProducts();">
+                    <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                        <span>₹200</span>
+                        <span>₹10,000+</span>
+                    </div>
+                </div>
+
+                <!-- Minimum Intelligence Score -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Min Intelligence Score</label>
+                    <select id="scoreSelect" onchange="filterProducts()" class="w-full p-2.5 rounded-xl bg-slate-900/80 border border-white/10 text-xs text-slate-200 outline-none focus:border-indigo-500">
+                        <option value="0">Any Score</option>
+                        <option value="80">80+ (Smart Pick)</option>
+                        <option value="85">85+ (Exceptional Value)</option>
+                        <option value="90">90+ (Flagship Quality)</option>
+                    </select>
+                </div>
+
+                <!-- Sort By -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Sort By</label>
+                    <select id="sortSelect" onchange="filterProducts()" class="w-full p-2.5 rounded-xl bg-slate-900/80 border border-white/10 text-xs text-slate-200 outline-none focus:border-indigo-500">
+                        <option value="score">Highest Intelligence Score</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="discount">Biggest Discount %</option>
+                    </select>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <div class="lg:col-span-3">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-xs text-slate-400" id="resultCountText">Showing 6 verified smart recommendations</span>
+                    
+                    <div class="flex items-center gap-2">
+                        <button onclick="compareSelected()" class="px-3.5 py-1.5 rounded-xl bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-500/40 text-indigo-300 text-xs font-semibold transition-all flex items-center gap-1.5">
+                            <i data-lucide="git-compare" class="w-3.5 h-3.5"></i>
+                            <span>Compare Selected (<span id="compareCount">0</span>)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="productsGrid">
+                    
+                    <!-- Card 1: Realme Buds 2 Neo -->
+                    <div class="glass-card p-5 flex flex-col justify-between" data-category="audio" data-price="299" data-score="84">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold uppercase">
+                                    BUY NOW (84/100)
+                                </span>
+                                <label class="flex items-center gap-1.5 text-xs text-slate-400 cursor-pointer">
+                                    <input type="checkbox" class="compare-checkbox accent-indigo-500" value="101" onchange="updateCompareCount()">
+                                    <span>Compare</span>
+                                </label>
+                            </div>
+                            
+                            <div class="h-36 rounded-xl bg-gradient-to-br from-indigo-950/40 to-slate-900 flex items-center justify-center mb-4 overflow-hidden p-3 border border-white/5">
+                                <i data-lucide="headphones" class="w-16 h-16 text-indigo-400/80"></i>
+                            </div>
+
+                            <h4 class="font-bold text-sm text-slate-100 line-clamp-1 mb-1">Realme Buds 2 Neo (Type-C)</h4>
+                            <p class="text-slate-400 text-xs line-clamp-2 mb-3">11.2mm dynamic bass boost driver with tangle-free reinforced cable.</p>
+                            
+                            <!-- Store price pill -->
+                            <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 text-xs mb-3 space-y-1">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400">Flipkart Deal:</span>
+                                    <span class="font-extrabold text-white">₹299 <span class="text-[10px] text-slate-500 line-through">₹499</span></span>
+                                </div>
+                                <div class="text-[10px] text-emerald-400 flex items-center gap-1">
+                                    <i data-lucide="tag" class="w-3 h-3"></i> ₹50 Instant Axis Bank Discount
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 flex gap-2">
+                            <a href="product-detail.html?id=101" class="flex-1 py-2 text-center rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-semibold text-xs transition-colors">
+                                Truth Box
+                            </a>
+                            <a href="results.html?q=Realme+Buds+2" class="flex-1 py-2 text-center rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs shadow-md transition-colors">
+                                Buy Matrix
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: boAt BassHeads 100 Pro (Smart Stretch Highlight) -->
+                    <div class="glass-card smart-stretch-card p-5 flex flex-col justify-between" data-category="audio" data-price="369" data-score="91">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold uppercase flex items-center gap-1">
+                                    <i data-lucide="zap" class="w-3 h-3 text-amber-400"></i> SMART UPGRADE (91)
+                                </span>
+                                <label class="flex items-center gap-1.5 text-xs text-slate-400 cursor-pointer">
+                                    <input type="checkbox" class="compare-checkbox accent-indigo-500" value="102" onchange="updateCompareCount()">
+                                    <span>Compare</span>
+                                </label>
+                            </div>
+                            
+                            <div class="h-36 rounded-xl bg-gradient-to-br from-amber-950/40 to-slate-900 flex items-center justify-center mb-4 overflow-hidden p-3 border border-amber-500/20">
+                                <i data-lucide="music" class="w-16 h-16 text-amber-400/90"></i>
+                            </div>
+
+                            <h4 class="font-bold text-sm text-slate-100 line-clamp-1 mb-1">boAt BassHeads 100 Pro</h4>
+                            <p class="text-slate-400 text-xs line-clamp-2 mb-3">Hawk-inspired design with 12mm sound drivers and 1-year replacement.</p>
+                            
+                            <!-- Store price pill -->
+                            <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs mb-3 space-y-1">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-amber-200">Amazon Deal:</span>
+                                    <span class="font-extrabold text-white">₹369 <span class="text-[10px] text-slate-500 line-through">₹599</span></span>
+                                </div>
+                                <div class="text-[10px] text-amber-300 flex items-center gap-1">
+                                    <i data-lucide="trending-up" class="w-3 h-3"></i> +65% Durability & Sound Ratio
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 flex gap-2">
+                            <a href="product-detail.html?id=102" class="flex-1 py-2 text-center rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-semibold text-xs transition-colors">
+                                Truth Box
+                            </a>
+                            <a href="results.html?q=boAt+BassHeads" class="flex-1 py-2 text-center rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs shadow-md transition-colors">
+                                Buy Matrix
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: OnePlus Nord Wired -->
+                    <div class="glass-card p-5 flex flex-col justify-between" data-category="audio" data-price="499" data-score="88">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] font-bold uppercase">
+                                    EXCELLENT (88/100)
+                                </span>
+                                <label class="flex items-center gap-1.5 text-xs text-slate-400 cursor-pointer">
+                                    <input type="checkbox" class="compare-checkbox accent-indigo-500" value="103" onchange="updateCompareCount()">
+                                    <span>Compare</span>
+                                </label>
+                            </div>
+                            
+                            <div class="h-36 rounded-xl bg-gradient-to-br from-cyan-950/40 to-slate-900 flex items-center justify-center mb-4 overflow-hidden p-3 border border-white/5">
+                                <i data-lucide="volume-2" class="w-16 h-16 text-cyan-400/80"></i>
+                            </div>
+
+                            <h4 class="font-bold text-sm text-slate-100 line-clamp-1 mb-1">OnePlus Nord Wired (3.5mm)</h4>
+                            <p class="text-slate-400 text-xs line-clamp-2 mb-3">Magnetic clip earbuds with built-in DAC and in-line microphone.</p>
+                            
+                            <!-- Store price pill -->
+                            <div class="p-2.5 rounded-xl bg-white/5 border border-white/10 text-xs mb-3 space-y-1">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-400">Tata Neu Deal:</span>
+                                    <span class="font-extrabold text-white">₹499 <span class="text-[10px] text-slate-500 line-through">₹799</span></span>
+                                </div>
+                                <div class="text-[10px] text-emerald-400 flex items-center gap-1">
+                                    <i data-lucide="percent" class="w-3 h-3"></i> 5% NeuCoins Cashback Included
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 flex gap-2">
+                            <a href="product-detail.html?id=103" class="flex-1 py-2 text-center rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-semibold text-xs transition-colors">
+                                Truth Box
+                            </a>
+                            <a href="results.html?q=OnePlus+Nord+Wired" class="flex-1 py-2 text-center rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs shadow-md transition-colors">
+                                Buy Matrix
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Floating AI Shopping Concierge -->
+    <div class="chat-fab" id="chatFab">
+        <i data-lucide="sparkles" class="w-5 h-5 animate-pulse"></i>
+        <span>AI Deal Concierge</span>
+    </div>
+
+    <!-- AI Chat Drawer -->
+    <div class="chat-drawer glass-panel" id="chatDrawer">
+        <div class="p-4 border-b border-white/10 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
+                    <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                </div>
+                <h4 class="font-bold text-sm">Faircart AI Concierge</h4>
+            </div>
+            <button id="closeChatBtn" class="p-1 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+
+        <div class="flex-1 p-4 overflow-y-auto" id="chatMessages">
+            <div class="flex justify-start mb-4">
+                <div class="max-w-[85%] p-3.5 rounded-2xl text-xs bg-slate-800/90 text-slate-100 border border-white/10">
+                    Hello! Ask me any shopping query or budget goal (e.g. <em>"Find best earphones under ₹300"</em> or <em>"Compare Realme vs boAt"</em>).
+                </div>
+            </div>
+        </div>
+
+        <div class="p-3 border-t border-white/10 flex items-center gap-2 bg-slate-950/50">
+            <button id="voiceChatBtn" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300" title="Voice Search">
+                <i data-lucide="mic" class="w-4 h-4"></i>
+            </button>
+            <input type="text" id="chatInput" placeholder="Ask AI shopping concierge..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-500 outline-none">
+            <button id="sendChatBtn" class="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white">
+                <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="../index.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="flex flex-col items-center gap-1 text-[10px] text-indigo-400 font-semibold">
+            <i data-lucide="grid" class="w-5 h-5"></i>
+            <span>Catalog</span>
+        </a>
+        <a href="results.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Compare</span>
+        </a>
+        <a href="wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span>Alerts</span>
+        </a>
+        <a href="cart.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Basket</span>
+        </a>
+    </nav>
+
+    <script src="../js/app.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function updateCompareCount() {
+            const checked = document.querySelectorAll('.compare-checkbox:checked').length;
+            document.getElementById('compareCount').textContent = checked;
+        }
+
+        function compareSelected() {
+            const checked = Array.from(document.querySelectorAll('.compare-checkbox:checked')).map(c => c.value);
+            if (checked.length < 2) {
+                showToast("Select at least 2 products to launch Comparison Arena", "warning");
+                return;
+            }
+            window.location.href = `results.html?ids=${checked.join(',')}`;
+        }
+
+        function filterProducts() {
+            const maxPrice = Number(document.getElementById('priceSlider').value);
+            const minScore = Number(document.getElementById('scoreSelect').value);
+            const category = document.querySelector('input[name="category"]:checked').value;
+            const search = document.getElementById('catalogSearchInput').value.toLowerCase();
+
+            const cards = document.querySelectorAll('#productsGrid > div');
+            let visible = 0;
+
+            cards.forEach(card => {
+                const cardCategory = card.dataset.category;
+                const cardPrice = Number(card.dataset.price);
+                const cardScore = Number(card.dataset.score);
+                const cardTitle = card.querySelector('h4').textContent.toLowerCase();
+
+                const matchesCat = (category === 'all' || cardCategory === category);
+                const matchesPrice = cardPrice <= maxPrice;
+                const matchesScore = cardScore >= minScore;
+                const matchesSearch = !search || cardTitle.includes(search);
+
+                if (matchesCat && matchesPrice && matchesScore && matchesSearch) {
+                    card.style.display = 'flex';
+                    visible++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.getElementById('resultCountText').textContent = `Showing ${visible} verified smart recommendations`;
+        }
+
+        function resetFilters() {
+            document.getElementById('priceSlider').value = 5000;
+            document.getElementById('priceDisplay').textContent = '₹5,000';
+            document.getElementById('scoreSelect').value = '0';
+            document.querySelector('input[name="category"][value="all"]').checked = true;
+            document.getElementById('catalogSearchInput').value = '';
+            filterProducts();
+            showToast("Filters reset to default", "info");
+        }
+
+        document.getElementById('catalogSearchInput')?.addEventListener('input', filterProducts);
+    </script>
+</body>
+</html>

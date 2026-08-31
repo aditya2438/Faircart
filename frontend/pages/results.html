@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison & Recommendations — Faircart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <!-- Top Navigation -->
+    <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
+        <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a href="../index.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i> Home</a>
+                <a href="results.html" class="text-indigo-400 font-semibold flex items-center gap-1.5"><i data-lucide="compass" class="w-4 h-4"></i> Explore Deals</a>
+                <a href="wishlist.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="bell" class="w-4 h-4"></i> Price Alerts</a>
+                <a href="auth.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="user" class="w-4 h-4"></i> Sign In / OTP</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="theme-switch theme-switch-btn" title="Toggle Light/Dark Mode">
+                    <div class="theme-switch-thumb shadow-md">
+                        <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 pt-28 pb-16">
+        <!-- Search & Control Header -->
+        <div class="glass-panel p-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Multi-Platform Aggregator</span>
+                <h1 class="text-2xl font-bold font-['Outfit'] mt-1" id="resultsTitle">Showing Deals for: <span class="text-indigo-400" id="queryDisplay">Earphones under ₹300</span></h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="exportCSV()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white flex items-center gap-2 transition-colors">
+                    <i data-lucide="download" class="w-4 h-4 text-cyan-400"></i> Export CSV
+                </button>
+                <button onclick="exportPDF()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-xs font-semibold text-white flex items-center gap-2 shadow-lg shadow-indigo-600/30 transition-colors">
+                    <i data-lucide="file-text" class="w-4 h-4"></i> Export PDF Report
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Filters -->
+            <aside class="glass-panel p-5 h-fit space-y-6">
+                <div>
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2 mb-4">
+                        <i data-lucide="sliders-horizontal" class="w-4 h-4 text-indigo-400"></i> Refine Budget & Stores
+                    </h3>
+                    
+                    <!-- Budget Slider -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-semibold">
+                            <span class="text-slate-400">Target Budget:</span>
+                            <span class="text-indigo-400" id="budgetValue">₹300</span>
+                        </div>
+                        <input type="range" id="budgetRange" min="100" max="5000" step="50" value="300" 
+                               class="w-full accent-indigo-500 bg-white/10 rounded-lg cursor-pointer">
+                    </div>
+                </div>
+
+                <!-- Stores Checkboxes -->
+                <div class="pt-4 border-t border-white/10 space-y-3">
+                    <span class="text-xs font-semibold text-slate-400">Platforms Included:</span>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked class="accent-indigo-500 rounded"> Amazon India (Prime Deals)
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked class="accent-indigo-500 rounded"> Flipkart SuperCoins
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked class="accent-indigo-500 rounded"> Tata NeuPass
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked class="accent-indigo-500 rounded"> Croma Retail
+                    </label>
+                </div>
+
+                <!-- Score Filter -->
+                <div class="pt-4 border-t border-white/10 space-y-2">
+                    <div class="flex justify-between text-xs font-semibold">
+                        <span class="text-slate-400">Minimum Score:</span>
+                        <span class="text-emerald-400" id="scoreValue">70+</span>
+                    </div>
+                    <input type="range" id="scoreRange" min="0" max="100" step="5" value="70" 
+                           class="w-full accent-emerald-500 bg-white/10 rounded-lg cursor-pointer">
+                </div>
+            </aside>
+
+            <!-- Main Comparison Arena -->
+            <section class="lg:col-span-3 space-y-6">
+                <!-- Smart Stretch Upsell Banner -->
+                <div class="glass-panel smart-stretch-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold uppercase tracking-wider mb-2">
+                                <i data-lucide="zap" class="w-3.5 h-3.5"></i> Smart Stretch Recommendation Engine
+                            </div>
+                            <h2 class="text-xl font-extrabold text-white">Upgrade Pick: boAt BassHeads 100 Pro</h2>
+                            <p class="text-xs text-slate-300 mt-1 max-w-xl">
+                                Spending <strong>₹70 more</strong> than your ₹300 budget delivers <strong>+65% higher composite value</strong>: 12mm sound drivers, tangle-free braided cable, and 1-year replacement warranty.
+                            </p>
+                        </div>
+                        <div class="text-right shrink-0">
+                            <span class="text-xs text-slate-400">Effective Deal Price</span>
+                            <div class="text-3xl font-black text-amber-400 font-['Outfit']">₹369</div>
+                            <span class="text-[11px] text-emerald-400 font-bold">91 • SMART UPGRADE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verified Recommendations Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Base Budget Match Card -->
+                    <div class="glass-card p-5 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase">Best Budget Choice</span>
+                                <h3 class="text-base font-bold text-white mt-1">Realme Buds 2 Neo</h3>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/80 text-white text-xs font-black">
+                                84 • BUY NOW
+                            </span>
+                        </div>
+
+                        <div class="aspect-video rounded-xl bg-slate-800/80 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=60" alt="Realme Buds 2 Neo" class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Price Breakdown Matrix -->
+                        <div class="space-y-1 text-xs">
+                            <div class="flex justify-between text-slate-400">
+                                <span>Listed Price:</span>
+                                <span class="line-through">₹499</span>
+                            </div>
+                            <div class="flex justify-between text-emerald-400">
+                                <span>Bank Instant Discount:</span>
+                                <span>-₹150</span>
+                            </div>
+                            <div class="flex justify-between text-emerald-400">
+                                <span>Coupon Applied:</span>
+                                <span>-₹50</span>
+                            </div>
+                            <div class="flex justify-between text-white font-bold pt-1 border-t border-white/10 text-sm">
+                                <span>Effective Out-of-Pocket:</span>
+                                <span class="text-indigo-400 font-black">₹299</span>
+                            </div>
+                        </div>
+
+                        <!-- Truth Box Section -->
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2 text-xs">
+                            <div class="font-bold text-slate-300 flex items-center gap-1">
+                                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i> Verified Truth Box
+                            </div>
+                            <p class="text-slate-300"><strong class="text-emerald-400">Pros:</strong> Lightweight deep bass, gold-plated Type-C pin.</p>
+                            <p class="text-slate-300"><strong class="text-rose-400">Cons:</strong> Rubber cable can tangle over time.</p>
+                            <div class="text-[10px] text-slate-400 pt-1 border-t border-white/5 flex justify-between">
+                                <span>Genuine Reviews: <strong>88%</strong></span>
+                                <span>Fake Reviews Detected: <strong>12%</strong></span>
+                            </div>
+                        </div>
+
+                        <a href="https://flipkart.com" target="_blank" class="block w-full py-2.5 text-center rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs transition-colors">
+                            Buy on Flipkart for ₹299
+                        </a>
+                    </div>
+
+                    <!-- Stretch Upgrade Card -->
+                    <div class="glass-card smart-stretch-card p-5 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="px-2 py-0.5 rounded bg-amber-500/30 text-amber-300 text-[10px] font-bold uppercase">Smart Stretch Choice</span>
+                                <h3 class="text-base font-bold text-white mt-1">boAt BassHeads 100 Pro</h3>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 text-xs font-black">
+                                91 • SMART UPGRADE
+                            </span>
+                        </div>
+
+                        <div class="aspect-video rounded-xl bg-slate-800/80 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=60" alt="boAt BassHeads 100" class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Price Breakdown Matrix -->
+                        <div class="space-y-1 text-xs">
+                            <div class="flex justify-between text-slate-400">
+                                <span>Listed Price:</span>
+                                <span class="line-through">₹799</span>
+                            </div>
+                            <div class="flex justify-between text-emerald-400">
+                                <span>Amazon Prime Coupon:</span>
+                                <span>-₹350</span>
+                            </div>
+                            <div class="flex justify-between text-emerald-400">
+                                <span>HDFC Card Cashback:</span>
+                                <span>-₹80</span>
+                            </div>
+                            <div class="flex justify-between text-white font-bold pt-1 border-t border-white/10 text-sm">
+                                <span>Effective Out-of-Pocket:</span>
+                                <span class="text-amber-400 font-black">₹369</span>
+                            </div>
+                        </div>
+
+                        <!-- Truth Box Section -->
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2 text-xs">
+                            <div class="font-bold text-slate-300 flex items-center gap-1">
+                                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-400"></i> Verified Truth Box
+                            </div>
+                            <p class="text-slate-300"><strong class="text-emerald-400">Pros:</strong> Braided tangle-free cord, 12mm punchy drivers, 1-yr replacement.</p>
+                            <p class="text-slate-300"><strong class="text-rose-400">Cons:</strong> Lacks active noise cancellation.</p>
+                            <div class="text-[10px] text-slate-400 pt-1 border-t border-white/5 flex justify-between">
+                                <span>Genuine Reviews: <strong>94%</strong></span>
+                                <span>Fake Reviews Detected: <strong>6%</strong></span>
+                            </div>
+                        </div>
+
+                        <a href="https://amazon.in" target="_blank" class="block w-full py-2.5 text-center rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition-colors">
+                            Buy on Amazon for ₹369
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 90-Day Price History Visualizer -->
+                <div class="glass-panel p-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="line-chart" class="w-4 h-4 text-indigo-400"></i> 90-Day Multi-Platform Price History
+                        </h3>
+                        <span class="text-[11px] text-emerald-400 font-semibold">Currently at 90-Day Historical Low</span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="priceHistoryChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Initialize Price History Chart
+        const ctx = document.getElementById('priceHistoryChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['90d ago', '75d ago', '60d ago', '45d ago', '30d ago', '15d ago', 'Today'],
+                datasets: [
+                    {
+                        label: 'Realme Buds 2 (Flipkart)',
+                        data: [499, 449, 429, 399, 349, 329, 299],
+                        borderColor: '#6366F1',
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'boAt BassHeads 100 (Amazon)',
+                        data: [599, 549, 499, 449, 399, 389, 369],
+                        borderColor: '#F59E0B',
+                        backgroundColor: 'rgba(245, 158, 11, 0.05)',
+                        fill: true,
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#94A3B8', font: { size: 11 } }
+                    }
+                },
+                scales: {
+                    x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8' } },
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8' } }
+                }
+            }
+        });
+
+        function exportCSV() {
+            exportChatComparisonCSV();
+        }
+
+        function exportPDF() {
+            exportChatComparisonPDF();
+        }
+    </script>
+</body>
+</html>

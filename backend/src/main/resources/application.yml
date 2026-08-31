@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: faircart-backend
+  profiles:
+    active: dev
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+faircart:
+  api:
+    base-path: /api/v1
+  jwt:
+    secret: ${JWT_SECRET:change-me-to-a-256-bit-secret-key-for-production-use}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when_authorized
+
+logging:
+  level:
+    root: INFO
+    com.faircart: DEBUG
+    org.springframework.security: INFO

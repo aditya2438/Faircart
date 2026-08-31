@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Drop Alerts & Tracked Products — Faircart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <!-- Magnetic Custom Mouse Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating Top Glass Navbar -->
+    <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
+        <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a href="../index.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i> Home</a>
+                <a href="products.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="grid" class="w-4 h-4"></i> Catalog</a>
+                <a href="results.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="compass" class="w-4 h-4"></i> Compare Arena</a>
+                <a href="wishlist.html" class="text-indigo-400 font-semibold flex items-center gap-1.5"><i data-lucide="bell" class="w-4 h-4"></i> Price Alerts</a>
+                <a href="cart.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="shopping-bag" class="w-4 h-4"></i> Smart Basket</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="theme-switch theme-switch-btn" title="Toggle Light/Dark Mode">
+                    <div class="theme-switch-thumb shadow-md">
+                        <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+
+                <a href="auth.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-lg shadow-indigo-600/30 transition-all">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                    <span>Account</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 pt-28 pb-16">
+        <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-4 mb-8">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Autonomous Monitoring</span>
+                <h1 class="text-3xl font-extrabold font-['Outfit']">Tracked Products & Price Drop Alerts</h1>
+                <p class="text-slate-400 text-xs mt-1">Faircart continuously scans prices across Flipkart, Amazon, and Tata Neu every 5 minutes</p>
+            </div>
+            <a href="products.html" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-xs font-semibold text-white flex items-center gap-2 transition-all shadow-lg w-fit">
+                <i data-lucide="plus" class="w-4 h-4"></i> Track New Item
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="wishlistGrid">
+            <!-- Tracked Card 1 -->
+            <div class="glass-card p-5 space-y-4">
+                <div class="flex justify-between items-start">
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase flex items-center gap-1">
+                        <i data-lucide="activity" class="w-3 h-3 animate-pulse"></i> 5m Live Polling
+                    </span>
+                    <button onclick="showToast('Removed from price tracking', 'info')" class="text-slate-500 hover:text-rose-400 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </div>
+
+                <div class="aspect-video rounded-xl bg-slate-800/80 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=60" alt="boAt BassHeads 100" class="w-full h-full object-cover">
+                </div>
+
+                <h3 class="text-base font-bold text-white">boAt BassHeads 100 Pro Metallic Edition</h3>
+
+                <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2 text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Current Effective:</span>
+                        <span class="font-bold text-white">₹369</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Your Target Alert:</span>
+                        <span class="font-bold text-emerald-400">₹320</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-indigo-500 h-full rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <div class="pt-2 flex justify-between items-center text-xs text-slate-400">
+                    <span>Channel: <strong>SMS & Email</strong></span>
+                    <span class="text-emerald-400 font-semibold">Watching Amazon</span>
+                </div>
+            </div>
+
+            <!-- Tracked Card 2 -->
+            <div class="glass-card p-5 space-y-4">
+                <div class="flex justify-between items-start">
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase flex items-center gap-1">
+                        <i data-lucide="activity" class="w-3 h-3 animate-pulse"></i> 5m Live Polling
+                    </span>
+                    <button onclick="showToast('Removed from price tracking', 'info')" class="text-slate-500 hover:text-rose-400 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </div>
+
+                <div class="aspect-video rounded-xl bg-slate-800/80 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=60" alt="OnePlus Nord Wired" class="w-full h-full object-cover">
+                </div>
+
+                <h3 class="text-base font-bold text-white">OnePlus Nord Wired Earphones (IPX4)</h3>
+
+                <div class="p-3 rounded-xl bg-white/5 border border-white/10 space-y-2 text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Current Effective:</span>
+                        <span class="font-bold text-white">₹499</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Your Target Alert:</span>
+                        <span class="font-bold text-emerald-400">₹450</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-indigo-500 h-full rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <div class="pt-2 flex justify-between items-center text-xs text-slate-400">
+                    <span>Channel: <strong>Email</strong></span>
+                    <span class="text-cyan-400 font-semibold">Watching Tata Neu</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating AI Shopping Concierge -->
+    <div class="chat-fab" id="chatFab">
+        <i data-lucide="sparkles" class="w-5 h-5 animate-pulse"></i>
+        <span>AI Deal Concierge</span>
+    </div>
+
+    <!-- AI Chat Drawer -->
+    <div class="chat-drawer glass-panel" id="chatDrawer">
+        <div class="p-4 border-b border-white/10 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
+                    <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                </div>
+                <h4 class="font-bold text-sm">Faircart AI Concierge</h4>
+            </div>
+            <button id="closeChatBtn" class="p-1 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+
+        <div class="flex-1 p-4 overflow-y-auto" id="chatMessages">
+            <div class="flex justify-start mb-4">
+                <div class="max-w-[85%] p-3.5 rounded-2xl text-xs bg-slate-800/90 text-slate-100 border border-white/10">
+                    Hello! I'm monitoring 2 active products for you. I'll notify you the moment boAt BassHeads drops below ₹320.
+                </div>
+            </div>
+        </div>
+
+        <div class="p-3 border-t border-white/10 flex items-center gap-2 bg-slate-950/50">
+            <button id="voiceChatBtn" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300" title="Voice Search">
+                <i data-lucide="mic" class="w-4 h-4"></i>
+            </button>
+            <input type="text" id="chatInput" placeholder="Ask about price alerts..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-500 outline-none">
+            <button id="sendChatBtn" class="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white">
+                <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="../index.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="grid" class="w-5 h-5"></i>
+            <span>Catalog</span>
+        </a>
+        <a href="results.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Compare</span>
+        </a>
+        <a href="wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-indigo-400 font-semibold">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span>Alerts</span>
+        </a>
+        <a href="cart.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Basket</span>
+        </a>
+    </nav>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

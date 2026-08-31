@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faircart — AI E-Commerce Aggregator & Smart Stretch Decision Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <!-- Magnetic Custom Mouse Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating Top Glass Navbar -->
+    <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
+        <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a href="index.html" class="text-indigo-400 font-semibold flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i> Home</a>
+                <a href="pages/products.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="grid" class="w-4 h-4"></i> Catalog</a>
+                <a href="pages/results.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="compass" class="w-4 h-4"></i> Compare Arena</a>
+                <a href="pages/wishlist.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="bell" class="w-4 h-4"></i> Price Alerts</a>
+                <a href="pages/cart.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="shopping-bag" class="w-4 h-4"></i> Smart Basket</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <!-- iOS Style Theme Toggle -->
+                <div class="theme-switch theme-switch-btn" title="Toggle Light/Dark Mode">
+                    <div class="theme-switch-thumb shadow-md">
+                        <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+
+                <a href="pages/auth.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-lg shadow-indigo-600/30 transition-all">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                    <span>Account</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Live Market Ticker -->
+    <div class="pt-28 pb-4">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="glass-panel py-2 px-4 flex items-center gap-3 text-xs overflow-hidden">
+                <span class="flex items-center gap-1.5 text-amber-400 font-semibold shrink-0 uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Live Ticker:
+                </span>
+                <marquee class="text-slate-300 font-medium space-x-8" behavior="scroll" direction="left" scrollamount="4">
+                    🔥 Realme Buds 2 Neo dropped 15% on Flipkart (Effective ₹299) &nbsp;&nbsp;•&nbsp;&nbsp; 💡 boAt BassHeads 100 Pro ₹369 Smart Stretch Pick (+65% value) &nbsp;&nbsp;•&nbsp;&nbsp; ⚡ OnePlus Nord Wired Earphones ₹499 on Tata Neu with HDFC Discount &nbsp;&nbsp;•&nbsp;&nbsp; 🛡️ Croma Instant Store Pickup available in Mumbai & Bengaluru
+                </marquee>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section & Omnibar -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <section class="text-center py-12 md:py-16">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-6">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> AI-Powered Multi-Platform Aggregator
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl font-extrabold font-['Outfit'] tracking-tight mb-6 leading-tight">
+                Shop with <span class="bg-gradient-to-r from-indigo-400 via-cyan-300 to-indigo-200 bg-clip-text text-transparent">True Intelligence</span>.<br>
+                Never Overpay Again.
+            </h1>
+            
+            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10">
+                Faircart monitors real-time pricing across Amazon, Flipkart, Tata Neu & Croma, subtracts hidden bank coupons, detects fake sales, and highlights <strong>Smart Stretch Upgrades</strong>.
+            </p>
+
+            <!-- Omnibar Search Terminal -->
+            <div class="max-w-2xl mx-auto mb-6">
+                <div class="omnibar-container flex items-center p-2 sm:p-2.5 shadow-2xl">
+                    <div class="pl-3 text-slate-400">
+                        <i data-lucide="search" class="w-5 h-5 text-indigo-400"></i>
+                    </div>
+                    <input type="text" id="heroSearchInput" 
+                           placeholder="e.g., 'Earphones under 300', 'ANC Headphones under 1500'..." 
+                           class="w-full bg-transparent px-4 py-2 text-sm sm:text-base outline-none text-slate-100 placeholder-slate-500 font-medium">
+                    <button onclick="window.location.href='pages/results.html?q=' + encodeURIComponent(document.getElementById('heroSearchInput').value || 'Earphones under 300')" 
+                            class="px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 hover:opacity-90 text-white font-semibold text-xs sm:text-sm shadow-md transition-transform active:scale-95 shrink-0 flex items-center gap-2">
+                        <span>Search Deals</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Suggestion Tags -->
+            <div class="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto text-xs font-medium">
+                <span class="text-slate-500 py-1">Quick Filters:</span>
+                <a href="pages/results.html?q=Earphones+under+300" class="px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 transition-colors">🔥 Under ₹300</a>
+                <a href="pages/results.html?q=Gaming+Earphones" class="px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 transition-colors">🎮 Gaming Latency</a>
+                <a href="pages/results.html?q=ANC+TWS" class="px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 transition-colors">🎧 Active Noise Cancelling</a>
+                <a href="pages/results.html?q=Type-C+Audio" class="px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 transition-colors">⚡ Type-C Jack</a>
+            </div>
+        </section>
+
+        <!-- Feature Spotlight: The Smart Stretch & Truth Box -->
+        <section class="py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card p-6 flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-4 border border-amber-500/30">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Smart Stretch Budget Engine</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        If spending a marginal ₹70 more gets you 65% better durability, 12mm sound drivers, and 1-yr replacement warranty, Faircart calculates the value jump and alerts you.
+                    </p>
+                </div>
+                <div class="mt-4 pt-4 border-t border-white/10 text-xs text-amber-300 font-semibold flex items-center gap-1.5">
+                    <i data-lucide="trending-up" class="w-4 h-4"></i> Up to 25% Budget Upsell Justification
+                </div>
+            </div>
+
+            <div class="glass-card p-6 flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4 border border-emerald-500/30">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Buy / Skip / Wait Verdict (0–100)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Evaluates price drops against 90-day time-series history, seller authenticity, and return reliability to produce an actionable 0-100 verdict badge.
+                    </p>
+                </div>
+                <div class="mt-4 pt-4 border-t border-white/10 text-xs text-emerald-300 font-semibold flex items-center gap-1.5">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i> 100% Anti-Price Inflation Guard
+                </div>
+            </div>
+
+            <div class="glass-card p-6 flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-4 border border-cyan-500/30">
+                        <i data-lucide="message-square" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Autonomous AI Concierge</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Natural language shopping assistant with 1-click comparison sheet exports (PDF/CSV) and real-time deal analysis across verified e-commerce platforms.
+                    </p>
+                </div>
+                <div class="mt-4 pt-4 border-t border-white/10 text-xs text-cyan-300 font-semibold flex items-center gap-1.5">
+                    <i data-lucide="bot" class="w-4 h-4"></i> Conversational Intent Parser
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Deals & Verified Smart Upgrades -->
+        <section class="py-8">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Verified Benchmarks</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold font-['Outfit']">Top Rated Products This Week</h2>
+                </div>
+                <a href="pages/results.html" class="text-sm font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                    View All Deals <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Product Card 1 (Base Match) -->
+                <div class="glass-card overflow-hidden p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="relative rounded-xl overflow-hidden mb-4 bg-slate-800/60 aspect-video flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=60" alt="Realme Buds 2 Neo" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-emerald-500/90 text-white font-bold text-xs backdrop-blur-md shadow-md">
+                                84 • BUY NOW
+                            </span>
+                            <span class="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-black/60 text-white text-[11px] font-medium backdrop-blur-md">
+                                Flipkart
+                            </span>
+                        </div>
+                        <span class="text-[11px] font-semibold text-indigo-400 uppercase tracking-wider">Audio & Earphones</span>
+                        <h3 class="text-base font-bold text-white mt-1 mb-2">Realme Buds 2 Neo Type-C Wired Earphones</h3>
+                        <div class="flex items-baseline gap-2 mb-3">
+                            <span class="text-2xl font-black text-white font-['Outfit']">₹299</span>
+                            <span class="text-xs text-slate-500 line-through">₹499</span>
+                            <span class="text-xs font-bold text-emerald-400">40% OFF</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex justify-between items-center">
+                        <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i> 4.2 (1,420 reviews)</span>
+                        <a href="pages/results.html?q=Realme+Buds+2" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white transition-colors">Compare (4)</a>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 (Smart Stretch Upgrade) -->
+                <div class="glass-card smart-stretch-card overflow-hidden p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="relative rounded-xl overflow-hidden mb-4 bg-slate-800/60 aspect-video flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=60" alt="boAt BassHeads 100" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-black text-xs backdrop-blur-md shadow-md flex items-center gap-1">
+                                <i data-lucide="zap" class="w-3 h-3"></i> 91 • SMART UPGRADE
+                            </span>
+                            <span class="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-black/60 text-white text-[11px] font-medium backdrop-blur-md">
+                                Amazon
+                            </span>
+                        </div>
+                        <div class="inline-block px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-bold uppercase mb-1">
+                            Recommended Upgrade (+₹70)
+                        </div>
+                        <h3 class="text-base font-bold text-white mt-1 mb-2">boAt BassHeads 100 Pro Metallic Edition</h3>
+                        <div class="flex items-baseline gap-2 mb-3">
+                            <span class="text-2xl font-black text-amber-400 font-['Outfit']">₹369</span>
+                            <span class="text-xs text-slate-500 line-through">₹799</span>
+                            <span class="text-xs font-bold text-emerald-400">54% OFF</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex justify-between items-center">
+                        <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i> 4.6 (8,950 reviews)</span>
+                        <a href="pages/results.html?q=boAt+BassHeads" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-xs font-bold text-slate-950 transition-colors">See Upgrade</a>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 (High-Tier Wait) -->
+                <div class="glass-card overflow-hidden p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="relative rounded-xl overflow-hidden mb-4 bg-slate-800/60 aspect-video flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=60" alt="OnePlus Nord Wired" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-amber-600/90 text-white font-bold text-xs backdrop-blur-md shadow-md">
+                                62 • WAIT FOR SALE
+                            </span>
+                            <span class="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-black/60 text-white text-[11px] font-medium backdrop-blur-md">
+                                Tata Neu
+                            </span>
+                        </div>
+                        <span class="text-[11px] font-semibold text-indigo-400 uppercase tracking-wider">High Fidelity</span>
+                        <h3 class="text-base font-bold text-white mt-1 mb-2">OnePlus Nord Wired 3.5mm Earphones (IPX4)</h3>
+                        <div class="flex items-baseline gap-2 mb-3">
+                            <span class="text-2xl font-black text-white font-['Outfit']">₹599</span>
+                            <span class="text-xs text-slate-500 line-through">₹799</span>
+                            <span class="text-xs font-bold text-slate-400">25% OFF</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex justify-between items-center">
+                        <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i> 4.3 (3,100 reviews)</span>
+                        <a href="pages/results.html?q=OnePlus+Nord" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white transition-colors">Compare (3)</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating AI Shopping Assistant Concierge -->
+    <div class="chat-fab" id="chatFab">
+        <i data-lucide="bot" class="w-5 h-5"></i>
+        <span>AI Shopping Concierge</span>
+    </div>
+
+    <!-- Expandable AI Chat Drawer -->
+    <aside class="chat-drawer glass-panel p-5" id="chatDrawer">
+        <div class="flex justify-between items-center pb-3 border-b border-white/10">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white">Faircart Concierge</h4>
+                    <p class="text-[10px] text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Platform Engine</p>
+                </div>
+            </div>
+            <button id="closeChatBtn" class="text-slate-400 hover:text-white p-1">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Chat Message Area -->
+        <div class="flex-1 overflow-y-auto py-4 space-y-3" id="chatMessages">
+            <div class="flex justify-start mb-2">
+                <div class="max-w-[85%] p-3.5 rounded-2xl bg-slate-800/80 text-slate-100 border border-white/10 text-xs shadow-lg">
+                    👋 Hi there! I'm your autonomous shopping concierge. Tell me what product and budget you have in mind (e.g., <em>"Earphones under 300"</em>), and I'll find verified deals and Smart Stretch upgrades.
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="pt-3 border-t border-white/10 flex gap-2">
+            <input type="text" id="chatInput" placeholder="Ask e.g. 'Best gaming earphones under ₹400'..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500">
+            <button id="sendChatBtn" class="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors">
+                <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile Bottom Navigation (< 640px) -->
+    <nav class="mobile-bottom-nav sm:hidden">
+        <a href="index.html" class="mobile-nav-item flex flex-col items-center gap-1 text-[11px] font-medium text-indigo-400">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="pages/results.html" class="mobile-nav-item flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Deals</span>
+        </a>
+        <a href="pages/wishlist.html" class="mobile-nav-item flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span>Alerts</span>
+        </a>
+        <a href="pages/auth.html" class="mobile-nav-item flex flex-col items-center gap-1 text-[11px] font-medium text-slate-400">
+            <i data-lucide="user" class="w-5 h-5"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="max-w-7xl mx-auto px-4 pt-16 pb-28 sm:pb-12 text-center text-xs text-slate-500 border-t border-white/5 mt-16">
+        <div class="flex justify-center items-center gap-2 mb-3">
+            <i data-lucide="shield-check" class="w-4 h-4 text-indigo-400"></i>
+            <span class="font-semibold text-slate-400">Faircart Intelligent Multi-Platform Aggregation Engine</span>
+        </div>
+        <p>&copy; 2026 Faircart Platform Inc. Engineered with Java 26 Virtual Threads, PostgreSQL & Frosted Glassmorphism.</p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+

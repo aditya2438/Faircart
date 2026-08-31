@@ -1,0 +1,34 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.redisson.spring.starter.RedissonAutoConfigurationV2
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+  datasource:
+    url: jdbc:h2:mem:faircart_test;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+  h2:
+    console:
+      enabled: false
+
+  cloud:
+    config:
+      enabled: false
+      fail-fast: false
+    discovery:
+      enabled: false
+
+faircart:
+  api:
+    base-path: /api/v1
+  jwt:
+    secret: test-secret-key-minimum-256-bits-for-jwt-signing-hmac
+    expiration-ms: 3600000

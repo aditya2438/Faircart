@@ -1,0 +1,66 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: faircart-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-faircart}
+      POSTGRES_USER: ${POSTGRES_USER:-faircart}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-faircart123}
+    volumes:
+      - faircart_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-faircart} -d ${POSTGRES_DB:-faircart}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: faircart-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - faircart_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: faircart-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-faircart}
+      POSTGRES_USER: ${POSTGRES_USER:-faircart}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-faircart123}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:-faircart-super-secure-enterprise-secret-key-for-jwt-signing-256-bits}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  faircart_pg_data:
+  faircart_redis_data:
+

@@ -1,0 +1,2 @@
+-- Flyway/Liquibase migrations will live here.
+-- Example: V1__init_schema.sql

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Deep Dive & Truth Box — Faircart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <!-- Magnetic Custom Mouse Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating Top Glass Navbar -->
+    <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
+        <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a href="../index.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="home" class="w-4 h-4"></i> Home</a>
+                <a href="products.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="grid" class="w-4 h-4"></i> Catalog</a>
+                <a href="results.html" class="text-indigo-400 font-semibold flex items-center gap-1.5"><i data-lucide="compass" class="w-4 h-4"></i> Compare Arena</a>
+                <a href="wishlist.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="bell" class="w-4 h-4"></i> Price Alerts</a>
+                <a href="cart.html" class="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"><i data-lucide="shopping-bag" class="w-4 h-4"></i> Smart Basket</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="theme-switch theme-switch-btn" title="Toggle Light/Dark Mode">
+                    <div class="theme-switch-thumb shadow-md">
+                        <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+                    </div>
+                </div>
+
+                <a href="auth.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-lg shadow-indigo-600/30 transition-all">
+                    <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                    <span>Account</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 pt-28 pb-20">
+        
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2 text-xs text-slate-400 mb-6">
+            <a href="../index.html" class="hover:text-white">Home</a>
+            <span>/</span>
+            <a href="products.html" class="hover:text-white">Audio & Earphones</a>
+            <span>/</span>
+            <span class="text-indigo-400 font-semibold" id="detailProductName">Realme Buds 2 Neo</span>
+        </div>
+
+        <!-- Top Showcase Grid: Image + Verdict & Intelligence Gauge -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
+            
+            <!-- Left: Image Gallery & 3D Tilt Card -->
+            <div class="lg:col-span-5 space-y-4">
+                <div class="glass-card p-6 flex flex-col items-center justify-center min-h-[380px] bg-gradient-to-br from-indigo-950/30 to-slate-900/60 border border-white/10 relative">
+                    <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Verified Anti-Inflation Pick
+                    </span>
+                    <div class="w-48 h-48 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-2xl my-6">
+                        <i data-lucide="headphones" class="w-24 h-24 text-indigo-400 animate-pulse"></i>
+                    </div>
+                    <div class="flex gap-3 mt-2">
+                        <button class="w-12 h-12 rounded-xl bg-white/10 border-2 border-indigo-500 flex items-center justify-center text-white"><i data-lucide="headphones" class="w-6 h-6"></i></button>
+                        <button class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white"><i data-lucide="volume-2" class="w-6 h-6"></i></button>
+                        <button class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white"><i data-lucide="mic" class="w-6 h-6"></i></button>
+                    </div>
+                </div>
+
+                <!-- Price Drop Tracker Subscription Pill -->
+                <div class="glass-panel p-4 flex items-center justify-between">
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                            <i data-lucide="bell" class="w-3.5 h-3.5 text-amber-400"></i> Track Price Drops
+                        </h4>
+                        <p class="text-[11px] text-slate-400">Instant notification when price drops below ₹280</p>
+                    </div>
+                    <button onclick="subscribePriceAlert(101)" class="px-3.5 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 text-xs font-bold transition-all flex items-center gap-1">
+                        <i data-lucide="plus" class="w-3.5 h-3.5"></i> Set Alert
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Product Intelligence, Score Breakdown & Verdict -->
+            <div class="lg:col-span-7 space-y-6">
+                
+                <!-- Main Header -->
+                <div class="glass-panel p-6 space-y-4">
+                    <div class="flex flex-wrap justify-between items-start gap-2">
+                        <div>
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Audio & Headsets</span>
+                            <h1 class="text-2xl sm:text-3xl font-extrabold font-['Outfit'] tracking-tight text-white mt-1">
+                                Realme Buds 2 Neo (Type-C Wired Earphones)
+                            </h1>
+                            <p class="text-xs text-slate-400 mt-1">Model: RMA2011 • 11.2mm Bass Boost Driver • In-line HD Mic</p>
+                        </div>
+                                         <!-- 0-100 Verdict Badge -->
+                        <div class="px-4 py-2 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-center shrink-0">
+                            <div class="text-[10px] uppercase font-extrabold tracking-wider text-emerald-300">Decision Verdict</div>
+                            <div class="text-xl font-black text-emerald-400">BUY NOW</div>
+                            <div class="text-[10px] text-slate-300">Score 84/100</div>
+                        </div>
+                    </div>
+
+                    <!-- Price & Savings Highlight -->
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-wrap justify-between items-center gap-4">
+                        <div>
+                            <div class="text-xs text-slate-400">True Out-of-Pocket Price</div>
+                            <div class="text-3xl font-black text-white flex items-baseline gap-2">
+                                ₹299
+                                <span class="text-sm font-normal text-slate-500 line-through">₹499 MRP</span>
+                                <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">40% OFF</span>
+                            </div>
+                        </div>
+
+                        <div class="text-right text-xs space-y-1">
+                            <div class="text-emerald-400 font-semibold flex items-center gap-1 justify-end">
+                                <i data-lucide="tag" class="w-3.5 h-3.5"></i> ₹50 Axis Bank Instant Discount
+                            </div>
+                            <div class="text-slate-400">Lowest price in last 90 days</div>
+                        </div>
+                    </div>
+
+                    <!-- Intelligence Score Sub-metrics (4 Pillars) -->
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Intelligence Score Breakdown</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                                <div class="text-slate-400 text-[10px]">Price Competitiveness</div>
+                                <div class="text-base font-bold text-indigo-300 mt-1">28 / 30</div>
+                                <div class="w-full h-1 bg-white/10 rounded-full mt-1.5 overflow-hidden">
+                                    <div class="h-full bg-indigo-500 rounded-full" style="width: 93%;"></div>
+                                </div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                                <div class="text-slate-400 text-[10px]">Seller Authenticity</div>
+                                <div class="text-base font-bold text-emerald-300 mt-1">24 / 25</div>
+                                <div class="w-full h-1 bg-white/10 rounded-full mt-1.5 overflow-hidden">
+                                    <div class="h-full bg-emerald-500 rounded-full" style="width: 96%;"></div>
+                                </div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                                <div class="text-slate-400 text-[10px]">Review Sentiment</div>
+                                <div class="text-base font-bold text-cyan-300 mt-1">20 / 25</div>
+                                <div class="w-full h-1 bg-white/10 rounded-full mt-1.5 overflow-hidden">
+                                    <div class="h-full bg-cyan-500 rounded-full" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                                <div class="text-slate-400 text-[10px]">Return & Warranty</div>
+                                <div class="text-base font-bold text-amber-300 mt-1">12 / 20</div>
+                                <div class="w-full h-1 bg-white/10 rounded-full mt-1.5 overflow-hidden">
+                                    <div class="h-full bg-amber-500 rounded-full" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Multi-Platform Live Buy Arena -->
+                <div class="glass-panel p-6 space-y-4">
+                    <h3 class="text-base font-bold text-slate-100 flex items-center justify-between">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="store" class="w-4 h-4 text-indigo-400"></i>
+                            Live Store Allocation Matrix
+                        </span>
+                        <span class="text-xs text-slate-400 font-normal">Updated 2 mins ago</span>
+                    </h3>
+
+                    <div class="space-y-3">
+                        <!-- Flipkart (Best Deal) -->
+                        <div class="p-4 rounded-2xl bg-indigo-950/40 border border-indigo-500/40 flex flex-col sm:flex-row justify-between items-center gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-md">
+                                    FK
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-bold text-sm text-white">Flipkart Verified</span>
+                                        <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold text-[10px]">CHEAPEST DEAL</span>
+                                    </div>
+                                    <div class="text-xs text-slate-400">Effective Out-of-Pocket Price: <strong class="text-white">₹299</strong> (Includes ₹50 Instant Card Off)</div>
+                                </div>
+                            </div>
+                            <a href="https://www.flipkart.com" target="_blank" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5">
+                                <span>Buy on Flipkart</span>
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+
+                        <!-- Amazon -->
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-amber-600 text-white font-bold flex items-center justify-center text-sm shadow-md">
+                                    AZ
+                                </div>
+                                <div>
+                                    <div class="font-bold text-sm text-white">Amazon India</div>
+                                    <div class="text-xs text-slate-400">Effective Price: <strong class="text-white">₹349</strong> • Free 1-Day Prime Delivery</div>
+                                </div>
+                            </div>
+                            <a href="https://www.amazon.in" target="_blank" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-all flex items-center justify-center gap-1.5">
+                                <span>Buy on Amazon</span>
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+
+                        <!-- Tata Neu -->
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center text-sm shadow-md">
+                                    TN
+                                </div>
+                                <div>
+                                    <div class="font-bold text-sm text-white">Tata Neu (Croma)</div>
+                                    <div class="text-xs text-slate-400">Effective Price: <strong class="text-white">₹349</strong> • 5% NeuCoins Cashback</div>
+                                </div>
+                            </div>
+                            <a href="https://www.tataneu.com" target="_blank" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-all flex items-center justify-center gap-1.5">
+                                <span>Buy on Tata Neu</span>
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Verified Truth Box (Pros, Cons, Deceptive Review Filter) -->
+        <section class="mb-10">
+            <div class="glass-panel p-6 space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-white/10 pb-4">
+                    <div>
+                        <div class="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                            <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Anti-Deception Audit
+                        </div>
+                        <h2 class="text-xl font-bold font-['Outfit'] text-white">The Verified Truth Box</h2>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs">
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">
+                            94.2% Authentic Reviews
+                        </span>
+                        <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 font-bold">
+                            5.8% Filtered Bots
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Real Pros -->
+                    <div class="p-5 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 space-y-3">
+                        <h3 class="text-sm font-bold text-emerald-300 flex items-center gap-2">
+                            <i data-lucide="thumbs-up" class="w-4 h-4"></i> Confirmed Strengths
+                        </h3>
+                        <ul class="text-xs text-slate-300 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0"></i>
+                                <span><strong>Punchy Dynamic Bass:</strong> 11.2mm drivers deliver above-average sub-bass response for ₹299 price tier.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0"></i>
+                                <span><strong>Tangle-Free Cord:</strong> Reinforced TPU cable resists common pocket knots and internal wire breakage.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0"></i>
+                                <span><strong>Clear Microphone:</strong> Noise cancellation on in-line mic performs well for standard calling and meetings.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Real Cons -->
+                    <div class="p-5 rounded-2xl bg-rose-950/20 border border-rose-500/30 space-y-3">
+                        <h3 class="text-sm font-bold text-rose-300 flex items-center gap-2">
+                            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Critical Trade-Offs
+                        </h3>
+                        <ul class="text-xs text-slate-300 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="x" class="w-3.5 h-3.5 text-rose-400 mt-0.5 shrink-0"></i>
+                                <span><strong>Plastic Housing:</strong> Lacks metallic shell of the higher-tier boAt BassHeads 100 Pro.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="x" class="w-3.5 h-3.5 text-rose-400 mt-0.5 shrink-0"></i>
+                                <span><strong>Treble Harshness at High Volume:</strong> Distortion noticeable beyond 85% volume level.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="x" class="w-3.5 h-3.5 text-rose-400 mt-0.5 shrink-0"></i>
+                                <span><strong>Warranty Process:</strong> Service center replacement requires physical visit in Tier-2/3 cities.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 90-Day Interactive Price History Chart -->
+        <section class="mb-10">
+            <div class="glass-panel p-6 space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-white/10 pb-4">
+                    <div>
+                        <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Price Integrity Engine</div>
+                        <h2 class="text-xl font-bold font-['Outfit'] text-white">90-Day Price Trend & Deal Cycle</h2>
+                    </div>
+                    <div class="flex gap-4 text-xs">
+                        <div><span class="text-slate-500">90d Low:</span> <strong class="text-emerald-400">₹299</strong></div>
+                        <div><span class="text-slate-500">90d High:</span> <strong class="text-rose-400">₹449</strong></div>
+                        <div><span class="text-slate-500">Average:</span> <strong class="text-slate-200">₹365</strong></div>
+                    </div>
+                </div>
+
+                <div class="h-64 sm:h-72 w-full pt-2">
+                    <canvas id="detailPriceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating AI Shopping Concierge -->
+    <div class="chat-fab" id="chatFab">
+        <i data-lucide="sparkles" class="w-5 h-5 animate-pulse"></i>
+        <span>AI Deal Concierge</span>
+    </div>
+
+    <!-- AI Chat Drawer -->
+    <div class="chat-drawer glass-panel" id="chatDrawer">
+        <div class="p-4 border-b border-white/10 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
+                    <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                </div>
+                <h4 class="font-bold text-sm">Faircart AI Concierge</h4>
+            </div>
+            <button id="closeChatBtn" class="p-1 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+
+        <div class="flex-1 p-4 overflow-y-auto" id="chatMessages">
+            <div class="flex justify-start mb-4">
+                <div class="max-w-[85%] p-3.5 rounded-2xl text-xs bg-slate-800/90 text-slate-100 border border-white/10">
+                    Hello! Ask me any question about <strong>Realme Buds 2 Neo</strong> or request a direct comparison with boAt or OnePlus.
+                </div>
+            </div>
+        </div>
+
+        <div class="p-3 border-t border-white/10 flex items-center gap-2 bg-slate-950/50">
+            <button id="voiceChatBtn" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300" title="Voice Search">
+                <i data-lucide="mic" class="w-4 h-4"></i>
+            </button>
+            <input type="text" id="chatInput" placeholder="Ask about this product..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-500 outline-none">
+            <button id="sendChatBtn" class="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white">
+                <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="../index.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="grid" class="w-5 h-5"></i>
+            <span>Catalog</span>
+        </a>
+        <a href="results.html" class="flex flex-col items-center gap-1 text-[10px] text-indigo-400 font-semibold">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Compare</span>
+        </a>
+        <a href="wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span>Alerts</span>
+        </a>
+        <a href="cart.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Basket</span>
+        </a>
+    </nav>
+
+    <script src="../js/app.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function subscribePriceAlert(productId) {
+            showToast("Price alert activated for Realme Buds 2 Neo at ₹280 threshold!", "success");
+        }
+
+        // Initialize 90-Day Chart.js Price History Line Chart
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('detailPriceChart')?.getContext('2d');
+            if (!ctx) return;
+
+            const labels = ['Jun 1', 'Jun 15', 'Jul 1', 'Jul 15', 'Aug 1', 'Aug 15', 'Aug 30 (Today)'];
+            const prices = [449, 399, 399, 349, 349, 329, 299];
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Effective Price (₹)',
+                        data: prices,
+                        borderColor: '#6366F1',
+                        backgroundColor: 'rgba(99, 102, 241, 0.12)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: '#06B6D4',
+                        pointBorderColor: '#fff',
+                        pointHoverRadius: 6,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#A5B4FC',
+                            borderColor: 'rgba(99, 102, 241, 0.3)',
+                            borderWidth: 1,
+                            padding: 10,
+                            displayColors: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#94A3B8', font: { size: 11 } }
+                        },
+                        y: {
+                            min: 250,
+                            max: 500,
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { 
+                                color: '#94A3B8', 
+                                font: { size: 11 },
+                                callback: (val) => '₹' + val
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

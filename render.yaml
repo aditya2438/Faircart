@@ -1,0 +1,55 @@
+﻿services:
+  # Faircart Backend Spring Boot Web Service (Render Free Tier)
+  - type: web
+    name: faircart-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    region: oregon
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: DB_HOST
+        fromDatabase:
+          name: faircart-postgres
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: faircart-postgres
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: faircart-postgres
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: faircart-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: faircart-postgres
+          property: password
+      - key: JWT_SECRET
+        generateValue: true
+
+  # Faircart Frontend Static Site (Render Free Tier)
+  - type: web
+    name: faircart-frontend
+    env: static
+    buildCommand: ""
+    staticPublishPath: frontend
+    plan: free
+    region: oregon
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+databases:
+  # Managed PostgreSQL Database (Render Free Tier)
+  - name: faircart-postgres
+    plan: free
+    region: oregon
+    databaseName: faircart
+    user: faircart_user
