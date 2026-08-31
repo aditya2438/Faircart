@@ -506,6 +506,22 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
     border-color: #BAE6FD !important;
 }
 
+[data-theme="light"] #dealNotificationDropdown {
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="light"] .deal-alert-card {
+    background-color: #F8FAFC !important;
+    border-color: #E2E8F0 !important;
+}
+
+[data-theme="light"] .deal-alert-card:hover {
+    background-color: #F1F5F9 !important;
+    border-color: #CBD5E1 !important;
+}
+
 /* Primary buttons retain vibrant white text */
 [data-theme="light"] .bg-indigo-600,
 [data-theme="light"] .bg-indigo-600 .text-white,

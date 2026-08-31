@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initGlobalSearchHotkeys();
     initToastContainer();
     initMobileNav();
+    initAIDealNotificationEngine();
 });
 
 /* ==========================================================================
@@ -363,5 +364,359 @@ function initMobileNav() {
         });
     });
 }
+
+/* ==========================================================================
+   9. AI Deal Radar & Web Push Browser Notification Engine
+   Real-Time Price Drop Alerts on Past Search History & Wishlist Data
+   ========================================================================== */
+
+const DEFAULT_AI_ALERTS = [
+    {
+        id: 'deal-1',
+        title: 'Sony WH-1000XM5 ANC Headphones',
+        platform: 'Flipkart',
+        originalPrice: 29990,
+        dealPrice: 19990,
+        discountPercent: 33,
+        reason: '🔥 All-Time Low! Dropped ₹10,000 below historical average.',
+        image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100',
+        url: 'pages/product-detail.html?id=1',
+        timestamp: 'Just now',
+        read: false
+    },
+    {
+        id: 'deal-2',
+        title: 'Apple iPhone 15 (128 GB, Blue)',
+        platform: 'Amazon',
+        originalPrice: 79900,
+        dealPrice: 65999,
+        discountPercent: 17,
+        reason: '💳 Instant ₹5,000 ICICI Bank Discount + ₹2,000 Coupon Applied.',
+        image: 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=100',
+        url: 'pages/results.html?q=iPhone+15',
+        timestamp: '12m ago',
+        read: false
+    },
+    {
+        id: 'deal-3',
+        title: 'Realme Buds Wireless 2 Neo',
+        platform: 'Tata Neu',
+        originalPrice: 1499,
+        dealPrice: 899,
+        discountPercent: 40,
+        reason: '⚡ Smart Stretch Upgrade: 40% OFF with 80+ Verdict Score.',
+        image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=100',
+        url: 'pages/results.html?q=Realme+Buds',
+        timestamp: '35m ago',
+        read: true
+    }
+];
+
+function initAIDealNotificationEngine() {
+    const btn = document.getElementById('dealNotificationBtn');
+    const dropdown = document.getElementById('dealNotificationDropdown');
+    const badge = document.getElementById('dealBadgeCount');
+    const alertsList = document.getElementById('dealAlertsList');
+    const enableBtn = document.getElementById('requestBrowserNotifBtn');
+    const testBtn = document.getElementById('testNotifBtn');
+    const clearBtn = document.getElementById('clearAlertsBtn');
+
+    // 1. Load alerts from storage or seed defaults
+    let alerts = getStoredAlerts();
+    renderAlertsList(alerts);
+    updateBadge(alerts);
+    updatePushPermissionUI();
+
+    // 2. Toggle Dropdown
+    if (btn && dropdown) {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('hidden');
+            dropdown.classList.toggle('flex');
+            
+            // Mark all as read when opening dropdown
+            alerts = alerts.map(a => ({ ...a, read: true }));
+            saveAlerts(alerts);
+            updateBadge(alerts);
+        });
+
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+                dropdown.classList.add('hidden');
+                dropdown.classList.remove('flex');
+            }
+        });
+    }
+
+    // 3. Request Browser Notification Permission
+    if (enableBtn) {
+        enableBtn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            if (!("Notification" in window)) {
+                showToast("Your browser does not support Web Notifications", "warning");
+                return;
+            }
+
+            try {
+                const permission = await Notification.requestPermission();
+                updatePushPermissionUI();
+                if (permission === 'granted') {
+                    showToast("🎉 Browser Deal Notifications Enabled! You will not miss any deal.", "success");
+                    dispatchBrowserPushNotification(
+                        "🛒 Faircart AI Deal Radar Active!",
+                        "We will notify you immediately when products you search hit historical all-time low prices or huge discounts.",
+                        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100"
+                    );
+                } else if (permission === 'denied') {
+                    showToast("Notifications blocked in browser settings. Please enable them in site settings.", "warning");
+                }
+            } catch (err) {
+                console.error("Error requesting notification permission:", err);
+            }
+        });
+    }
+
+    // 4. Test Notification Button
+    if (testBtn) {
+        testBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!("Notification" in window) || Notification.permission !== 'granted') {
+                Notification.requestPermission().then(p => {
+                    if (p === 'granted') {
+                        triggerTestAlert();
+                    } else {
+                        showToast("Please allow browser notifications to receive deal alerts", "warning");
+                    }
+                });
+            } else {
+                triggerTestAlert();
+            }
+        });
+    }
+
+    // 5. Clear Alerts Button
+    if (clearBtn) {
+        clearBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            alerts = [];
+            saveAlerts(alerts);
+            renderAlertsList(alerts);
+            updateBadge(alerts);
+            showToast("All deal alerts cleared", "info");
+        });
+    }
+
+    // 6. Capture Search Queries & Generate AI Deals Based on Search History
+    captureSearchQueries();
+
+    // 7. Background Autonomous Polling Loop for New Deals (Runs every 45s)
+    setInterval(() => {
+        evaluateLiveDealsForSearchedItems();
+    }, 45000);
+}
+
+function getStoredAlerts() {
+    try {
+        const data = localStorage.getItem('faircart_ai_deal_alerts');
+        return data ? JSON.parse(data) : DEFAULT_AI_ALERTS;
+    } catch (e) {
+        return DEFAULT_AI_ALERTS;
+    }
+}
+
+function saveAlerts(alerts) {
+    try {
+        localStorage.setItem('faircart_ai_deal_alerts', JSON.stringify(alerts));
+    } catch (e) {
+        console.error("Failed to save deal alerts:", e);
+    }
+}
+
+function renderAlertsList(alerts) {
+    const list = document.getElementById('dealAlertsList');
+    if (!list) return;
+
+    if (!alerts || alerts.length === 0) {
+        list.innerHTML = `
+            <div class="py-8 text-center text-slate-400 text-xs">
+                <i data-lucide="bell-off" class="w-6 h-6 mx-auto mb-2 text-slate-500"></i>
+                <p>No active deal alerts.</p>
+                <p class="text-[10px] text-slate-500 mt-1">Search or wishlist items to track price drops.</p>
+            </div>
+        `;
+        if (window.lucide) lucide.createIcons();
+        return;
+    }
+
+    list.innerHTML = alerts.map(deal => `
+        <div class="deal-alert-card p-2.5 rounded-xl border border-white/10 bg-white/5 hover:border-indigo-500/40 transition-all flex gap-2.5 items-center">
+            <img src="${deal.image}" alt="${deal.title}" class="w-11 h-11 rounded-lg object-cover bg-slate-800 flex-shrink-0">
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300">${deal.platform}</span>
+                    <span class="text-[10px] text-emerald-400 font-bold">${deal.discountPercent}% OFF</span>
+                </div>
+                <h5 class="text-xs font-semibold text-white truncate mt-0.5" title="${deal.title}">${deal.title}</h5>
+                <div class="flex items-center gap-1.5 mt-0.5">
+                    <span class="text-xs font-extrabold text-white">₹${Number(deal.dealPrice).toLocaleString('en-IN')}</span>
+                    <span class="text-[10px] text-slate-400 line-through">₹${Number(deal.originalPrice).toLocaleString('en-IN')}</span>
+                </div>
+                <p class="text-[10px] text-amber-300/90 truncate mt-0.5">${deal.reason}</p>
+            </div>
+            <a href="${deal.url}" class="p-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition-all flex items-center justify-center flex-shrink-0" title="View Deal">
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+        </div>
+    `).join('');
+
+    if (window.lucide) lucide.createIcons();
+}
+
+function updateBadge(alerts) {
+    const badge = document.getElementById('dealBadgeCount');
+    if (!badge) return;
+
+    const unreadCount = alerts.filter(a => !a.read).length;
+    if (unreadCount > 0) {
+        badge.textContent = unreadCount > 9 ? '9+' : unreadCount;
+        badge.classList.remove('hidden');
+    } else {
+        badge.classList.add('hidden');
+    }
+}
+
+function updatePushPermissionUI() {
+    const enableBtn = document.getElementById('requestBrowserNotifBtn');
+    if (!enableBtn) return;
+
+    if ("Notification" in window && Notification.permission === 'granted') {
+        enableBtn.innerHTML = `<i data-lucide="check" class="w-3 h-3 text-emerald-400"></i><span class="text-emerald-300">Push On</span>`;
+        enableBtn.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+        enableBtn.classList.add('bg-emerald-950/60', 'border', 'border-emerald-500/40');
+    } else {
+        enableBtn.innerHTML = `<i data-lucide="bell-ring" class="w-3 h-3"></i><span>Enable Push</span>`;
+        enableBtn.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+        enableBtn.classList.remove('bg-emerald-950/60', 'border', 'border-emerald-500/40');
+    }
+    if (window.lucide) lucide.createIcons();
+}
+
+function triggerTestAlert() {
+    const testDeal = {
+        id: 'deal-test-' + Date.now(),
+        title: 'Apple MacBook Air M2 (16GB RAM)',
+        platform: 'Amazon',
+        originalPrice: 114900,
+        dealPrice: 89990,
+        discountPercent: 22,
+        reason: '🔥 Flash Price Drop! ₹24,910 off today on Amazon.',
+        image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=100',
+        url: 'pages/results.html?q=MacBook+Air',
+        timestamp: 'Just now',
+        read: false
+    };
+
+    let alerts = getStoredAlerts();
+    alerts.unshift(testDeal);
+    saveAlerts(alerts);
+    renderAlertsList(alerts);
+    updateBadge(alerts);
+
+    showToast("🔥 FLASH DEAL: Apple MacBook Air M2 dropped to ₹89,990!", "success");
+    dispatchBrowserPushNotification(
+        "🔥 FLASH DEAL ALERT: Apple MacBook Air M2",
+        "Price dropped to ₹89,990 on Amazon (Save ₹24,910). Instant HDFC Bank ₹5,000 discount applied!",
+        testDeal.image
+    );
+}
+
+function dispatchBrowserPushNotification(title, body, icon) {
+    if (!("Notification" in window) || Notification.permission !== 'granted') return;
+
+    try {
+        const notif = new Notification(title, {
+            body: body,
+            icon: icon || 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=100',
+            badge: icon,
+            tag: 'faircart-deal-alert',
+            renotify: true,
+            requireInteraction: false
+        });
+
+        notif.onclick = function() {
+            window.focus();
+            window.location.href = 'pages/results.html';
+            notif.close();
+        };
+    } catch (e) {
+        console.error("Browser notification failed:", e);
+    }
+}
+
+function captureSearchQueries() {
+    const searchInputs = document.querySelectorAll('input[type="text"][placeholder*="search" i], #heroSearchInput, #catalogSearchInput, #omnibarSearch');
+    searchInputs.forEach(input => {
+        input.addEventListener('change', (e) => {
+            const query = e.target.value.trim();
+            if (query.length > 2) {
+                saveSearchHistoryTerm(query);
+            }
+        });
+    });
+}
+
+function saveSearchHistoryTerm(query) {
+    try {
+        let history = JSON.parse(localStorage.getItem('faircart_search_history') || '[]');
+        if (!history.includes(query)) {
+            history.unshift(query);
+            if (history.length > 10) history = history.slice(0, 10);
+            localStorage.setItem('faircart_search_history', JSON.stringify(history));
+        }
+    } catch (e) {}
+}
+
+function evaluateLiveDealsForSearchedItems() {
+    try {
+        const history = JSON.parse(localStorage.getItem('faircart_search_history') || '["Sony WH-1000XM5", "MacBook Air", "OnePlus 12"]');
+        if (history.length === 0) return;
+
+        const randomQuery = history[Math.floor(Math.random() * history.length)];
+        const simulatedDiscount = Math.floor(Math.random() * 20) + 15; // 15% - 35% OFF
+        const simulatedPlatforms = ['Amazon', 'Flipkart', 'Tata Neu', 'Croma', 'Myntra'];
+        const randomPlatform = simulatedPlatforms[Math.floor(Math.random() * simulatedPlatforms.length)];
+        
+        const newDeal = {
+            id: 'deal-' + Date.now(),
+            title: randomQuery + ' Special Edition',
+            platform: randomPlatform,
+            originalPrice: 12999,
+            dealPrice: Math.round(12999 * (1 - simulatedDiscount / 100)),
+            discountPercent: simulatedDiscount,
+            reason: `⚡ AI Match: Price drop detected for past search "${randomQuery}" on ${randomPlatform}!`,
+            image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=100',
+            url: 'pages/results.html?q=' + encodeURIComponent(randomQuery),
+            timestamp: 'Just now',
+            read: false
+        };
+
+        let alerts = getStoredAlerts();
+        alerts.unshift(newDeal);
+        if (alerts.length > 8) alerts = alerts.slice(0, 8);
+        saveAlerts(alerts);
+        renderAlertsList(alerts);
+        updateBadge(alerts);
+
+        dispatchBrowserPushNotification(
+            `🔥 NEW DEAL MATCH: ${newDeal.title}`,
+            `${simulatedDiscount}% OFF on ${randomPlatform} for "${randomQuery}". Tap to view deal now!`,
+            newDeal.image
+        );
+    } catch (e) {
+        console.error("Deal evaluation error:", e);
+    }
+}
+
 
 
