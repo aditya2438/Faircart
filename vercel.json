@@ -1,6 +1,5 @@
-﻿{
-  "version": 2,
-  "public": true,
+{
+  "outputDirectory": "frontend",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
@@ -20,9 +19,12 @@
       ]
     }
   ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/", "dest": "/frontend/index.html" },
-    { "src": "/(.*)", "dest": "/frontend/" }
+  "rewrites": [
+    { "source": "/products", "destination": "/pages/products.html" },
+    { "source": "/results", "destination": "/pages/results.html" },
+    { "source": "/wishlist", "destination": "/pages/wishlist.html" },
+    { "source": "/cart", "destination": "/pages/cart.html" },
+    { "source": "/auth", "destination": "/pages/auth.html" },
+    { "source": "/product-detail", "destination": "/pages/product-detail.html" }
   ]
 }
