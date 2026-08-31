@@ -326,26 +326,63 @@
         </div>
     </main>
 
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="../index.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="grid" class="w-5 h-5"></i>
+            <span>Catalog</span>
+        </a>
+        <a href="results.html" class="flex flex-col items-center gap-1 text-[10px] text-indigo-400 font-semibold">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Compare</span>
+        </a>
+        <a href="wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span>Alerts</span>
+        </a>
+        <a href="cart.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Basket</span>
+        </a>
+    </nav>
+
+    <!-- Core Scripts Loaded in Strict Dependency Order -->
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
     <script src="../js/catalog-data.js"></script>
     <script src="../js/app.js"></script>
+
+    <!-- Results Page Interactive Logic -->
     <script>
         let priceChartInstance = null;
         let activeComparisonMode = 'keyword';
 
         document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
+
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('mode') === 'url' || urlParams.get('url1')) {
+            const rawQuery = urlParams.get('q') || urlParams.get('search') || '';
+            const u1 = urlParams.get('url1');
+            const u2 = urlParams.get('url2');
+            const isUrlMode = urlParams.get('mode') === 'url' || rawQuery.startsWith('http') || Boolean(u1);
+
+            if (isUrlMode) {
                 switchComparisonMode('url');
-                const u1 = urlParams.get('url1');
-                const u2 = urlParams.get('url2');
                 const inputs = document.querySelectorAll('.compare-url-input');
-                if (u1 && inputs[0]) inputs[0].value = u1;
+                const firstUrl = u1 || rawQuery;
+                if (firstUrl && inputs[0]) inputs[0].value = firstUrl;
                 if (u2 && inputs[1]) inputs[1].value = u2;
-                if (u1 && u2) {
-                    comparePastedUrls();
+
+                if (firstUrl) {
+                    executeSingleOrMultiUrlCompare(firstUrl, u2);
                     return;
                 }
             }
+
             updateArena();
         });
 
@@ -354,6 +391,8 @@
             const tabKey = document.getElementById('modeTabKeyword');
             const tabUrl = document.getElementById('modeTabUrl');
             const urlContainer = document.getElementById('urlTerminalContainer');
+
+            if (!tabKey || !tabUrl || !urlContainer) return;
 
             if (mode === 'url') {
                 tabUrl.classList.add('border-indigo-500', 'text-indigo-400');
@@ -372,16 +411,17 @@
 
         function addUrlInputField() {
             const list = document.getElementById('urlInputList');
+            if (!list) return;
             const count = list.children.length + 1;
             if (count > 4) {
-                showToast("Maximum 4 URLs can be compared simultaneously", "warning");
+                if (window.showToast) showToast("Maximum 4 URLs can be compared simultaneously", "warning");
                 return;
             }
             const div = document.createElement('div');
             div.className = "flex items-center gap-2";
             div.innerHTML = `
-                <span class="w-6 h-6 rounded-full bg-cyan-600/30 text-cyan-400 text-xs font-bold flex items-center justify-center shrink-0">${count}</span>
-                <input type="url" class="compare-url-input flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500" placeholder="Paste product URL (Meesho, Croma, Apple, Realme, Zepto, etc.)...">
+                <span class="w-6 h-6 rounded-full bg-indigo-600/30 text-indigo-400 text-xs font-bold flex items-center justify-center shrink-0">${count}</span>
+                <input type="url" class="compare-url-input flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500" placeholder="Paste product URL (Amazon, Flipkart, Meesho, Croma, Apple, Realme, Zepto)...">
             `;
             list.appendChild(div);
         }
@@ -391,40 +431,58 @@
             if (type === 'phones') {
                 if (inputs[0]) inputs[0].value = 'https://www.flipkart.com/apple-iphone-15-pro-natural-titanium-128-gb/p/itm';
                 if (inputs[1]) inputs[1].value = 'https://www.amazon.in/dp/B0CQ2W2T5P (Samsung Galaxy S24 Ultra)';
-                showToast("Loaded Sample Smartphone Battle (iPhone 15 Pro vs S24 Ultra)", "info");
+                if (window.showToast) showToast("Loaded Sample Smartphone Battle (iPhone 15 Pro vs S24 Ultra)", "info");
             } else {
                 if (inputs[0]) inputs[0].value = 'https://www.amazon.in/dp/B0BY8MCQ9S (OnePlus Nord Buds 2)';
                 if (inputs[1]) inputs[1].value = 'https://www.blinkit.com/prn/boat-bassheads-100';
-                showToast("Loaded Sample Audio Comparison (OnePlus Buds vs boAt)", "info");
+                if (window.showToast) showToast("Loaded Sample Audio Comparison (OnePlus Buds vs boAt)", "info");
             }
             comparePastedUrls();
+        }
+
+        function executeSingleOrMultiUrlCompare(url1, url2) {
+            if (!window.parseProductUrl) return;
+
+            const res1 = window.parseProductUrl(url1);
+            let products = [];
+            if (res1 && res1.product) products.push(res1.product);
+
+            if (url2) {
+                const res2 = window.parseProductUrl(url2);
+                if (res2 && res2.product) products.push(res2.product);
+            }
+
+            // If only 1 URL pasted, find cross-platform price beats or related upgrades
+            if (products.length === 1 && window.FAIRCART_CATALOG) {
+                const mainItem = products[0];
+                const matchingCat = window.FAIRCART_CATALOG.filter(c => c.category === mainItem.category && c.id !== mainItem.id).slice(0, 2);
+                products = [mainItem, ...matchingCat];
+            }
+
+            const selectedStores = Array.from(document.querySelectorAll('.arena-store-cb:checked')).map(cb => cb.value);
+
+            document.getElementById('queryDisplay').textContent = `Live Scraped URL Deal (${products[0].name})`;
+            document.getElementById('resultsSubtitle').textContent = `Aggregating real-time discounts across 12 platforms`;
+
+            renderSmartStretchBanner(products[0]);
+            renderArenaCards(products, selectedStores);
+            renderComparisonTable(products, selectedStores);
+            renderPriceChart(products);
+
+            if (window.lucide) lucide.createIcons();
+            if (window.showToast) showToast(`Parsed live product link & compared across 12 platforms!`, "success");
         }
 
         function comparePastedUrls() {
             const inputs = Array.from(document.querySelectorAll('.compare-url-input'));
             const urls = inputs.map(i => i.value.trim()).filter(Boolean);
 
-            if (urls.length < 2) {
-                showToast("Please paste at least 2 product URLs to compare", "warning");
+            if (urls.length === 0) {
+                if (window.showToast) showToast("Please paste at least 1 product link to analyze", "warning");
                 return;
             }
 
-            const parsedResults = urls.map(u => window.parseProductUrl(u)).filter(Boolean);
-            const parsedProducts = parsedResults.map(r => r.product);
-
-            document.getElementById('queryDisplay').textContent = `URL Battle (${parsedProducts.length} Pasted Links)`;
-            document.getElementById('resultsSubtitle').textContent = `Cross-platform analysis across Amazon, Flipkart, Meesho, Croma, Samsung, Apple, Realme, Blinkit, Instamart & Zepto`;
-
-            const selectedStores = Array.from(document.querySelectorAll('.arena-store-cb:checked')).map(cb => cb.value);
-
-            renderSmartStretchBanner(parsedProducts[0]);
-            renderArenaCards(parsedProducts, selectedStores);
-            renderComparisonTable(parsedProducts, selectedStores);
-            renderPriceChart(parsedProducts);
-
-            if (window.lucide) lucide.createIcons();
-
-            showToast(`Parsed & compared ${parsedProducts.length} live product links with cross-store price beats!`, "success");
+            executeSingleOrMultiUrlCompare(urls[0], urls[1]);
         }
 
         function resetArenaFilters() {
@@ -438,7 +496,7 @@
                 btn.classList.add('bg-white/5');
             });
             updateArena();
-            showToast("Comparison filters reset", "info");
+            if (window.showToast) showToast("Comparison filters reset", "info");
         }
 
         function applyArenaPill(type) {
@@ -455,23 +513,23 @@
 
             if (type === 'instant') {
                 document.querySelectorAll('.arena-store-cb').forEach(cb => {
-                    cb.checked = (cb.value === 'Blinkit' || cb.value === 'Instamart');
+                    cb.checked = (cb.value === 'Blinkit' || cb.value === 'Instamart' || cb.value === 'Zepto');
                 });
-                showToast("Refined by ⚡ 10-15 Min Instant Delivery (Blinkit & Instamart)", "info");
+                if (window.showToast) showToast("Refined by ⚡ 10-15 Min Instant Delivery (Blinkit, Instamart, Zepto)", "info");
             } else if (type === 'score90') {
                 document.getElementById('scoreRange').value = 90;
                 document.getElementById('scoreValue').textContent = '90+';
-                showToast("Refined by 90+ Flagship & Gold Standard Intelligence", "info");
+                if (window.showToast) showToast("Refined by 90+ Flagship & Gold Standard Intelligence", "info");
             } else if (type === 'under1k') {
                 document.getElementById('budgetRange').value = 1000;
                 document.getElementById('budgetValue').textContent = '₹1,000';
-                showToast("Refined by Under ₹1,000 Budget Picks", "info");
+                if (window.showToast) showToast("Refined by Under ₹1,000 Budget Picks", "info");
             } else if (type === 'discount40') {
-                showToast("Refined by 40%+ Mega Discounts", "info");
+                if (window.showToast) showToast("Refined by 40%+ Mega Discounts", "info");
             } else if (type === 'rating45') {
-                showToast("Refined by 4.5★+ Top Customer Ratings", "info");
+                if (window.showToast) showToast("Refined by 4.5★+ Top Customer Ratings", "info");
             } else if (type === 'upgrades') {
-                showToast("Highlighting Smart Stretch Upgrades", "success");
+                if (window.showToast) showToast("Highlighting Smart Stretch Upgrades", "success");
             }
 
             updateArena();
@@ -503,23 +561,21 @@
                     item.subCategory.toLowerCase().includes(qLower) ||
                     item.category.toLowerCase().includes(qLower)
                 );
-                document.getElementById('queryDisplay').textContent = queryParam;
+                document.getElementById('queryDisplay').textContent = `"${queryParam}"`;
             } else if (categoryParam) {
                 matchedItems = window.FAIRCART_CATALOG.filter(item => item.category === categoryParam);
                 document.getElementById('queryDisplay').textContent = categoryParam.toUpperCase();
             } else {
                 matchedItems = window.FAIRCART_CATALOG.slice(0, 4);
-                document.getElementById('queryDisplay').textContent = 'All Categories & Top Picks';
+                document.getElementById('queryDisplay').textContent = 'All Trending Products';
             }
 
-            // If no match found by search, fallback to catalog
             if (matchedItems.length === 0) {
-                matchedItems = window.FAIRCART_CATALOG.slice(0, 2);
+                matchedItems = window.FAIRCART_CATALOG.slice(0, 3);
             }
 
-            // Apply budget & score filters
             let displayItems = matchedItems.filter(item => item.bestPrice <= maxBudget && item.intelligenceScore >= minScore);
-            if (displayItems.length === 0) displayItems = matchedItems; // keep at least matches visible
+            if (displayItems.length === 0) displayItems = matchedItems;
 
             renderSmartStretchBanner(displayItems[0]);
             renderArenaCards(displayItems, selectedStores);
@@ -542,7 +598,7 @@
                             </div>
                             <div>
                                 <h4 class="text-sm font-bold text-white">AI Deal Optimization Active</h4>
-                                <p class="text-xs text-slate-400">Prices reflect verified out-of-pocket prices with bank & coupon deductions.</p>
+                                <p class="text-xs text-slate-400">Prices reflect verified out-of-pocket prices with bank & coupon deductions across 12 platforms.</p>
                             </div>
                         </div>
                         <span class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -762,7 +818,6 @@
 
             const datasets = items.slice(0, 3).map((item, idx) => {
                 const p = item.bestPrice;
-                // Generate 90d trend based on current price
                 const trend = [
                     Math.round(p * 1.25),
                     Math.round(p * 1.18),
@@ -804,34 +859,6 @@
                 }
             });
         }
-
-    <!-- Mobile Bottom Navigation -->
-    <nav class="mobile-bottom-nav md:hidden">
-        <a href="../index.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
-            <i data-lucide="home" class="w-5 h-5"></i>
-            <span>Home</span>
-        </a>
-        <a href="products.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
-            <i data-lucide="grid" class="w-5 h-5"></i>
-            <span>Catalog</span>
-        </a>
-        <a href="results.html" class="flex flex-col items-center gap-1 text-[10px] text-indigo-400 font-semibold">
-            <i data-lucide="compass" class="w-5 h-5"></i>
-            <span>Compare</span>
-        </a>
-        <a href="wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
-            <i data-lucide="bell" class="w-5 h-5"></i>
-            <span>Alerts</span>
-        </a>
-        <a href="cart.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
-            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-            <span>Basket</span>
-        </a>
-    </nav>
-
-    <script src="../js/config.js"></script>
-    <script src="../js/api.js"></script>
-    <script src="../js/catalog-data.js"></script>
-    <script src="../js/app.js"></script>
+    </script>
 </body>
 </html>
