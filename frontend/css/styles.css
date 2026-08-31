@@ -1,23 +1,23 @@
 /* ==========================================================================
-   FAIRCART ENTERPRISE DESIGN SYSTEM - LUXURY iOS FROSTED GLASSMORPHISM
-   Micro-interactions, 3D Physics, Motion Tickers, Custom Cursor & Ambient Glow
+   FAIRCART ENTERPRISE DESIGN SYSTEM
+   High-Contrast Dark & Light Modes, Luxury Glassmorphism, 3D Physics & Fast UI
    ========================================================================== */
 
 :root {
     /* Dark Theme (Default) */
     --fc-bg-main: #070913;
-    --fc-bg-gradient: radial-gradient(circle at 10% 15%, rgba(99, 102, 241, 0.18) 0%, transparent 45%),
-                      radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.14) 0%, transparent 45%),
-                      radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
+    --fc-bg-gradient: radial-gradient(circle at 12% 18%, rgba(99, 102, 241, 0.18) 0%, transparent 45%),
+                      radial-gradient(circle at 88% 82%, rgba(6, 182, 212, 0.14) 0%, transparent 45%),
+                      radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
                       linear-gradient(145deg, #070913 0%, #0D1322 50%, #05070E 100%);
-    --fc-glass-surface: rgba(15, 23, 42, 0.65);
+    --fc-glass-surface: rgba(15, 23, 42, 0.75);
     --fc-glass-card: rgba(255, 255, 255, 0.04);
     --fc-glass-card-hover: rgba(255, 255, 255, 0.08);
-    --fc-glass-border: rgba(255, 255, 255, 0.09);
+    --fc-glass-border: rgba(255, 255, 255, 0.10);
     --fc-glass-border-hover: rgba(99, 102, 241, 0.5);
     --fc-text-primary: #F8FAFC;
-    --fc-text-secondary: #94A3B8;
-    --fc-text-muted: #64748B;
+    --fc-text-secondary: #CBD5E1;
+    --fc-text-muted: #94A3B8;
     
     /* Brand Accents */
     --fc-primary: #6366F1;
@@ -35,20 +35,22 @@
     --fc-shadow-amber-glow: 0 0 30px rgba(245, 158, 11, 0.4);
 }
 
+/* High-Contrast Light Theme */
 [data-theme="light"] {
-    --fc-bg-main: #F8FAFC;
-    --fc-bg-gradient: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
-                      radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.10) 0%, transparent 40%),
-                      linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #EFF6FF 100%);
-    --fc-glass-surface: rgba(255, 255, 255, 0.75);
-    --fc-glass-card: rgba(255, 255, 255, 0.65);
-    --fc-glass-card-hover: rgba(255, 255, 255, 0.9);
-    --fc-glass-border: rgba(255, 255, 255, 0.8);
-    --fc-glass-border-hover: rgba(99, 102, 241, 0.4);
+    --fc-bg-main: #F1F5F9;
+    --fc-bg-gradient: radial-gradient(circle at 10% 15%, rgba(99, 102, 241, 0.10) 0%, transparent 45%),
+                      radial-gradient(circle at 90% 85%, rgba(6, 182, 212, 0.08) 0%, transparent 45%),
+                      linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 50%, #EDF2F7 100%);
+    --fc-glass-surface: rgba(255, 255, 255, 0.90);
+    --fc-glass-card: rgba(255, 255, 255, 0.92);
+    --fc-glass-card-hover: #FFFFFF;
+    --fc-glass-border: rgba(0, 0, 0, 0.08);
+    --fc-glass-border-hover: rgba(99, 102, 241, 0.5);
     --fc-text-primary: #0F172A;
-    --fc-text-secondary: #475569;
-    --fc-text-muted: #94A3B8;
-    --fc-shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+    --fc-text-secondary: #334155;
+    --fc-text-muted: #475569;
+    --fc-shadow-glass: 0 10px 30px 0 rgba(0, 0, 0, 0.06);
+    --fc-shadow-glow: 0 0 25px rgba(99, 102, 241, 0.2);
 }
 
 /* Reset & Base Typography */
@@ -56,7 +58,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -67,60 +69,23 @@ body {
     color: var(--fc-text-primary);
     min-height: 100vh;
     overflow-x: hidden;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    cursor: auto !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ==========================================
-   Custom Magnetic Mouse Cursor & Aura Follower
-   ========================================== */
-.custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background: var(--fc-primary);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+/* Standard Interactive Elements Cursor */
+a, button, input, select, textarea, [role="button"], .glass-card, .theme-switch {
+    cursor: pointer;
 }
-
-.cursor-follower {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid rgba(99, 102, 241, 0.5);
-    background: rgba(99, 102, 241, 0.08);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.08s ease-out, width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease;
-    backdrop-filter: blur(2px);
-}
-
-body.cursor-active .cursor-follower {
-    width: 54px;
-    height: 54px;
-    border-color: var(--fc-cyan);
-    background: rgba(6, 182, 212, 0.15);
-}
-
-body.cursor-active .custom-cursor {
-    width: 12px;
-    height: 12px;
-    background: var(--fc-cyan);
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea {
+    cursor: text;
 }
 
 /* Soundless Click Ripple Effect */
 .click-ripple {
     position: absolute;
     border-radius: 50%;
-    background: rgba(99, 102, 241, 0.35);
+    background: rgba(99, 102, 241, 0.3);
     transform: scale(0);
     animation: rippleAnimation 0.6s linear;
     pointer-events: none;
@@ -143,6 +108,7 @@ body.cursor-active .custom-cursor {
     border: 1px solid var(--fc-glass-border);
     border-radius: 20px;
     box-shadow: var(--fc-shadow-glass);
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .glass-card {
@@ -155,7 +121,8 @@ body.cursor-active .custom-cursor {
     overflow: hidden;
     transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), 
                 box-shadow 0.3s ease, 
-                border-color 0.3s ease;
+                border-color 0.3s ease,
+                background 0.3s ease;
     transform-style: preserve-3d;
     perspective: 1000px;
 }
@@ -193,6 +160,11 @@ body.cursor-active .custom-cursor {
     background: linear-gradient(145deg, rgba(245, 158, 11, 0.1) 0%, rgba(15, 23, 42, 0.8) 100%);
     box-shadow: var(--fc-shadow-amber-glow) !important;
     animation: pulseGlow 3s infinite ease-in-out;
+}
+
+[data-theme="light"] .smart-stretch-card {
+    background: linear-gradient(145deg, rgba(245, 158, 11, 0.12) 0%, #FFFFFF 100%) !important;
+    border: 2px solid var(--fc-amber) !important;
 }
 
 @keyframes pulseGlow {
@@ -262,7 +234,7 @@ body.cursor-active .custom-cursor {
     display: flex;
     align-items: center;
     padding: 0 4px;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .theme-switch-thumb {
@@ -341,6 +313,14 @@ body.cursor-active .custom-cursor {
     animation: shimmer 1.8s infinite;
 }
 
+[data-theme="light"] .skeleton-shimmer {
+    background: linear-gradient(90deg, 
+        rgba(0, 0, 0, 0.04) 25%, 
+        rgba(0, 0, 0, 0.08) 50%, 
+        rgba(0, 0, 0, 0.04) 75%);
+    background-size: 200% 100%;
+}
+
 @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
@@ -379,12 +359,160 @@ body.cursor-active .custom-cursor {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 9999px;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================================
+   HIGH-CONTRAST LIGHT MODE SEMANTIC CLASS OVERRIDES
+   Ensures 100% razor-sharp visibility of text, headings, badges & containers
+   ========================================================================== */
+
+[data-theme="light"] .text-white {
+    color: #0F172A !important;
+}
+
+[data-theme="light"] .text-slate-100 {
+    color: #0F172A !important;
+}
+
+[data-theme="light"] .text-slate-200 {
+    color: #1E293B !important;
+}
+
+[data-theme="light"] .text-slate-300 {
+    color: #334155 !important;
+}
+
+[data-theme="light"] .text-slate-400 {
+    color: #475569 !important;
+}
+
+[data-theme="light"] .text-slate-500 {
+    color: #64748B !important;
+}
+
+[data-theme="light"] .bg-white\/5 {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .bg-white\/10 {
+    background-color: rgba(0, 0, 0, 0.07) !important;
+}
+
+[data-theme="light"] .border-white\/10 {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .border-white\/20 {
+    border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="light"] .bg-slate-900\/60,
+[data-theme="light"] .bg-slate-950\/50,
+[data-theme="light"] .bg-indigo-950\/30 {
+    background-color: rgba(255, 255, 255, 0.90) !important;
+}
+
+[data-theme="light"] .bg-slate-800\/90,
+[data-theme="light"] .bg-slate-800\/80 {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+    color: #0F172A !important;
+    background-color: #FFFFFF !important;
+    border-color: #CBD5E1 !important;
+}
+
+[data-theme="light"] input::placeholder {
+    color: #64748B !important;
+}
+
+[data-theme="light"] .chat-drawer {
+    background: rgba(255, 255, 255, 0.96) !important;
+    border-color: #CBD5E1 !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="light"] .mobile-bottom-nav {
+    background: rgba(255, 255, 255, 0.94) !important;
+    border-color: #CBD5E1 !important;
+}
+
+/* Light mode header and navbar */
+[data-theme="light"] header nav a {
+    color: #334155 !important;
+}
+[data-theme="light"] header nav a:hover,
+[data-theme="light"] header nav a.font-semibold,
+[data-theme="light"] header nav a.text-indigo-400 {
+    color: #4F46E5 !important;
+}
+
+/* Light mode chips and tags */
+[data-theme="light"] .chip-tag {
+    background-color: #E2E8F0 !important;
+    color: #1E293B !important;
+    border-color: #CBD5E1 !important;
+}
+[data-theme="light"] .chip-tag.active {
+    background-color: #4F46E5 !important;
+    color: #FFFFFF !important;
+    border-color: #4338CA !important;
+}
+
+/* Light mode badges */
+[data-theme="light"] .badge,
+[data-theme="light"] .rounded-full.bg-emerald-500\/10 {
+    background-color: #DCFCE7 !important;
+    color: #15803D !important;
+    border-color: #86EFAC !important;
+}
+[data-theme="light"] .rounded-full.bg-indigo-500\/10 {
+    background-color: #EEF2FF !important;
+    color: #4338CA !important;
+    border-color: #C7D2FE !important;
+}
+[data-theme="light"] .rounded-full.bg-amber-500\/10 {
+    background-color: #FEF3C7 !important;
+    color: #B45309 !important;
+    border-color: #FDE68A !important;
+}
+[data-theme="light"] .rounded-full.bg-rose-500\/10 {
+    background-color: #FEE2E2 !important;
+    color: #B91C1C !important;
+    border-color: #FECACA !important;
+}
+[data-theme="light"] .rounded-full.bg-cyan-500\/10 {
+    background-color: #E0F2FE !important;
+    color: #0369A1 !important;
+    border-color: #BAE6FD !important;
+}
+
+/* Primary buttons retain vibrant white text */
+[data-theme="light"] .bg-indigo-600,
+[data-theme="light"] .bg-indigo-600 .text-white,
+[data-theme="light"] .bg-gradient-to-r .text-white,
+[data-theme="light"] button.bg-indigo-600,
+[data-theme="light"] a.bg-indigo-600 {
+    color: #FFFFFF !important;
 }
 
 /* Responsive Bottom Navigation Bar (< 640px) */
@@ -410,10 +538,6 @@ body.cursor-active .custom-cursor {
         display: flex;
         justify-content: space-around;
         align-items: center;
-    }
-
-    .custom-cursor, .cursor-follower {
-        display: none !important; /* Hide custom cursor on mobile touch devices */
     }
 }
 

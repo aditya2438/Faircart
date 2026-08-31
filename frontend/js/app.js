@@ -1,13 +1,12 @@
 /**
  * ==============================================================================
  * FAIRCART ENTERPRISE INTERACTION ENGINE
- * Luxury UI/UX Controller: Magnetic Cursor, 3D Parallax, Click Ripples,
- * AI Chat Concierge, Global Search Hotkeys, Theme Persistence & Toast Alerts
+ * Luxury UI/UX Controller: 3D Parallax, Click Ripples, AI Chat Concierge,
+ * Global Search Hotkeys, Theme Persistence & Toast Alerts
  * ==============================================================================
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initCustomCursor();
     initThemeSwitcher();
     init3DCardPhysics();
     initClickRipples();
@@ -16,66 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initToastContainer();
     initMobileNav();
 });
-
-/* ==========================================================================
-   1. Luxury Magnetic Cursor & Trailing Glow Aura Follower
-   ========================================================================== */
-function initCustomCursor() {
-    // Only initialize on pointer devices (not mobile touch)
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-
-    let cursor = document.querySelector('.custom-cursor');
-    let follower = document.querySelector('.cursor-follower');
-
-    if (!cursor) {
-        cursor = document.createElement('div');
-        cursor.className = 'custom-cursor';
-        document.body.appendChild(cursor);
-    }
-
-    if (!follower) {
-        follower = document.createElement('div');
-        follower.className = 'cursor-follower';
-        document.body.appendChild(follower);
-    }
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let followerX = mouseX;
-    let followerY = mouseY;
-
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursor.style.left = `${mouseX}px`;
-        cursor.style.top = `${mouseY}px`;
-    });
-
-    // Smooth Lerp physics for trailing follower
-    function renderFollower() {
-        followerX += (mouseX - followerX) * 0.18;
-        followerY += (mouseY - followerY) * 0.18;
-        follower.style.left = `${followerX}px`;
-        follower.style.top = `${followerY}px`;
-        requestAnimationFrame(renderFollower);
-    }
-    requestAnimationFrame(renderFollower);
-
-    // Interactive Hover Snap Targets
-    const interactiveSelectors = 'a, button, input, select, textarea, .glass-card, .theme-switch, .chip-tag, [role="button"]';
-    
-    document.addEventListener('mouseover', (e) => {
-        if (e.target.closest(interactiveSelectors)) {
-            document.body.classList.add('cursor-active');
-        }
-    });
-
-    document.addEventListener('mouseout', (e) => {
-        if (e.target.closest(interactiveSelectors)) {
-            document.body.classList.remove('cursor-active');
-        }
-    });
-}
 
 /* ==========================================================================
    2. Soundless Tactile Click Ripple Effect
