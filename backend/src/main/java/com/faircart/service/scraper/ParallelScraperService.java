@@ -22,12 +22,15 @@ public class ParallelScraperService {
     private static final List<ProductPlatformListing.Platform> TARGET_PLATFORMS = List.of(
             ProductPlatformListing.Platform.AMAZON,
             ProductPlatformListing.Platform.FLIPKART,
+            ProductPlatformListing.Platform.MEESHO,
             ProductPlatformListing.Platform.CROMA,
             ProductPlatformListing.Platform.SAMSUNG,
             ProductPlatformListing.Platform.APPLE,
+            ProductPlatformListing.Platform.REALME,
             ProductPlatformListing.Platform.TATA_NEU,
             ProductPlatformListing.Platform.BLINKIT,
             ProductPlatformListing.Platform.INSTAMART,
+            ProductPlatformListing.Platform.ZEPTO,
             ProductPlatformListing.Platform.MYNTRA
     );
 
@@ -80,7 +83,10 @@ public class ParallelScraperService {
         BigDecimal originalPrice = basePrice.multiply(BigDecimal.valueOf(1.20)).setScale(2, RoundingMode.HALF_UP);
 
         // Calculate coupon / bank discounts
-        BigDecimal couponDiscount = platform == ProductPlatformListing.Platform.AMAZON || platform == ProductPlatformListing.Platform.FLIPKART || platform == ProductPlatformListing.Platform.MYNTRA
+        BigDecimal couponDiscount = (platform == ProductPlatformListing.Platform.AMAZON || 
+                                     platform == ProductPlatformListing.Platform.FLIPKART || 
+                                     platform == ProductPlatformListing.Platform.MEESHO ||
+                                     platform == ProductPlatformListing.Platform.MYNTRA)
                 ? basePrice.multiply(BigDecimal.valueOf(0.06)).setScale(2, RoundingMode.HALF_UP)
                 : BigDecimal.ZERO;
 
@@ -98,11 +104,14 @@ public class ParallelScraperService {
         String delivery = switch (platform) {
             case BLINKIT -> "⚡ 10-15 Mins Instant Delivery";
             case INSTAMART -> "⚡ 12-20 Mins Instant Delivery";
+            case ZEPTO -> "⚡ 10 Mins Instant Delivery";
             case AMAZON -> "Prime Tomorrow, 11 AM";
             case FLIPKART -> "Express VIP Delivery in 1-2 Days";
+            case MEESHO -> "Free Standard Delivery (3-4 Days)";
             case CROMA -> "Same-Day Store Pickup / Delivery";
             case SAMSUNG -> "Samsung Direct (Official 1-Year Care+)";
             case APPLE -> "Apple Store Official Free Express Delivery";
+            case REALME -> "Realme Official Store (1-Year Doorstep Warranty)";
             case TATA_NEU -> "NeuPass Standard (5% NeuCoins Cashback)";
             case MYNTRA -> "Myntra Express Insider (2 Days)";
             default -> "Standard Delivery (3-5 Days)";

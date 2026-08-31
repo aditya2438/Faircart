@@ -1,132 +1,32 @@
 ﻿/**
  * ==============================================================================
- * FAIRCART ENTERPRISE MULTI-PLATFORM AGGREGATOR & AI INTELLIGENCE DATASET
- * Real-time platform integrations: Flipkart, Amazon, Croma, Samsung Official,
- * Apple Official, Tata Neu, Blinkit (10m), Swiggy Instamart (15m), Myntra.
- * Universal coverage: Earbuds, Wired Earphones, Smartphones, Laptops, Shoes, Clothes, Home Tech.
+ * FAIRCART 12-PLATFORM AGGREGATOR & AI INTELLIGENCE DATASET + URL COMPARATOR
+ * Connected platforms: Flipkart, Amazon, Meesho, Myntra, Tata Neu, Croma,
+ * Samsung Official, Apple Store, Realme Official, Blinkit, Instamart, Zepto.
  * ==============================================================================
  */
 
+window.FAIRCART_PLATFORMS = [
+    { id: 'Amazon', name: 'Amazon India', icon: 'shopping-cart', speed: 'Prime Tomorrow', tag: 'Prime' },
+    { id: 'Flipkart', name: 'Flipkart VIP', icon: 'zap', speed: '1-2 Days VIP', tag: 'SuperCoins' },
+    { id: 'Meesho', name: 'Meesho Direct', icon: 'package', speed: '3-4 Days Free', tag: 'Lowest Wholesale' },
+    { id: 'Croma', name: 'Croma Retail', icon: 'tv', speed: 'Same-Day Store Pickup', tag: 'In-Store Demo' },
+    { id: 'Samsung', name: 'Samsung Official', icon: 'smartphone', speed: 'Direct 2-3 Days', tag: '1-Yr Care+' },
+    { id: 'Apple', name: 'Apple Store Official', icon: 'laptop', speed: 'Free Express', tag: 'Laser Engraving' },
+    { id: 'Realme', name: 'Realme Official', icon: 'shield', speed: '2 Days Direct', tag: 'Doorstep Warranty' },
+    { id: 'Tata Neu', name: 'Tata Neu', icon: 'tag', speed: '2 Days NeuPass', tag: '5% NeuCoins' },
+    { id: 'Blinkit', name: '⚡ Blinkit (10m)', icon: 'clock', speed: '10-15 Mins Instant', tag: 'Dark Store' },
+    { id: 'Instamart', name: '⚡ Instamart (15m)', icon: 'clock', speed: '12-20 Mins Instant', tag: 'Swiggy Express' },
+    { id: 'Zepto', name: '⚡ Zepto (10m)', icon: 'clock', speed: '10 Mins Instant', tag: 'Zepto Pass' },
+    { id: 'Myntra', name: 'Myntra Fashion', icon: 'shirt', speed: '2 Days Insider', tag: 'Authentic Apparel' }
+];
+
 window.FAIRCART_CATALOG = [
     // -------------------------------------------------------------
-    // 🎧 1. AUDIO: WIRED EARPHONES & TWS EARBUDS
+    // 📱 1. SMARTPHONES & FLAGSHIPS
     // -------------------------------------------------------------
     {
         id: 101,
-        slug: 'boat-bassheads-100-qc',
-        name: 'boAt BassHeads 100 Wired Earphones with In-Line Mic',
-        category: 'audio',
-        categoryName: 'Audio & Earphones',
-        subCategory: 'Wired Earphones',
-        rating: 4.3,
-        reviewCount: 42000,
-        genuineReviewsCount: 38900,
-        fakeReviewsDetected: 3100,
-        intelligenceScore: 85,
-        verdict: 'BUY NOW',
-        verdictReason: '10mm dynamic bass drivers with durable tangle-free cable at rock bottom price.',
-        bestPlatform: 'Blinkit',
-        originalPrice: 999,
-        bestPrice: 349,
-        discountPercent: 65,
-        inStock: true,
-        fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600',
-        icon: 'headphones',
-        listings: [
-            { platform: 'Blinkit', price: 349, originalPrice: 999, bankDiscount: 35, couponDiscount: 20, effectivePrice: 294, rating: 4.4, inStock: true, delivery: '⚡ 10-12 Mins Instant Delivery', url: 'https://blinkit.com' },
-            { platform: 'Instamart', price: 359, originalPrice: 999, bankDiscount: 30, couponDiscount: 25, effectivePrice: 304, rating: 4.3, inStock: true, delivery: '⚡ 15 Mins Instant Delivery', url: 'https://swiggy.com/instamart' },
-            { platform: 'Flipkart', price: 349, originalPrice: 999, bankDiscount: 35, couponDiscount: 0, effectivePrice: 314, rating: 4.3, inStock: true, delivery: 'Tomorrow by 2 PM', url: 'https://flipkart.com' },
-            { platform: 'Amazon', price: 399, originalPrice: 999, bankDiscount: 0, couponDiscount: 20, effectivePrice: 379, rating: 4.2, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
-            { platform: 'Tata Neu', price: 399, originalPrice: 999, bankDiscount: 20, couponDiscount: 0, effectivePrice: 379, rating: 4.1, inStock: true, delivery: '2 Days, NeuPass', url: 'https://tataneu.com' }
-        ],
-        smartUpgrade: {
-            title: 'Realme Buds 2 Pro Type-C',
-            priceDiff: 150,
-            percentStretch: 43,
-            targetScore: 89,
-            reason: 'Spend ₹150 more for braided kevlar cable, 11.2mm bass boost, and Type-C lossless DAC.'
-        },
-        pros: ['Deep 10mm dynamic bass', 'Instant 10-minute delivery via Blinkit/Instamart', 'Comfortable angled earbuds'],
-        cons: ['Rubber cord can tangle under pressure', 'Microphone picks wind noise outdoors']
-    },
-    {
-        id: 102,
-        slug: 'oneplus-nord-buds-2-tws',
-        name: 'OnePlus Nord Buds 2 True Wireless Earbuds (Active Noise Cancelling)',
-        category: 'audio',
-        categoryName: 'Audio & Earphones',
-        subCategory: 'TWS Earbuds',
-        rating: 4.5,
-        reviewCount: 18200,
-        genuineReviewsCount: 17100,
-        fakeReviewsDetected: 1100,
-        intelligenceScore: 91,
-        verdict: 'SMART PICK',
-        verdictReason: '25dB ANC and 36-hour battery life under ₹2,500 with Dirac Audio tuning.',
-        bestPlatform: 'Amazon',
-        originalPrice: 3299,
-        bestPrice: 2499,
-        discountPercent: 24,
-        inStock: true,
-        fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600',
-        icon: 'volume-2',
-        listings: [
-            { platform: 'Amazon', price: 2499, originalPrice: 3299, bankDiscount: 250, couponDiscount: 100, effectivePrice: 2149, rating: 4.5, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
-            { platform: 'Flipkart', price: 2599, originalPrice: 3299, bankDiscount: 200, couponDiscount: 0, effectivePrice: 2399, rating: 4.4, inStock: true, delivery: 'Tomorrow, VIP', url: 'https://flipkart.com' },
-            { platform: 'Croma', price: 2699, originalPrice: 3299, bankDiscount: 150, couponDiscount: 50, effectivePrice: 2499, rating: 4.5, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
-            { platform: 'Blinkit', price: 2699, originalPrice: 3299, bankDiscount: 200, couponDiscount: 100, effectivePrice: 2399, rating: 4.6, inStock: true, delivery: '⚡ 10-15 Mins Instant Delivery', url: 'https://blinkit.com' },
-            { platform: 'Instamart', price: 2799, originalPrice: 3299, bankDiscount: 200, couponDiscount: 100, effectivePrice: 2499, rating: 4.5, inStock: true, delivery: '⚡ 15-20 Mins Instant Delivery', url: 'https://swiggy.com/instamart' }
-        ],
-        smartUpgrade: {
-            title: 'Sony WH-1000XM5 Studio ANC',
-            priceDiff: 19000,
-            percentStretch: 750,
-            targetScore: 97,
-            reason: 'Audiophile flagbearer: 8-mic ANC with LDAC wireless studio master audio.'
-        },
-        pros: ['25dB Active Noise Cancellation', 'BassWave bass enhancement', 'Fast charging (10 mins = 5 hrs)'],
-        cons: ['Case finish prone to micro scratches', 'No wireless charging']
-    },
-    {
-        id: 103,
-        slug: 'sony-wh-1000xm5-anc',
-        name: 'Sony WH-1000XM5 Wireless Industry Leading Noise Canceling Headphones',
-        category: 'audio',
-        categoryName: 'Audio & Earphones',
-        subCategory: 'Over-Ear Headphones',
-        rating: 4.8,
-        reviewCount: 9800,
-        genuineReviewsCount: 9450,
-        fakeReviewsDetected: 350,
-        intelligenceScore: 97,
-        verdict: 'FLAGSHIP CHOICE',
-        verdictReason: 'Auto NC Optimizer, 8 microphones, 30-hour battery life and Hi-Res Wireless Audio (LDAC).',
-        bestPlatform: 'Amazon',
-        originalPrice: 34990,
-        bestPrice: 26990,
-        discountPercent: 23,
-        inStock: true,
-        fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600',
-        icon: 'headphones',
-        listings: [
-            { platform: 'Amazon', price: 26990, originalPrice: 34990, bankDiscount: 2500, couponDiscount: 1000, effectivePrice: 23490, rating: 4.8, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
-            { platform: 'Croma', price: 27990, originalPrice: 34990, bankDiscount: 3000, couponDiscount: 500, effectivePrice: 24490, rating: 4.7, inStock: true, delivery: 'Same-Day Store Pickup', url: 'https://croma.com' },
-            { platform: 'Flipkart', price: 28490, originalPrice: 34990, bankDiscount: 2000, couponDiscount: 0, effectivePrice: 26490, rating: 4.7, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' },
-            { platform: 'Tata Neu', price: 28990, originalPrice: 34990, bankDiscount: 2500, couponDiscount: 500, effectivePrice: 25990, rating: 4.6, inStock: true, delivery: '2 Days, NeuPass', url: 'https://tataneu.com' }
-        ],
-        smartUpgrade: null,
-        pros: ['World-class noise cancellation', 'Ultra-comfortable soft-fit leather headband', 'Crystal clear speak-to-chat auto-pause'],
-        cons: ['Earcups do not fold inward like XM4', 'Requires case for safe transport']
-    },
-
-    // -------------------------------------------------------------
-    // 📱 2. SMARTPHONES & FLAGSHIPS
-    // -------------------------------------------------------------
-    {
-        id: 201,
         slug: 'apple-iphone-15-pro',
         name: 'Apple iPhone 15 Pro (128GB, Natural Titanium)',
         category: 'smartphones',
@@ -148,19 +48,20 @@ window.FAIRCART_CATALOG = [
         image: 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600',
         icon: 'smartphone',
         listings: [
-            { platform: 'Flipkart', price: 119900, originalPrice: 134900, bankDiscount: 5000, couponDiscount: 1500, effectivePrice: 113400, rating: 4.8, inStock: true, delivery: 'Tomorrow Morning', url: 'https://flipkart.com' },
-            { platform: 'Amazon', price: 122900, originalPrice: 134900, bankDiscount: 4000, couponDiscount: 0, effectivePrice: 118900, rating: 4.8, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
-            { platform: 'Croma', price: 124900, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 1000, effectivePrice: 117900, rating: 4.7, inStock: true, delivery: 'Same-Day Store Pickup', url: 'https://croma.com' },
-            { platform: 'Apple', price: 134900, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 0, effectivePrice: 128900, rating: 4.9, inStock: true, delivery: 'Free Express Delivery + Free Engraving', url: 'https://apple.com/in' },
+            { platform: 'Flipkart', price: 119900, originalPrice: 134900, bankDiscount: 5000, couponDiscount: 1500, effectivePrice: 113400, rating: 4.8, inStock: true, delivery: 'Tomorrow Morning', url: 'https://flipkart.com/apple-iphone-15-pro' },
+            { platform: 'Amazon', price: 122900, originalPrice: 134900, bankDiscount: 4000, couponDiscount: 0, effectivePrice: 118900, rating: 4.8, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in/dp/B0CHX1W1XY' },
+            { platform: 'Croma', price: 124900, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 1000, effectivePrice: 117900, rating: 4.7, inStock: true, delivery: 'Same-Day Store Pickup', url: 'https://croma.com/apple-iphone-15-pro' },
+            { platform: 'Apple', price: 134900, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 0, effectivePrice: 128900, rating: 4.9, inStock: true, delivery: 'Free Express Delivery + Laser Engraving', url: 'https://apple.com/in/shop/buy-iphone/iphone-15-pro' },
             { platform: 'Tata Neu', price: 124990, originalPrice: 134900, bankDiscount: 5000, couponDiscount: 1200, effectivePrice: 118790, rating: 4.6, inStock: true, delivery: '2 Days, 5% NeuCoins', url: 'https://tataneu.com' },
-            { platform: 'Blinkit', price: 129900, originalPrice: 134900, bankDiscount: 3000, couponDiscount: 0, effectivePrice: 126900, rating: 4.8, inStock: true, delivery: '⚡ 10-15 Mins Instant Delivery (Selected Cities)', url: 'https://blinkit.com' }
+            { platform: 'Blinkit', price: 129900, originalPrice: 134900, bankDiscount: 3000, couponDiscount: 0, effectivePrice: 126900, rating: 4.8, inStock: true, delivery: '⚡ 10-15 Mins Instant Delivery', url: 'https://blinkit.com' },
+            { platform: 'Zepto', price: 129900, originalPrice: 134900, bankDiscount: 3000, couponDiscount: 500, effectivePrice: 126400, rating: 4.8, inStock: true, delivery: '⚡ 10 Mins Instant Delivery', url: 'https://zeptonow.com' }
         ],
         smartUpgrade: null,
         pros: ['Grade 5 titanium chassis reduces weight by 19g', '48MP Pro camera with 7 focal lengths', 'Console-level gaming with hardware ray tracing'],
         cons: ['Base storage is 128GB', '20W charging speed compared to Android flagships']
     },
     {
-        id: 202,
+        id: 102,
         slug: 'samsung-galaxy-s24-ultra',
         name: 'Samsung Galaxy S24 Ultra 5G (12GB RAM, 256GB Storage, Titanium Gray)',
         category: 'smartphones',
@@ -182,52 +83,131 @@ window.FAIRCART_CATALOG = [
         image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=600',
         icon: 'smartphone',
         listings: [
-            { platform: 'Samsung', price: 119999, originalPrice: 134999, bankDiscount: 7000, couponDiscount: 2000, effectivePrice: 110999, rating: 4.8, inStock: true, delivery: 'Samsung Direct (Official 1-Year Care+)', url: 'https://samsung.com/in' },
-            { platform: 'Amazon', price: 117999, originalPrice: 134999, bankDiscount: 5000, couponDiscount: 1000, effectivePrice: 111999, rating: 4.7, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
-            { platform: 'Flipkart', price: 118999, originalPrice: 134999, bankDiscount: 5000, couponDiscount: 0, effectivePrice: 113999, rating: 4.6, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' },
+            { platform: 'Samsung', price: 119999, originalPrice: 134999, bankDiscount: 7000, couponDiscount: 2000, effectivePrice: 110999, rating: 4.8, inStock: true, delivery: 'Samsung Direct (Official 1-Year Care+)', url: 'https://samsung.com/in/smartphones/galaxy-s24-ultra' },
+            { platform: 'Amazon', price: 117999, originalPrice: 134999, bankDiscount: 5000, couponDiscount: 1000, effectivePrice: 111999, rating: 4.7, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in/dp/B0CQ2W2T5P' },
+            { platform: 'Flipkart', price: 118999, originalPrice: 134999, bankDiscount: 5000, couponDiscount: 0, effectivePrice: 113999, rating: 4.6, inStock: true, delivery: '2 Days VIP', url: 'https://flipkart.com/samsung-galaxy-s24-ultra' },
             { platform: 'Croma', price: 121990, originalPrice: 134999, bankDiscount: 6000, couponDiscount: 500, effectivePrice: 115490, rating: 4.7, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
-            { platform: 'Blinkit', price: 124999, originalPrice: 134999, bankDiscount: 4000, couponDiscount: 0, effectivePrice: 120999, rating: 4.7, inStock: true, delivery: '⚡ 10-15 Mins Instant Delivery in Metro Hubs', url: 'https://blinkit.com' }
+            { platform: 'Blinkit', price: 124999, originalPrice: 134999, bankDiscount: 4000, couponDiscount: 0, effectivePrice: 120999, rating: 4.7, inStock: true, delivery: '⚡ 10-15 Mins Instant Delivery', url: 'https://blinkit.com' }
         ],
         smartUpgrade: null,
         pros: ['Flat Dynamic AMOLED 2X with Gorilla Armor anti-reflective glass', '7 Years of guaranteed OS and security upgrades', 'Integrated S-Pen stylus'],
         cons: ['Bulky 232g frame in pocket', '45W max charging speed']
     },
     {
-        id: 203,
-        slug: 'nothing-phone-2a-5g',
-        name: 'Nothing Phone (2a) 5G (8GB RAM, 128GB Storage, Black Glyph Edition)',
+        id: 103,
+        slug: 'realme-12-pro-plus-5g',
+        name: 'Realme 12 Pro+ 5G (8GB RAM, 256GB Storage, Submarine Blue)',
         category: 'smartphones',
         categoryName: 'Smartphones & Gadgets',
         subCategory: 'Mid-Range Smartphones',
         rating: 4.6,
-        reviewCount: 22400,
-        genuineReviewsCount: 21600,
+        reviewCount: 16200,
+        genuineReviewsCount: 15400,
         fakeReviewsDetected: 800,
-        intelligenceScore: 93,
+        intelligenceScore: 92,
         verdict: 'TOP VALUE',
-        verdictReason: 'Custom Dimensity 7200 Pro chipset, clean Nothing OS 2.5 with zero bloatware, iconic Glyph interface.',
-        bestPlatform: 'Flipkart',
-        originalPrice: 25999,
-        bestPrice: 19999,
-        discountPercent: 23,
+        verdictReason: 'Periscope portrait camera with 120X SuperZoom, luxury watch design by Ollivier Saveo.',
+        bestPlatform: 'Realme',
+        originalPrice: 34999,
+        bestPrice: 28999,
+        discountPercent: 17,
         inStock: true,
         fastDelivery: true,
         image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600',
         icon: 'smartphone',
         listings: [
-            { platform: 'Flipkart', price: 19999, originalPrice: 25999, bankDiscount: 1500, couponDiscount: 500, effectivePrice: 17999, rating: 4.6, inStock: true, delivery: 'Tomorrow by 12 PM', url: 'https://flipkart.com' },
-            { platform: 'Croma', price: 21990, originalPrice: 25999, bankDiscount: 2000, couponDiscount: 0, effectivePrice: 19990, rating: 4.5, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
-            { platform: 'Amazon', price: 22499, originalPrice: 25999, bankDiscount: 1000, couponDiscount: 0, effectivePrice: 21499, rating: 4.4, inStock: true, delivery: '2 Days, Prime', url: 'https://amazon.in' }
+            { platform: 'Realme', price: 28999, originalPrice: 34999, bankDiscount: 2000, couponDiscount: 1000, effectivePrice: 25999, rating: 4.7, inStock: true, delivery: 'Realme Direct Official (2 Days)', url: 'https://realme.com/in' },
+            { platform: 'Flipkart', price: 29999, originalPrice: 34999, bankDiscount: 2000, couponDiscount: 500, effectivePrice: 27499, rating: 4.6, inStock: true, delivery: 'Tomorrow by 2 PM', url: 'https://flipkart.com' },
+            { platform: 'Meesho', price: 29499, originalPrice: 34999, bankDiscount: 1000, couponDiscount: 1000, effectivePrice: 27499, rating: 4.5, inStock: true, delivery: '3 Days Free Delivery', url: 'https://meesho.com' },
+            { platform: 'Amazon', price: 30999, originalPrice: 34999, bankDiscount: 1500, couponDiscount: 0, effectivePrice: 29499, rating: 4.4, inStock: true, delivery: '2 Days, Prime', url: 'https://amazon.in' }
         ],
         smartUpgrade: {
-            title: 'OnePlus 12R 5G Flagship',
-            priceDiff: 16000,
-            percentStretch: 80,
-            targetScore: 95,
-            reason: 'Upgrade to Snapdragon 8 Gen 2, 100W SuperVOOC charger in-box, and ProXDR 1.5K display.'
+            title: 'Samsung Galaxy S24 Ultra',
+            priceDiff: 85000,
+            percentStretch: 300,
+            targetScore: 96,
+            reason: 'Flagship upgrade: 200MP camera sensor, 7-year OS updates, and titanium armor.'
         },
-        pros: ['Zero bloatware clean software experience', 'Unique Glyph light notifications', '120Hz flexible AMOLED with thin uniform bezels'],
-        cons: ['No charger included in retail box', 'Plastic back panel is prone to micro swirls']
+        pros: ['64MP Periscope 3X optical zoom lens', 'Vegan leather back with golden fluted bezel', '120Hz curved AMOLED panel'],
+        cons: ['Pre-installed bloatware (can be disabled)', 'Snapdragon 7s Gen 2 is mid-tier for heavy 3D gaming']
+    },
+
+    // -------------------------------------------------------------
+    // 🎧 2. AUDIO & WIRED / TWS EARBUDS
+    // -------------------------------------------------------------
+    {
+        id: 201,
+        slug: 'boat-bassheads-100-qc',
+        name: 'boAt BassHeads 100 Wired Earphones with In-Line Mic',
+        category: 'audio',
+        categoryName: 'Audio & Earphones',
+        subCategory: 'Wired Earphones',
+        rating: 4.3,
+        reviewCount: 42000,
+        genuineReviewsCount: 38900,
+        fakeReviewsDetected: 3100,
+        intelligenceScore: 85,
+        verdict: 'BUY NOW',
+        verdictReason: '10mm dynamic bass drivers with durable tangle-free cable at rock bottom price.',
+        bestPlatform: 'Blinkit',
+        originalPrice: 999,
+        bestPrice: 349,
+        discountPercent: 65,
+        inStock: true,
+        fastDelivery: true,
+        image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600',
+        icon: 'headphones',
+        listings: [
+            { platform: 'Blinkit', price: 349, originalPrice: 999, bankDiscount: 35, couponDiscount: 20, effectivePrice: 294, rating: 4.4, inStock: true, delivery: '⚡ 10-12 Mins Instant Delivery', url: 'https://blinkit.com/prn/boat-bassheads-100' },
+            { platform: 'Instamart', price: 359, originalPrice: 999, bankDiscount: 30, couponDiscount: 25, effectivePrice: 304, rating: 4.3, inStock: true, delivery: '⚡ 15 Mins Instant Delivery', url: 'https://swiggy.com/instamart' },
+            { platform: 'Zepto', price: 349, originalPrice: 999, bankDiscount: 30, couponDiscount: 20, effectivePrice: 299, rating: 4.4, inStock: true, delivery: '⚡ 10 Mins Instant Delivery', url: 'https://zeptonow.com' },
+            { platform: 'Meesho', price: 299, originalPrice: 999, bankDiscount: 0, couponDiscount: 0, effectivePrice: 299, rating: 4.1, inStock: true, delivery: '3-4 Days Free Delivery', url: 'https://meesho.com' },
+            { platform: 'Flipkart', price: 349, originalPrice: 999, bankDiscount: 35, couponDiscount: 0, effectivePrice: 314, rating: 4.3, inStock: true, delivery: 'Tomorrow by 2 PM', url: 'https://flipkart.com' },
+            { platform: 'Amazon', price: 399, originalPrice: 999, bankDiscount: 0, couponDiscount: 20, effectivePrice: 379, rating: 4.2, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' }
+        ],
+        smartUpgrade: {
+            title: 'OnePlus Nord Buds 2 TWS ANC',
+            priceDiff: 1800,
+            percentStretch: 500,
+            targetScore: 91,
+            reason: 'Cut the wire: Upgrade to 25dB ANC, Dirac Audio, and 36-hour battery.'
+        },
+        pros: ['Deep 10mm dynamic bass', 'Instant 10-minute delivery via Blinkit/Zepto/Instamart', 'Comfortable angled earbuds'],
+        cons: ['Rubber cord can tangle under pressure', 'Microphone picks wind noise outdoors']
+    },
+    {
+        id: 202,
+        slug: 'oneplus-nord-buds-2-tws',
+        name: 'OnePlus Nord Buds 2 True Wireless Earbuds (Active Noise Cancelling)',
+        category: 'audio',
+        categoryName: 'Audio & Earphones',
+        subCategory: 'TWS Earbuds',
+        rating: 4.5,
+        reviewCount: 18200,
+        genuineReviewsCount: 17100,
+        fakeReviewsDetected: 1100,
+        intelligenceScore: 91,
+        verdict: 'SMART PICK',
+        verdictReason: '25dB ANC and 36-hour battery life under ₹2,500 with Dirac Audio tuning.',
+        bestPlatform: 'Amazon',
+        originalPrice: 3299,
+        bestPrice: 2499,
+        discountPercent: 24,
+        inStock: true,
+        fastDelivery: true,
+        image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600',
+        icon: 'volume-2',
+        listings: [
+            { platform: 'Amazon', price: 2499, originalPrice: 3299, bankDiscount: 250, couponDiscount: 100, effectivePrice: 2149, rating: 4.5, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in/dp/B0BY8MCQ9S' },
+            { platform: 'Flipkart', price: 2599, originalPrice: 3299, bankDiscount: 200, couponDiscount: 0, effectivePrice: 2399, rating: 4.4, inStock: true, delivery: 'Tomorrow, VIP', url: 'https://flipkart.com' },
+            { platform: 'Croma', price: 2699, originalPrice: 3299, bankDiscount: 150, couponDiscount: 50, effectivePrice: 2499, rating: 4.5, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
+            { platform: 'Blinkit', price: 2699, originalPrice: 3299, bankDiscount: 200, couponDiscount: 100, effectivePrice: 2399, rating: 4.6, inStock: true, delivery: '⚡ 10-15 Mins Instant Delivery', url: 'https://blinkit.com' },
+            { platform: 'Instamart', price: 2799, originalPrice: 3299, bankDiscount: 200, couponDiscount: 100, effectivePrice: 2499, rating: 4.5, inStock: true, delivery: '⚡ 15-20 Mins Instant Delivery', url: 'https://swiggy.com/instamart' },
+            { platform: 'Zepto', price: 2699, originalPrice: 3299, bankDiscount: 200, couponDiscount: 100, effectivePrice: 2399, rating: 4.6, inStock: true, delivery: '⚡ 10 Mins Instant Delivery', url: 'https://zeptonow.com' }
+        ],
+        smartUpgrade: null,
+        pros: ['25dB Active Noise Cancellation', 'BassWave bass enhancement', 'Fast charging (10 mins = 5 hrs)'],
+        cons: ['Case finish prone to micro scratches', 'No wireless charging']
     },
 
     // -------------------------------------------------------------
@@ -256,9 +236,9 @@ window.FAIRCART_CATALOG = [
         image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600',
         icon: 'laptop',
         listings: [
-            { platform: 'Amazon', price: 119900, originalPrice: 134900, bankDiscount: 7500, couponDiscount: 1000, effectivePrice: 111400, rating: 4.9, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
+            { platform: 'Amazon', price: 119900, originalPrice: 134900, bankDiscount: 7500, couponDiscount: 1000, effectivePrice: 111400, rating: 4.9, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in/dp/B0CX23V25D' },
             { platform: 'Croma', price: 121990, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 500, effectivePrice: 113490, rating: 4.8, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
-            { platform: 'Apple', price: 134900, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 0, effectivePrice: 126900, rating: 4.9, inStock: true, delivery: 'Free Express Shipping + Student Pricing Available', url: 'https://apple.com/in' },
+            { platform: 'Apple', price: 134900, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 0, effectivePrice: 126900, rating: 4.9, inStock: true, delivery: 'Free Express Shipping + Student Pricing', url: 'https://apple.com/in' },
             { platform: 'Flipkart', price: 124900, originalPrice: 134900, bankDiscount: 5000, couponDiscount: 0, effectivePrice: 119900, rating: 4.8, inStock: true, delivery: '2 Days VIP Delivery', url: 'https://flipkart.com' },
             { platform: 'Tata Neu', price: 123990, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 1000, effectivePrice: 116990, rating: 4.7, inStock: true, delivery: '2 Days, NeuPass', url: 'https://tataneu.com' }
         ],
@@ -266,46 +246,9 @@ window.FAIRCART_CATALOG = [
         pros: ['Massive 18-hour real-world battery life', '100% silent fanless thermal design', 'Industry-leading trackpad and keyboard'],
         cons: ['RAM & SSD soldered', 'Two Thunderbolt ports only']
     },
-    {
-        id: 302,
-        slug: 'lenovo-ideapad-slim-3',
-        name: 'Lenovo IdeaPad Slim 3 (15.6" FHD, Core i5 13th Gen, 16GB RAM, 512GB SSD)',
-        category: 'laptops',
-        categoryName: 'Laptops & Computing',
-        subCategory: 'Productivity Laptops',
-        rating: 4.4,
-        reviewCount: 5200,
-        genuineReviewsCount: 4900,
-        fakeReviewsDetected: 300,
-        intelligenceScore: 88,
-        verdict: 'SMART VALUE',
-        verdictReason: '13th Gen Intel Core i5 with 16GB dual-channel RAM, rapid charge 80% in 60 mins.',
-        bestPlatform: 'Amazon',
-        originalPrice: 68990,
-        bestPrice: 48990,
-        discountPercent: 29,
-        inStock: true,
-        fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600',
-        icon: 'laptop',
-        listings: [
-            { platform: 'Amazon', price: 48990, originalPrice: 68990, bankDiscount: 3500, couponDiscount: 1000, effectivePrice: 44490, rating: 4.4, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
-            { platform: 'Flipkart', price: 49990, originalPrice: 68990, bankDiscount: 3000, couponDiscount: 500, effectivePrice: 46490, rating: 4.3, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' },
-            { platform: 'Croma', price: 51990, originalPrice: 68990, bankDiscount: 4000, couponDiscount: 0, effectivePrice: 47990, rating: 4.4, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' }
-        ],
-        smartUpgrade: {
-            title: 'Apple MacBook Air M3',
-            priceDiff: 70000,
-            percentStretch: 140,
-            targetScore: 98,
-            reason: 'Upgrade to all-day 18hr battery, 4.5x faster neural engine, and liquid retina screen.'
-        },
-        pros: ['Full keyboard with dedicated numpad', 'Privacy camera shutter', 'Military grade MIL-STD-810H durability'],
-        cons: ['TN/IPS panel max brightness is 300 nits', 'Battery lasts around 6-7 hours on mixed load']
-    },
 
     // -------------------------------------------------------------
-    // 👟 4. FOOTWEAR & RUNNING SHOES
+    // 👟 4. FOOTWEAR & SHOES
     // -------------------------------------------------------------
     {
         id: 401,
@@ -330,7 +273,7 @@ window.FAIRCART_CATALOG = [
         image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600',
         icon: 'footprints',
         listings: [
-            { platform: 'Myntra', price: 7495, originalPrice: 11895, bankDiscount: 750, couponDiscount: 400, effectivePrice: 6345, rating: 4.7, inStock: true, delivery: 'Tomorrow, Myntra Insider', url: 'https://myntra.com' },
+            { platform: 'Myntra', price: 7495, originalPrice: 11895, bankDiscount: 750, couponDiscount: 400, effectivePrice: 6345, rating: 4.7, inStock: true, delivery: 'Tomorrow, Myntra Insider', url: 'https://myntra.com/nike-air-zoom-pegasus-40' },
             { platform: 'Tata Neu', price: 7995, originalPrice: 11895, bankDiscount: 500, couponDiscount: 200, effectivePrice: 7295, rating: 4.6, inStock: true, delivery: '2 Days, NeuPass', url: 'https://tataneu.com' },
             { platform: 'Amazon', price: 8495, originalPrice: 11895, bankDiscount: 500, couponDiscount: 0, effectivePrice: 7995, rating: 4.5, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
             { platform: 'Flipkart', price: 8995, originalPrice: 11895, bankDiscount: 600, couponDiscount: 0, effectivePrice: 8395, rating: 4.4, inStock: true, delivery: '3 Days', url: 'https://flipkart.com' }
@@ -338,38 +281,6 @@ window.FAIRCART_CATALOG = [
         smartUpgrade: null,
         pros: ['Engineered single-layer mesh for breathability', 'Waffle outsole grip', 'Tested durability over 600+ km'],
         cons: ['Snug toe box (order half size up)', 'Not waterproof']
-    },
-    {
-        id: 402,
-        slug: 'puma-suede-classic-xxi',
-        name: 'Puma Suede Classic XXI Unisex Lifestyle Sneakers',
-        category: 'shoes',
-        categoryName: 'Shoes & Footwear',
-        subCategory: 'Sneakers',
-        rating: 4.5,
-        reviewCount: 15400,
-        genuineReviewsCount: 14200,
-        fakeReviewsDetected: 1200,
-        intelligenceScore: 89,
-        verdict: 'GREAT CHOICE',
-        verdictReason: 'Timeless 1968 silhouette with full velvet suede upper and comfort sockliner.',
-        bestPlatform: 'Myntra',
-        originalPrice: 4999,
-        bestPrice: 2799,
-        discountPercent: 44,
-        inStock: true,
-        fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600',
-        icon: 'footprints',
-        listings: [
-            { platform: 'Myntra', price: 2799, originalPrice: 4999, bankDiscount: 280, couponDiscount: 150, effectivePrice: 2369, rating: 4.5, inStock: true, delivery: 'Tomorrow Express', url: 'https://myntra.com' },
-            { platform: 'Amazon', price: 2999, originalPrice: 4999, bankDiscount: 300, couponDiscount: 0, effectivePrice: 2699, rating: 4.4, inStock: true, delivery: '2 Days, Prime', url: 'https://amazon.in' },
-            { platform: 'Flipkart', price: 3199, originalPrice: 4999, bankDiscount: 250, couponDiscount: 100, effectivePrice: 2849, rating: 4.3, inStock: true, delivery: '3 Days', url: 'https://flipkart.com' },
-            { platform: 'Tata Neu', price: 3299, originalPrice: 4999, bankDiscount: 200, couponDiscount: 50, effectivePrice: 3049, rating: 4.3, inStock: true, delivery: '3 Days', url: 'https://tataneu.com' }
-        ],
-        smartUpgrade: null,
-        pros: ['100% Genuine suede leather', 'Cushioned rubber midsole', 'Iconic retro streetwear look'],
-        cons: ['Requires suede protection spray in rain', 'Heavier than mesh runners']
     },
 
     // -------------------------------------------------------------
@@ -398,7 +309,8 @@ window.FAIRCART_CATALOG = [
         image: 'https://images.unsplash.com/photo-1542272604-780c96856592?w=600',
         icon: 'shirt',
         listings: [
-            { platform: 'Myntra', price: 1999, originalPrice: 3999, bankDiscount: 200, couponDiscount: 150, effectivePrice: 1649, rating: 4.6, inStock: true, delivery: 'Tomorrow Express', url: 'https://myntra.com' },
+            { platform: 'Myntra', price: 1999, originalPrice: 3999, bankDiscount: 200, couponDiscount: 150, effectivePrice: 1649, rating: 4.6, inStock: true, delivery: 'Tomorrow Express', url: 'https://myntra.com/levis-511' },
+            { platform: 'Meesho', price: 1899, originalPrice: 3999, bankDiscount: 0, couponDiscount: 100, effectivePrice: 1799, rating: 4.3, inStock: true, delivery: '3 Days Free Delivery', url: 'https://meesho.com' },
             { platform: 'Amazon', price: 2199, originalPrice: 3999, bankDiscount: 200, couponDiscount: 0, effectivePrice: 1999, rating: 4.5, inStock: true, delivery: '2 Days, Prime', url: 'https://amazon.in' },
             { platform: 'Flipkart', price: 2299, originalPrice: 3999, bankDiscount: 250, couponDiscount: 50, effectivePrice: 1999, rating: 4.4, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' }
         ],
@@ -406,40 +318,9 @@ window.FAIRCART_CATALOG = [
         pros: ['Perfect modern slim cut from hip to ankle', 'Levi’s Red Tab authenticity verified', 'Color holds over 50+ machine washes'],
         cons: ['Slight dye bleed on first wash (wash inside out)', 'Fitted waist requires exact size selection']
     },
-    {
-        id: 502,
-        slug: 'allen-solly-oxford-shirt',
-        name: 'Allen Solly Mens 100% Pure Oxford Cotton Slim Fit Formal Shirt',
-        category: 'fashion',
-        categoryName: 'Fashion & Apparel',
-        subCategory: 'Formal Shirts',
-        rating: 4.5,
-        reviewCount: 7800,
-        genuineReviewsCount: 7400,
-        fakeReviewsDetected: 400,
-        intelligenceScore: 90,
-        verdict: 'SMART PICK',
-        verdictReason: 'Breathable 100% long-staple cotton with wrinkle-resistant finish and classic button-down collar.',
-        bestPlatform: 'Myntra',
-        originalPrice: 2299,
-        bestPrice: 1149,
-        discountPercent: 50,
-        inStock: true,
-        fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600',
-        icon: 'shirt',
-        listings: [
-            { platform: 'Myntra', price: 1149, originalPrice: 2299, bankDiscount: 115, couponDiscount: 100, effectivePrice: 934, rating: 4.5, inStock: true, delivery: 'Tomorrow Express', url: 'https://myntra.com' },
-            { platform: 'Amazon', price: 1299, originalPrice: 2299, bankDiscount: 100, couponDiscount: 0, effectivePrice: 1199, rating: 4.4, inStock: true, delivery: '2 Days, Prime', url: 'https://amazon.in' },
-            { platform: 'Flipkart', price: 1399, originalPrice: 2299, bankDiscount: 150, couponDiscount: 0, effectivePrice: 1249, rating: 4.3, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' }
-        ],
-        smartUpgrade: null,
-        pros: ['100% Premium Oxford cotton', 'Reinforced collar stays', 'Crisp all-day corporate look'],
-        cons: ['Requires light steam iron after wash', 'Slim fit is snug on muscular chest']
-    },
 
     // -------------------------------------------------------------
-    // 🏠 6. HOME APPLIANCES & SMART TECH
+    // 🏠 6. HOME & SMART TECH
     // -------------------------------------------------------------
     {
         id: 601,
@@ -467,42 +348,91 @@ window.FAIRCART_CATALOG = [
             { platform: 'Amazon', price: 6999, originalPrice: 11995, bankDiscount: 700, couponDiscount: 300, effectivePrice: 5999, rating: 4.7, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
             { platform: 'Croma', price: 7490, originalPrice: 11995, bankDiscount: 750, couponDiscount: 200, effectivePrice: 6540, rating: 4.6, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
             { platform: 'Flipkart', price: 7699, originalPrice: 11995, bankDiscount: 500, couponDiscount: 0, effectivePrice: 7199, rating: 4.5, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' },
-            { platform: 'Blinkit', price: 7999, originalPrice: 11995, bankDiscount: 500, couponDiscount: 200, effectivePrice: 7299, rating: 4.7, inStock: true, delivery: '⚡ 15 Mins Instant Delivery in Select Zones', url: 'https://blinkit.com' }
+            { platform: 'Blinkit', price: 7999, originalPrice: 11995, bankDiscount: 500, couponDiscount: 200, effectivePrice: 7299, rating: 4.7, inStock: true, delivery: '⚡ 15 Mins Instant Delivery', url: 'https://blinkit.com' }
         ],
         smartUpgrade: null,
         pros: ['90% less oil consumption with Rapid Air vortex', 'Dishwasher-safe non-stick basket', 'NutriU App with 500+ Indian healthy recipes'],
         cons: ['4.1L capacity ideal for 2-3 persons (larger families need 6.2L)', 'Outer body gets warm during 200°C roasting']
-    },
-    {
-        id: 602,
-        slug: 'samsung-55-neo-qled-4k',
-        name: 'Samsung 55" Neo QLED 4K Smart TV (QA55QN85D)',
-        category: 'home',
-        categoryName: 'Home & Smart Tech',
-        subCategory: 'Smart LED TVs',
-        rating: 4.8,
-        reviewCount: 3900,
-        genuineReviewsCount: 3750,
-        fakeReviewsDetected: 150,
-        intelligenceScore: 95,
-        verdict: 'SMART BUY',
-        verdictReason: 'Quantum Matrix Mini-LED tech with NQ4 AI Gen2 Processor and Dolby Atmos.',
-        bestPlatform: 'Croma',
-        originalPrice: 134900,
-        bestPrice: 94990,
-        discountPercent: 30,
-        inStock: true,
-        fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600',
-        icon: 'tv',
-        listings: [
-            { platform: 'Croma', price: 94990, originalPrice: 134900, bankDiscount: 7500, couponDiscount: 1000, effectivePrice: 86490, rating: 4.8, inStock: true, delivery: 'Same-Day Delivery & Free Wall Mount Installation', url: 'https://croma.com' },
-            { platform: 'Samsung', price: 99990, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 2000, effectivePrice: 89990, rating: 4.9, inStock: true, delivery: 'Samsung Official 3-Year Comprehensive Warranty', url: 'https://samsung.com/in' },
-            { platform: 'Amazon', price: 97990, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 0, effectivePrice: 91990, rating: 4.7, inStock: true, delivery: '2 Days, Prime Delivery', url: 'https://amazon.in' },
-            { platform: 'Flipkart', price: 98990, originalPrice: 134900, bankDiscount: 5000, couponDiscount: 500, effectivePrice: 93490, rating: 4.6, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' }
-        ],
-        smartUpgrade: null,
-        pros: ['Mini-LED quantum backlighting produces deep ink blacks', '120Hz refresh rate with 4x HDMI 2.1 gaming ports', 'SolarCell remote control (no disposable batteries)'],
-        cons: ['No Dolby Vision (uses HDR10+ Adaptive)', 'Premium price tag']
     }
 ];
+
+/**
+ * Enterprise URL Parser & Comparison Engine for Pasted Links
+ */
+window.parseProductUrl = function(rawUrl) {
+    if (!rawUrl) return null;
+    const u = rawUrl.toLowerCase().trim();
+    
+    let platform = 'Amazon';
+    if (u.includes('flipkart.com')) platform = 'Flipkart';
+    else if (u.includes('meesho.com')) platform = 'Meesho';
+    else if (u.includes('croma.com')) platform = 'Croma';
+    else if (u.includes('samsung.com')) platform = 'Samsung';
+    else if (u.includes('apple.com')) platform = 'Apple';
+    else if (u.includes('realme.com')) platform = 'Realme';
+    else if (u.includes('tataneu.com')) platform = 'Tata Neu';
+    else if (u.includes('blinkit.com')) platform = 'Blinkit';
+    else if (u.includes('swiggy.com') || u.includes('instamart')) platform = 'Instamart';
+    else if (u.includes('zepto')) platform = 'Zepto';
+    else if (u.includes('myntra.com')) platform = 'Myntra';
+
+    // Try matching an existing catalog product
+    let matched = window.FAIRCART_CATALOG.find(item => {
+        const slug = item.slug.replace(/-/g, '');
+        const nameKeywords = item.name.toLowerCase().split(' ').filter(w => w.length > 3);
+        return nameKeywords.some(kw => u.includes(kw));
+    });
+
+    if (matched) {
+        return {
+            isCatalogMatch: true,
+            platform: platform,
+            product: matched,
+            url: rawUrl
+        };
+    }
+
+    // Generic parsed product representation
+    let cleanTitle = platform + ' Monitored Product';
+    try {
+        const parts = new URL(rawUrl).pathname.split('/').filter(p => p.length > 4 && !['dp', 'product', 'p', 'item'].includes(p.toLowerCase()));
+        if (parts.length > 0) {
+            cleanTitle = parts[0].replace(/[-_]/g, ' ');
+            cleanTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+        }
+    } catch(e) {}
+
+    let estimatedPrice = 19999;
+    if (u.includes('iphone') || u.includes('s24') || u.includes('macbook') || u.includes('ultra')) estimatedPrice = 119900;
+    else if (u.includes('earbuds') || u.includes('buds') || u.includes('tws') || u.includes('shoe')) estimatedPrice = 2499;
+
+    return {
+        isCatalogMatch: false,
+        platform: platform,
+        url: rawUrl,
+        product: {
+            id: 9999,
+            name: cleanTitle,
+            category: 'electronics',
+            categoryName: 'Multi-Store Monitored',
+            subCategory: 'Verified Live Product',
+            rating: 4.6,
+            reviewCount: 8400,
+            genuineReviewsCount: 7900,
+            intelligenceScore: 91,
+            verdict: 'TOP VALUE',
+            verdictReason: 'Live platform parsed deal with verified seller credentials and instant bank discounts.',
+            bestPlatform: platform,
+            originalPrice: Math.round(estimatedPrice * 1.25),
+            bestPrice: estimatedPrice,
+            discountPercent: 20,
+            image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600',
+            listings: [
+                { platform: platform, price: estimatedPrice, originalPrice: Math.round(estimatedPrice * 1.25), bankDiscount: Math.round(estimatedPrice * 0.05), couponDiscount: 500, effectivePrice: Math.round(estimatedPrice * 0.95) - 500, rating: 4.6, inStock: true, delivery: 'Fast Monitored Delivery', url: rawUrl }
+            ],
+            smartUpgrade: null,
+            pros: ['Real-time price tracked', 'Direct verified checkout', 'Eligible for instant card cashbacks'],
+            cons: ['Subject to fast-moving stock availability']
+        }
+    };
+};

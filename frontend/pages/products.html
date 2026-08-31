@@ -189,21 +189,24 @@
                     </div>
 
                     <!-- Custom Price Slider -->
-                    <div class="pt-2 border-t border-white/10">
-                        <div class="flex justify-between items-center text-xs font-semibold mb-1.5">
+                    <div class="pt-2 border-t border-white/10 space-y-1">
+                        <div class="flex justify-between items-center text-xs font-semibold">
                             <span class="text-slate-400">Custom Max:</span>
-                            <span class="text-indigo-400 font-bold" id="priceDisplay">₹1,50,000</span>
+                            <span class="text-cyan-400 font-mono-numbers font-bold" id="priceDisplay">₹1,50,000</span>
                         </div>
-                        <input type="range" id="priceSlider" min="500" max="150000" step="500" value="150000" 
-                               class="w-full accent-indigo-500 cursor-pointer"
-                               oninput="document.getElementById('priceDisplay').textContent = '₹' + Number(this.value).toLocaleString('en-IN'); renderFilteredCatalog();">
+                        <div class="fc-slider-container py-2">
+                            <input type="range" id="priceSlider" min="500" max="150000" step="500" value="150000" 
+                                   class="fc-range-slider"
+                                   data-target-display="priceDisplay"
+                                   oninput="renderFilteredCatalog();">
+                        </div>
                     </div>
                 </div>
 
                 <!-- 3. Store / Platforms -->
                 <div>
-                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2.5">Live Monitored Stores</label>
-                    <div class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2.5">12 Monitored Stores</label>
+                    <div class="space-y-1.5 max-h-56 overflow-y-auto pr-1">
                         <label class="flex items-center gap-2 text-xs text-slate-300 hover:text-white cursor-pointer">
                             <input type="checkbox" class="platform-filter accent-indigo-500" value="Amazon" checked onchange="renderFilteredCatalog()">
                             <span>Amazon India</span>
@@ -211,6 +214,10 @@
                         <label class="flex items-center gap-2 text-xs text-slate-300 hover:text-white cursor-pointer">
                             <input type="checkbox" class="platform-filter accent-indigo-500" value="Flipkart" checked onchange="renderFilteredCatalog()">
                             <span>Flipkart VIP</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-slate-300 hover:text-white cursor-pointer">
+                            <input type="checkbox" class="platform-filter accent-indigo-500" value="Meesho" checked onchange="renderFilteredCatalog()">
+                            <span class="text-pink-400 font-semibold">Meesho Direct</span>
                         </label>
                         <label class="flex items-center gap-2 text-xs text-slate-300 hover:text-white cursor-pointer">
                             <input type="checkbox" class="platform-filter accent-indigo-500" value="Croma" checked onchange="renderFilteredCatalog()">
@@ -225,6 +232,10 @@
                             <span>Apple Store</span>
                         </label>
                         <label class="flex items-center gap-2 text-xs text-slate-300 hover:text-white cursor-pointer">
+                            <input type="checkbox" class="platform-filter accent-indigo-500" value="Realme" checked onchange="renderFilteredCatalog()">
+                            <span>Realme Official</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-slate-300 hover:text-white cursor-pointer">
                             <input type="checkbox" class="platform-filter accent-indigo-500" value="Tata Neu" checked onchange="renderFilteredCatalog()">
                             <span>Tata Neu</span>
                         </label>
@@ -235,6 +246,10 @@
                         <label class="flex items-center gap-2 text-xs text-slate-300 hover:text-white cursor-pointer">
                             <input type="checkbox" class="platform-filter accent-indigo-500" value="Instamart" checked onchange="renderFilteredCatalog()">
                             <span class="text-orange-400 font-semibold">⚡ Instamart (15-min)</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs text-slate-300 hover:text-white cursor-pointer">
+                            <input type="checkbox" class="platform-filter accent-indigo-500" value="Zepto" checked onchange="renderFilteredCatalog()">
+                            <span class="text-violet-400 font-semibold">⚡ Zepto (10-min)</span>
                         </label>
                         <label class="flex items-center gap-2 text-xs text-slate-300 hover:text-white cursor-pointer">
                             <input type="checkbox" class="platform-filter accent-indigo-500" value="Myntra" checked onchange="renderFilteredCatalog()">

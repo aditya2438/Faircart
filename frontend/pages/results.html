@@ -87,22 +87,79 @@
             </div>
         </nav>
     </header>    <main class="max-w-7xl mx-auto px-4 pt-28 pb-16">
-        <!-- Search & Control Header -->
-        <div class="glass-panel p-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-                <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Multi-Platform Intelligence Engine</span>
-                <h1 class="text-2xl sm:text-3xl font-bold font-['Outfit'] mt-1 text-white" id="resultsTitle">
-                    Comparing Deals for: <span class="text-indigo-400" id="queryDisplay">All Categories</span>
-                </h1>
-                <p class="text-xs text-slate-400 mt-1" id="resultsSubtitle">Real-time out-of-pocket pricing across Amazon, Flipkart, Tata Neu, Croma & Myntra</p>
+        <!-- Search & Control Header with URL Comparison Mode Switcher -->
+        <div class="glass-panel p-6 mb-8 space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                        <i data-lucide="layers" class="w-3.5 h-3.5"></i> 12-Platform Live Aggregator & URL Comparator
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-bold font-['Outfit'] text-white" id="resultsTitle">
+                        Comparing Deals for: <span class="text-indigo-400" id="queryDisplay">All Categories</span>
+                    </h1>
+                    <p class="text-xs text-slate-400 mt-1" id="resultsSubtitle">Real-time out-of-pocket pricing across Amazon, Flipkart, Meesho, Croma, Samsung, Apple, Realme, Tata Neu, Blinkit, Instamart, Zepto & Myntra</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="exportCSV()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white flex items-center gap-2 transition-colors">
+                        <i data-lucide="download" class="w-4 h-4 text-cyan-400"></i> Export CSV
+                    </button>
+                    <button onclick="exportPDF()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-xs font-semibold text-white flex items-center gap-2 shadow-lg shadow-indigo-600/30 transition-colors">
+                        <i data-lucide="file-text" class="w-4 h-4"></i> Export PDF Report
+                    </button>
+                </div>
             </div>
-            <div class="flex items-center gap-3">
-                <button onclick="exportCSV()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-white flex items-center gap-2 transition-colors">
-                    <i data-lucide="download" class="w-4 h-4 text-cyan-400"></i> Export CSV
+
+            <!-- Mode Selector Tabs -->
+            <div class="flex border-b border-white/10 gap-4 text-xs font-bold">
+                <button onclick="switchComparisonMode('keyword')" id="modeTabKeyword" class="pb-3 border-b-2 border-indigo-500 text-indigo-400 flex items-center gap-2">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                    <span>Keyword & Category Battle</span>
                 </button>
-                <button onclick="exportPDF()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-xs font-semibold text-white flex items-center gap-2 shadow-lg shadow-indigo-600/30 transition-colors">
-                    <i data-lucide="file-text" class="w-4 h-4"></i> Export PDF Report
+                <button onclick="switchComparisonMode('url')" id="modeTabUrl" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2">
+                    <i data-lucide="link" class="w-4 h-4"></i>
+                    <span>🔗 Paste Product URLs (Amazon, Flipkart, Meesho, Croma, etc.)</span>
                 </button>
+            </div>
+
+            <!-- URL Input Terminal Box (Hidden by default until Mode 2) -->
+            <div id="urlTerminalContainer" class="hidden p-5 rounded-2xl bg-slate-900/80 border border-indigo-500/30 space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                    <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                        <i data-lucide="git-pull-request" class="w-4 h-4 text-amber-400"></i>
+                        Paste links from Amazon, Flipkart, Meesho, Samsung, Apple, Croma, Realme, Zepto, or Blinkit
+                    </span>
+                    <span class="text-[11px] text-emerald-400 font-semibold">AI Cross-Store Price Beat Active</span>
+                </div>
+
+                <div class="space-y-2.5" id="urlInputList">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-indigo-600/30 text-indigo-400 text-xs font-bold flex items-center justify-center shrink-0">1</span>
+                        <input type="url" class="compare-url-input flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500" placeholder="e.g., https://www.flipkart.com/apple-iphone-15-pro-natural-titanium-128-gb/p/itm...">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-amber-600/30 text-amber-400 text-xs font-bold flex items-center justify-center shrink-0">2</span>
+                        <input type="url" class="compare-url-input flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500" placeholder="e.g., https://www.amazon.in/dp/B0CQ2W2T5P (Samsung Galaxy S24 Ultra)...">
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+                    <div class="flex items-center gap-2">
+                        <button onclick="addUrlInputField()" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-300 flex items-center gap-1">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add URL 3
+                        </button>
+                        <button onclick="loadSampleUrls('phones')" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">
+                            Sample: iPhone 15 Pro vs S24 Ultra
+                        </button>
+                        <button onclick="loadSampleUrls('earbuds')" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">
+                            Sample: OnePlus Buds vs boAt
+                        </button>
+                    </div>
+
+                    <button onclick="comparePastedUrls()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 hover:opacity-95 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Run AI URL Battle & Find Cheaper Stores</span>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -116,20 +173,23 @@
                     </h3>
                     
                     <!-- Target Budget Slider -->
-                    <div class="space-y-2">
+                    <div class="space-y-1">
                         <div class="flex justify-between text-xs font-semibold">
                             <span class="text-slate-400">Target Budget:</span>
-                            <span class="text-indigo-400 font-bold" id="budgetValue">₹1,50,000</span>
+                            <span class="text-cyan-400 font-mono-numbers font-bold" id="budgetValue">₹1,50,000</span>
                         </div>
-                        <input type="range" id="budgetRange" min="300" max="150000" step="500" value="150000" 
-                               class="w-full accent-indigo-500 bg-white/10 rounded-lg cursor-pointer"
-                               oninput="document.getElementById('budgetValue').textContent = '₹' + Number(this.value).toLocaleString('en-IN'); updateArena();">
+                        <div class="fc-slider-container py-2">
+                            <input type="range" id="budgetRange" min="300" max="150000" step="500" value="150000" 
+                                   class="fc-range-slider"
+                                   data-target-display="budgetValue"
+                                   oninput="updateArena();">
+                        </div>
                     </div>
                 </div>
 
-                <!-- Stores Checkboxes -->
-                <div class="pt-4 border-t border-white/10 space-y-2.5 max-h-52 overflow-y-auto pr-1">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Live Platforms</span>
+                <!-- Stores Checkboxes (All 12 Platforms) -->
+                <div class="pt-4 border-t border-white/10 space-y-2.5 max-h-56 overflow-y-auto pr-1">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">12 Monitored Stores</span>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
                         <input type="checkbox" checked value="Amazon" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Amazon India (Prime)
                     </label>
@@ -137,13 +197,19 @@
                         <input type="checkbox" checked value="Flipkart" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Flipkart (VIP Deals)
                     </label>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked value="Meesho" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> <span class="text-pink-400 font-semibold">Meesho Direct</span>
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
                         <input type="checkbox" checked value="Croma" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Croma Retail
                     </label>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
-                        <input type="checkbox" checked value="Samsung" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Samsung Direct
+                        <input type="checkbox" checked value="Samsung" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Samsung Official
                     </label>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
                         <input type="checkbox" checked value="Apple" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Apple Store Official
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked value="Realme" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Realme Official
                     </label>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
                         <input type="checkbox" checked value="Tata Neu" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Tata Neu (NeuPass)
@@ -155,19 +221,24 @@
                         <input type="checkbox" checked value="Instamart" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> <span class="text-orange-400 font-semibold">⚡ Instamart (15-min)</span>
                     </label>
                     <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
+                        <input type="checkbox" checked value="Zepto" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> <span class="text-violet-400 font-semibold">⚡ Zepto (10-min)</span>
+                    </label>
+                    <label class="flex items-center gap-2.5 text-xs text-slate-200 cursor-pointer">
                         <input type="checkbox" checked value="Myntra" class="arena-store-cb accent-indigo-500 rounded" onchange="updateArena()"> Myntra Fashion
                     </label>
                 </div>
 
                 <!-- Score Filter -->
-                <div class="pt-4 border-t border-white/10 space-y-2">
+                <div class="pt-4 border-t border-white/10 space-y-1">
                     <div class="flex justify-between text-xs font-semibold">
                         <span class="text-slate-400">Min Intelligence Score:</span>
-                        <span class="text-emerald-400 font-bold" id="scoreValue">0+</span>
+                        <span class="text-emerald-400 font-mono-numbers font-bold" id="scoreValue">0+</span>
                     </div>
-                    <input type="range" id="scoreRange" min="0" max="95" step="5" value="0" 
-                           class="w-full accent-emerald-500 bg-white/10 rounded-lg cursor-pointer"
-                           oninput="document.getElementById('scoreValue').textContent = this.value + '+'; updateArena();">
+                    <div class="fc-slider-container py-2">
+                        <input type="range" id="scoreRange" min="0" max="95" step="5" value="0" 
+                               class="fc-range-slider"
+                               oninput="document.getElementById('scoreValue').textContent = this.value + '+'; updateArena();">
+                    </div>
                 </div>
             </aside>
 
@@ -253,10 +324,102 @@
     <script src="../js/app.js"></script>
     <script>
         let priceChartInstance = null;
+        let activeComparisonMode = 'keyword';
 
         document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('mode') === 'url' || urlParams.get('url1')) {
+                switchComparisonMode('url');
+                const u1 = urlParams.get('url1');
+                const u2 = urlParams.get('url2');
+                const inputs = document.querySelectorAll('.compare-url-input');
+                if (u1 && inputs[0]) inputs[0].value = u1;
+                if (u2 && inputs[1]) inputs[1].value = u2;
+                if (u1 && u2) {
+                    comparePastedUrls();
+                    return;
+                }
+            }
             updateArena();
         });
+
+        function switchComparisonMode(mode) {
+            activeComparisonMode = mode;
+            const tabKey = document.getElementById('modeTabKeyword');
+            const tabUrl = document.getElementById('modeTabUrl');
+            const urlContainer = document.getElementById('urlTerminalContainer');
+
+            if (mode === 'url') {
+                tabUrl.classList.add('border-indigo-500', 'text-indigo-400');
+                tabUrl.classList.remove('border-transparent', 'text-slate-400');
+                tabKey.classList.remove('border-indigo-500', 'text-indigo-400');
+                tabKey.classList.add('border-transparent', 'text-slate-400');
+                urlContainer.classList.remove('hidden');
+            } else {
+                tabKey.classList.add('border-indigo-500', 'text-indigo-400');
+                tabKey.classList.remove('border-transparent', 'text-slate-400');
+                tabUrl.classList.remove('border-indigo-500', 'text-indigo-400');
+                tabUrl.classList.add('border-transparent', 'text-slate-400');
+                urlContainer.classList.add('hidden');
+            }
+        }
+
+        function addUrlInputField() {
+            const list = document.getElementById('urlInputList');
+            const count = list.children.length + 1;
+            if (count > 4) {
+                showToast("Maximum 4 URLs can be compared simultaneously", "warning");
+                return;
+            }
+            const div = document.createElement('div');
+            div.className = "flex items-center gap-2";
+            div.innerHTML = `
+                <span class="w-6 h-6 rounded-full bg-cyan-600/30 text-cyan-400 text-xs font-bold flex items-center justify-center shrink-0">${count}</span>
+                <input type="url" class="compare-url-input flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500" placeholder="Paste product URL (Meesho, Croma, Apple, Realme, Zepto, etc.)...">
+            `;
+            list.appendChild(div);
+        }
+
+        function loadSampleUrls(type) {
+            const inputs = document.querySelectorAll('.compare-url-input');
+            if (type === 'phones') {
+                if (inputs[0]) inputs[0].value = 'https://www.flipkart.com/apple-iphone-15-pro-natural-titanium-128-gb/p/itm';
+                if (inputs[1]) inputs[1].value = 'https://www.amazon.in/dp/B0CQ2W2T5P (Samsung Galaxy S24 Ultra)';
+                showToast("Loaded Sample Smartphone Battle (iPhone 15 Pro vs S24 Ultra)", "info");
+            } else {
+                if (inputs[0]) inputs[0].value = 'https://www.amazon.in/dp/B0BY8MCQ9S (OnePlus Nord Buds 2)';
+                if (inputs[1]) inputs[1].value = 'https://www.blinkit.com/prn/boat-bassheads-100';
+                showToast("Loaded Sample Audio Comparison (OnePlus Buds vs boAt)", "info");
+            }
+            comparePastedUrls();
+        }
+
+        function comparePastedUrls() {
+            const inputs = Array.from(document.querySelectorAll('.compare-url-input'));
+            const urls = inputs.map(i => i.value.trim()).filter(Boolean);
+
+            if (urls.length < 2) {
+                showToast("Please paste at least 2 product URLs to compare", "warning");
+                return;
+            }
+
+            const parsedResults = urls.map(u => window.parseProductUrl(u)).filter(Boolean);
+            const parsedProducts = parsedResults.map(r => r.product);
+
+            document.getElementById('queryDisplay').textContent = `URL Battle (${parsedProducts.length} Pasted Links)`;
+            document.getElementById('resultsSubtitle').textContent = `Cross-platform analysis across Amazon, Flipkart, Meesho, Croma, Samsung, Apple, Realme, Blinkit, Instamart & Zepto`;
+
+            const selectedStores = Array.from(document.querySelectorAll('.arena-store-cb:checked')).map(cb => cb.value);
+
+            renderSmartStretchBanner(parsedProducts[0]);
+            renderArenaCards(parsedProducts, selectedStores);
+            renderComparisonTable(parsedProducts, selectedStores);
+            renderPriceChart(parsedProducts);
+
+            if (window.lucide) lucide.createIcons();
+
+            showToast(`Parsed & compared ${parsedProducts.length} live product links with cross-store price beats!`, "success");
+        }
 
         function resetArenaFilters() {
             document.getElementById('budgetRange').value = 150000;
