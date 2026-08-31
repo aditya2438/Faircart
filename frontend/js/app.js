@@ -120,7 +120,7 @@ function initSlidingRangeSliders() {
             const val = parseFloat(slider.value) || min;
             const percent = ((val - min) / (max - min)) * 100;
 
-            slider.style.background = `linear-gradient(to right, var(--fc-primary) 0%, var(--fc-cyan) ${percent}%, var(--fc-slider-track) ${percent}%, var(--fc-slider-track) 100%)`;
+            slider.style.background = `linear-gradient(to right, var(--fc-primary) 0%, var(--fc-amber) ${percent}%, var(--fc-slider-track) ${percent}%, var(--fc-slider-track) 100%)`;
 
             // Update floating bubble tooltip if present
             const container = slider.closest('.fc-slider-container');
@@ -284,14 +284,14 @@ function appendChatMessage(role, text, structuredData = null) {
     wrapper.className = `flex gap-3 ${role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`;
 
     let avatar = role === 'user'
-        ? `<div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">U</div>`
-        : `<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0"><i data-lucide="sparkles" class="w-4 h-4"></i></div>`;
+        ? `<div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-md shadow-indigo-600/30">U</div>`
+        : `<div class="w-8 h-8 rounded-full bg-slate-800 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xs font-bold shrink-0 shadow-md"><i data-lucide="sparkles" class="w-4 h-4"></i></div>`;
 
     let messageCard = `
         <div class="chat-msg-content max-w-[85%] p-3.5 rounded-2xl ${role === 'user' ? 'bg-indigo-600 text-white' : 'glass-panel text-slate-100'}" data-role="${role}">
             <p class="text-xs leading-relaxed font-medium">${text.replace(/\n/g, '<br>')}</p>
             ${structuredData ? renderStructuredDealCard(structuredData) : ''}
-            ${role === 'assistant' ? `<button class="read-speech-btn mt-2 text-[10px] text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1"><i data-lucide="volume-2" class="w-3 h-3"></i> Read Aloud</button>` : ''}
+            ${role === 'assistant' ? `<button class="read-speech-btn mt-2 text-[10px] text-amber-400 hover:text-amber-300 font-semibold flex items-center gap-1"><i data-lucide="volume-2" class="w-3 h-3"></i> Read Aloud</button>` : ''}
         </div>
     `;
 
@@ -345,11 +345,11 @@ function appendChatThinking() {
     wrapper.id = id;
     wrapper.className = 'flex gap-3 justify-start animate-fade-in';
     wrapper.innerHTML = `
-        <div class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold shrink-0">
+        <div class="w-8 h-8 rounded-full bg-amber-500/15 text-amber-400 flex items-center justify-center text-xs font-bold shrink-0">
             <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
         </div>
         <div class="glass-panel p-3 rounded-2xl flex items-center gap-2 text-xs text-slate-300">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
             <span>Synthesizing real-time prices & Smart Stretch options...</span>
         </div>
     `;
@@ -531,8 +531,19 @@ function showToast(message, type = 'info') {
    ========================================================================== */
 function initMobileNav() {
     const navItems = document.querySelectorAll('.mobile-bottom-nav a');
+    const currentPath = window.location.pathname;
     navItems.forEach(item => {
-        if (item.href === window.location.href) item.classList.add('text-indigo-400');
+        try {
+            const itemUrl = new URL(item.href, window.location.origin);
+            const isMatch = itemUrl.pathname === currentPath || 
+                           (currentPath.endsWith('/') && itemUrl.pathname.endsWith('index.html')) ||
+                           (currentPath.includes('results') && itemUrl.pathname.includes('results')) ||
+                           (currentPath.includes('product') && itemUrl.pathname.includes('product'));
+            if (isMatch) {
+                item.classList.add('text-indigo-400', 'active');
+                item.classList.remove('text-slate-400');
+            }
+        } catch(e) {}
     });
 }
 

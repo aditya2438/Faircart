@@ -1,34 +1,35 @@
-﻿# 🛒 Faircart — Enterprise AI E-Commerce Decision Engine & Multi-Platform Aggregator
+# 🛒 Faircart — Enterprise AI Multi-Platform E-Commerce Decision Engine
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Author: Aditya Singh Chouhan](https://img.shields.io/badge/Author-Aditya%20Singh%20Chouhan-blue.svg)](https://github.com/)
+[![License: All Rights Reserved](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)](LICENSE)
 [![Java 21/26](https://img.shields.io/badge/Java-21%20%7C%2026%20Loom-ED8B00?logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![Spring Boot 3.4](https://img.shields.io/badge/Spring%20Boot-3.4.1-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Tailwind CSS 3](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![PostgreSQL 16](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Redis 7](https://img.shields.io/badge/Redis-7%20MFA%20OTP-DC382D?logo=redis&logoColor=white)](https://redis.io/)
-[![Build Status](https://img.shields.io/badge/Tests-30%2F30%20Passing-brightgreen.svg)]()
+[![Build Status](https://img.shields.io/badge/Tests-32%2F32%20Passing-brightgreen.svg)]()
 
-> **Faircart** is an intelligent, multi-platform e-commerce aggregator, price-drop alert engine, and decision-making platform. It eliminates shopping friction by scraping, normalizing, and comparing real-time product prices, instant bank discounts, coupon deductions, authentic user reviews, and return policies across major trusted platforms (**Amazon, Flipkart, Tata Neu, Myntra, Croma**).
+> **Faircart** is an intelligent multi-platform e-commerce aggregator, decision engine, and AI shopping concierge engineered by **Aditya Singh Chouhan**. It eliminates manual shopping friction by scraping, normalizing, and comparing real-time product prices, instant bank discounts, coupon deductions, authentic user reviews, and return policies across 12 major platforms (**Amazon, Flipkart, Meesho, Myntra, Tata Neu, Croma, Samsung, Apple, Realme, Blinkit, Instamart, and Zepto**).
 
 ---
 
 ## 🌟 Key Architecture & Capabilities
 
-`
+```
                   ┌────────────────────────────────────────────────────────┐
                   │          FAIRCART CLIENT INTERFACE (HTML5/CSS3)         │
-                  │   Frosted Glassmorphism • Magnetic Cursor • 3D Tilt   │
+                  │   Nordic Obsidian & Alpine Alabaster • 3D Tilt Glare   │
                   └──────────────────────────┬─────────────────────────────┘
                                              │ REST API / JWT
                                              ▼
                   ┌────────────────────────────────────────────────────────┐
                   │              SPRING BOOT 3.4 CORE BACKEND              │
                   ├──────────────────────────┬─────────────────────────────┤
-                  │ ⚡ Parallel Scraper      │ 🛡️ Dual-Channel MFA OTP     │
-                  │ (Java 26 Virtual Threads)│ (Redis 5m TTL + Lockout)    │
+                  │ ⚡ 12-Platform Scraper   │ 🛡️ Dual-Channel MFA OTP     │
+                  │ (Java 21 Virtual Threads)│ (Redis 5m TTL + Lockout)    │
                   ├──────────────────────────┼─────────────────────────────┤
                   │ 💡 Smart Stretch Engine  │ 🔍 Verified Truth Box       │
-                  │ (125% Budget Jump Math)  │ (Fake Review Bot Filter)    │
+                  │ (+10–25% Tier-Jump Math) │ (Anti-Deception Audit)      │
                   └─────────────┬────────────────────────────┬─────────────┘
                                 │                            │
                                 ▼                            ▼
@@ -36,108 +37,106 @@
                   │ PostgreSQL 16 Database   │ │ Redis 7 In-Memory Cache   │
                   │ Product History & Auth   │ │ 5-Min TTL & Rate Limiting │
                   └──────────────────────────┘ └───────────────────────────┘
-`
+```
 
-### 1. ⚡ Virtual-Thread Parallel Scraper (ParallelScraperService.java)
-- Executes non-blocking concurrent queries across 5 platforms with latency SLA $< 5.
-- Calculates true out-of-pocket prices: $\text{Effective Price} = \text{Base Price} - \text{Instant Bank Discount} - \text{Coupon Deductions}$.
+### 1. ⚡ Virtual-Thread Multi-Platform Scraper (`ParallelScraperService.java`)
+- Executes non-blocking concurrent queries across 12 platforms with latency SLA $< 5\text{s}$.
+- Connects **Flipkart, Amazon, Meesho, Myntra, Tata Neu, Croma, Samsung Store, Apple Store, Realme Store, Blinkit, Swiggy Instamart, and Zepto**.
+- Calculates true out-of-pocket prices:
+  $$\text{Effective Price} = \text{Base Price} - \text{Instant Bank Discount} - \text{Coupon Deductions}$$
 
-### 2. 💡 Smart Stretch Budget Engine (RecommendationService.java)
-- Mathematical formulation: Evaluates  \le \text{Budget}$ vs $\text{Budget} < P \le \text{Budget} \times 1.25$.
-- Computes composite value jump ratio $\Delta V = \frac{\text{Score}_{\text{upgrade}} / P_{\text{upgrade}}}{\text{Score}_{\text{base}} / P_{\text{base}}}$.
-- Produces deterministic **0–100 Buy / Good Choice / Wait / Do Not Buy verdicts**.
+### 2. 💡 Smart Stretch Budget Engine (`RecommendationService.java`)
+- Evaluates candidate products: $P \le \text{Budget}$ vs $\text{Budget} < P \le \text{Budget} \times 1.25$.
+- Computes composite value jump ratio:
+  $$\Delta V = \frac{\text{Score}_{\text{upgrade}} / P_{\text{upgrade}}}{\text{Score}_{\text{base}} / P_{\text{base}}}$$
+- Produces deterministic **0–100 Buy / Skip / Wait Verdicts** based on 90-day time-series pricing and verified sentiment.
 
-### 3. 🛡️ Dual-Channel Redis MFA OTP (RedisOtpService.java)
-- Cryptographically secure 6-digit numeric OTP generation (SecureRandom).
-- 5-minute TTL stored in Redis (aircart:otp:<destination>) with in-memory resilient fallback.
-- Rate-limiting lockout enforcement after 3 consecutive failed verification attempts.
+### 3. 🛡️ Dual-Channel Redis MFA OTP (`RedisOtpService.java`)
+- Cryptographically secure 6-digit numeric OTP generation (`SecureRandom`).
+- 5-minute TTL stored in Redis (`faircart:otp:<destination>`) with resilient concurrent in-memory fallback.
+- Enforces 3-attempt lockout security to prevent brute force attacks.
 
-### 4. 🎨 Senior-Level Luxury UI/UX Design System
-- **Apple iOS Frosted Glassmorphism**: ackdrop-filter: blur(24px), translucent cards with glowing borders.
-- **Physics-Based Magnetic Cursor**: Lerp follower and tactile soundless click ripples.
-- **3D Card Parallax Tilt**: Real-time specular glare with dynamic mouse coordinates (--mouse-x, --mouse-y).
-- **Autonomous AI Concierge**: Built-in voice input via Web Speech API, streaming answers, and 1-click CSV/PDF exports.
+### 4. 🎨 Senior-Level Luxury Design System 2.0
+- **Nordic Obsidian & Alpine Alabaster Dual Themes**: Studio-grade diffused lighting, zero harsh neon.
+- **Instant 0ms Page Transitions**: Link speculation prefetcher and cross-document View Transitions.
+- **Interactive Sliding Price Physics**: Custom slider tracks with live floating monetary bubbles.
+- **Mobile Safe UI Layout**: Raised AI floating concierge button with zero overlap on fixed bottom navigation tabs.
 
 ---
 
-## 🚀 100% Free Deployment Guide (Live URL in 5 Mins)
+## 🚀 100% Free Live Deployment Options (Zero Cost)
 
-### Option A: Deploy Frontend to GitHub Pages (100% Free Forever)
-1. Push your repository to GitHub (see commands below).
-2. On GitHub, go to your repository **Settings** → **Pages**.
+| Platform | Type | Free URL Format | Setup Time |
+| :--- | :--- | :--- | :--- |
+| **Vercel** (Recommended) | Frontend + CDN | `https://faircart-<username>.vercel.app` | 1 Minute |
+| **GitHub Pages** | Frontend | `https://<username>.github.io/Faircart/` | Automatic on Push |
+| **Render** | Full Stack (Spring Boot + Postgres) | `https://faircart-api.onrender.com` | 3 Minutes |
+| **DuckDNS** (Custom Domain) | Free Custom DNS | `https://faircart.duckdns.org` | 2 Minutes |
+
+### Option A: Deploy to GitHub Pages (Automatic on `git push`)
+1. Push your repository to GitHub (see instructions below).
+2. On GitHub, navigate to **Settings** → **Pages**.
 3. Under **Build and deployment** → **Source**, select **GitHub Actions**.
-4. The workflow in .github/workflows/deploy-gh-pages.yml will automatically build and publish your site at:
-   https://<your-username>.github.io/<your-repo>/
+4. The workflow in `.github/workflows/deploy-gh-pages.yml` will automatically build and publish your site at:
+   `https://<YOUR_GITHUB_USERNAME>.github.io/Faircart/`
 
-### Option B: Deploy Backend & Database on Render (100% Free Tier)
-1. Create a free account on [Render.com](https://render.com).
-2. Click **New** → **Blueprint**.
-3. Connect your GitHub repository.
-4. Render will automatically read ender.yaml and provision:
-   - **PostgreSQL 16 Database** (Free)
-   - **Spring Boot Docker Web Service** (Free)
-   - **Frontend Static Site with SSL** (Free)
+### Option B: Deploy to Vercel (Instant HTTPS & Global CDN)
+1. Sign up on [Vercel](https://vercel.com) using your GitHub account.
+2. Click **Add New Project** → Import your `Faircart` GitHub repository.
+3. Keep default settings (`vercel.json` is already bundled) and click **Deploy**.
+4. Your site will instantly go live at `https://faircart-<username>.vercel.app`.
 
-### Option C: Deploy Frontend to Vercel (100% Free)
-1. Install Vercel CLI: 
-pm i -g vercel (or connect on [Vercel.com](https://vercel.com)).
-2. In the project root, run:
-   `ash
-   vercel
-   `
-3. Vercel automatically deploys using the bundled ercel.json configuration with instant SSL and global CDN.
+### Option C: Deploy Backend & Database on Render
+1. Sign up on [Render.com](https://render.com).
+2. Click **New** → **Blueprint** → Select your `Faircart` repo.
+3. Render reads `render.yaml` to auto-provision a free PostgreSQL database and Spring Boot web service.
+
+---
+
+## 📦 How to Upload This Project to Your GitHub Account
+
+Open your terminal in the project directory and run:
+
+```bash
+# 1. Add all files to git
+git add .
+
+# 2. Commit changes
+git commit -m "feat: complete Faircart enterprise release - Copyright 2026 Aditya Singh Chouhan"
+
+# 3. Rename branch to main
+git branch -M main
+
+# 4. Link to your GitHub repository (replace <YOUR_GITHUB_USERNAME> with your actual username)
+git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/Faircart.git
+
+# 5. Push code to your GitHub account
+git push -u origin main
+```
 
 ---
 
 ## 💻 Local Quickstart
 
-### Prerequisites
-- Java 21 or Java 26
-- Maven 3.9+
-- Docker & Docker Compose (Optional)
-
-### 1. Run Full Stack with Docker
-`ash
-docker compose up -d
-`
-- Frontend: http://localhost:3000 (or open rontend/index.html)
-- Backend API: http://localhost:8080/api/v1
-- Swagger UI: http://localhost:8080/swagger-ui.html
-
-### 2. Run Backend Standalone
-`ash
+### 1. Run Backend Tests
+```bash
 cd backend
-mvn clean test
-mvn spring-boot:run
-`
+mvn test
+```
+*(All 32 tests execute against in-memory H2 with 100% pass rate)*
+
+### 2. Launch Full Stack with Docker
+```bash
+docker compose up -d --build
+```
+- **Frontend UI:** `http://localhost:3000` (or double-click `frontend/index.html`)
+- **Backend REST API:** `http://localhost:8080/api/v1`
+- **Swagger Documentation:** `http://localhost:8080/swagger-ui.html`
 
 ---
 
-## 📦 Step-by-Step Git Push Instructions
+## 📜 Copyright & License
 
-Run these terminal commands to initialize and push your repository to your GitHub account:
+**Copyright © 2026 Aditya Singh Chouhan. All rights reserved.**
 
-`ash
-# 1. Initialize Git repository
-git init
-
-# 2. Add all project files
-git add .
-
-# 3. Commit changes
-git commit -m "feat: complete Faircart enterprise aggregator, UI/UX interaction engine, and CI/CD"
-
-# 4. Rename default branch to main
-git branch -M main
-
-# 5. Link your GitHub remote repository (replace with your GitHub repository URL)
-git remote add origin https://github.com/<YOUR_USERNAME>/FairCart.git
-
-# 6. Push code to GitHub
-git push -u origin main
-`
-
----
-
-## 📜 License
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details. Free for commercial and private use.
+This software and associated documentation files are proprietary and confidential. Unauthorized copying, distribution, modification, reverse engineering, or commercial use without express written consent from **Aditya Singh Chouhan** is strictly prohibited. See [LICENSE](LICENSE) for full terms.

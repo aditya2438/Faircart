@@ -6,22 +6,28 @@
     <title>Comparison & Recommendations — Faircart</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="selection:bg-indigo-500 selection:text-white">
+<body class="selection:bg-indigo-500 selection:text-white relative">
+
+    <!-- Ambient Studio Lighting -->
+    <div class="ambient-glow-orb w-96 h-96 bg-indigo-900/15 top-10 left-10"></div>
+    <div class="ambient-glow-orb w-[450px] h-[450px] bg-amber-900/10 bottom-20 right-10" style="animation-delay: -6s;"></div>
 
     <!-- Top Navigation -->
     <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
         <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
                     <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
                 </div>
-                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+                <span class="font-['Outfit'] font-bold text-white tracking-tight">Faircart</span>
             </a>
             
             <div class="hidden md:flex items-center gap-6 text-sm font-medium">
@@ -37,7 +43,7 @@
                 <div class="relative">
                     <button id="dealNotificationBtn" class="relative p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-all flex items-center justify-center" title="AI Deal Notifications & Alerts">
                         <i data-lucide="bell" class="w-4 h-4 text-indigo-400"></i>
-                        <span id="dealBadgeCount" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-extrabold flex items-center justify-center shadow-lg shadow-rose-500/50 animate-pulse">3</span>
+                        <span id="dealBadgeCount" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-600 text-white text-[9px] font-extrabold flex items-center justify-center shadow-md">3</span>
                     </button>
 
                     <!-- Notification Dropdown Panel -->
@@ -799,13 +805,33 @@
             });
         }
 
-        function exportCSV() {
-            exportChatComparisonCSV();
-        }
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="../index.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="grid" class="w-5 h-5"></i>
+            <span>Catalog</span>
+        </a>
+        <a href="results.html" class="flex flex-col items-center gap-1 text-[10px] text-indigo-400 font-semibold">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Compare</span>
+        </a>
+        <a href="wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span>Alerts</span>
+        </a>
+        <a href="cart.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Basket</span>
+        </a>
+    </nav>
 
-        function exportPDF() {
-            exportChatComparisonPDF();
-        }
-    </script>
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/catalog-data.js"></script>
+    <script src="../js/app.js"></script>
 </body>
 </html>

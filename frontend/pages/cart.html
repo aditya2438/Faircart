@@ -6,21 +6,27 @@
     <title>Smart Split-Basket — Faircart</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="selection:bg-indigo-500 selection:text-white">
+<body class="selection:bg-indigo-500 selection:text-white relative">
+
+    <!-- Ambient Studio Lighting -->
+    <div class="ambient-glow-orb w-96 h-96 bg-indigo-900/15 top-10 left-10"></div>
+    <div class="ambient-glow-orb w-[450px] h-[450px] bg-amber-900/10 bottom-20 right-10" style="animation-delay: -6s;"></div>
 
     <!-- Floating Top Glass Navbar -->
     <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
         <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
                     <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
                 </div>
-                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+                <span class="font-['Outfit'] font-bold text-white tracking-tight">Faircart</span>
             </a>
             
             <div class="hidden md:flex items-center gap-6 text-sm font-medium">
@@ -36,7 +42,7 @@
                 <div class="relative">
                     <button id="dealNotificationBtn" class="relative p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-all flex items-center justify-center" title="AI Deal Notifications & Alerts">
                         <i data-lucide="bell" class="w-4 h-4 text-indigo-400"></i>
-                        <span id="dealBadgeCount" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-extrabold flex items-center justify-center shadow-lg shadow-rose-500/50 animate-pulse">3</span>
+                        <span id="dealBadgeCount" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-600 text-white text-[9px] font-extrabold flex items-center justify-center shadow-md">3</span>
                     </button>
 
                     <!-- Notification Dropdown Panel -->
@@ -114,6 +120,25 @@
             </div>
         </div>
 
+        <!-- Optimization Strategy Slider Panel -->
+        <div class="glass-panel p-5 mb-8 rounded-2xl">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
+                <div>
+                    <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5"><i data-lucide="sliders" class="w-4 h-4 text-indigo-400"></i> Split-Basket Strategy Mode</span>
+                    <p class="text-[11px] text-slate-400">Dynamically rebalance packages between lowest out-of-pocket price vs ultra-fast quick commerce</p>
+                </div>
+                <span id="basketStrategyLabel" class="text-xs font-extrabold text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/30">Maximum Cost Savings (₹430 Saved)</span>
+            </div>
+            <div class="fc-slider-container py-2">
+                <input type="range" id="basketStrategySlider" class="fc-range-slider" min="1" max="3" step="1" value="1" oninput="updateBasketStrategy(this.value)">
+            </div>
+            <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                <span>💰 Maximum Savings (Multi-Store Split)</span>
+                <span>⚖️ Balanced (Fewer Deliveries)</span>
+                <span>⚡ Hyperlocal Rush (Blinkit/Zepto 10-Min)</span>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             <!-- Left: Split Store Baskets -->
@@ -129,7 +154,7 @@
                                 <span class="text-[10px] text-emerald-400">Cheapest for audio cables & basic earphones</span>
                             </div>
                         </div>
-                        <span class="text-xs font-bold text-slate-300">Subtotal: ₹299</span>
+                        <span class="text-xs font-mono-numbers font-bold text-slate-300">Subtotal: ₹299</span>
                     </div>
 
                     <!-- Item Row -->
@@ -139,21 +164,13 @@
                                 <i data-lucide="headphones" class="w-7 h-7"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-white">Realme Buds 2 Neo (Type-C)</h4>
-                                <div class="text-xs text-slate-400">₹299 <span class="line-through text-slate-500 text-[10px]">₹499</span> • Score: 84/100</div>
-                                <div class="text-[10px] text-emerald-400 mt-0.5">Applied: ₹50 Axis Bank Offer</div>
+                                <h4 class="text-sm font-bold text-white">boAt BassHeads 100 Pro</h4>
+                                <div class="text-xs text-slate-400">Out-of-Pocket: <span class="text-white font-mono-numbers font-bold">₹299</span> <span class="line-through text-slate-500">₹399</span></div>
                             </div>
                         </div>
-
-                        <div class="flex items-center justify-between sm:justify-end gap-4">
-                            <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-black/20 text-xs">
-                                <button class="px-2.5 py-1 hover:bg-white/10 text-slate-300">−</button>
-                                <span class="px-3 py-1 font-semibold text-white">1</span>
-                                <button class="px-2.5 py-1 hover:bg-white/10 text-slate-300">+</button>
-                            </div>
-                            <button onclick="showToast('Item removed from basket', 'info')" class="text-slate-500 hover:text-rose-400 p-1.5 transition-colors">
-                                <i data-lucide="trash-2" class="w-4 h-4"></i>
-                            </button>
+                        <div class="flex items-center gap-3 self-end sm:self-center">
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-extrabold text-[10px]">SAVE ₹100</span>
+                            <button onclick="showToast('Item removed', 'info')" class="text-slate-400 hover:text-rose-400 p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>
                     </div>
                 </div>
@@ -162,37 +179,29 @@
                 <div class="glass-panel p-6 space-y-4">
                     <div class="flex justify-between items-center border-b border-white/10 pb-3">
                         <div class="flex items-center gap-3">
-                            <span class="w-8 h-8 rounded-lg bg-amber-600 text-white font-bold text-xs flex items-center justify-center">AZ</span>
+                            <span class="w-8 h-8 rounded-lg bg-amber-600 text-white font-bold text-xs flex items-center justify-center">AMZ</span>
                             <div>
                                 <h3 class="text-sm font-bold text-white">Amazon Fulfilled (1 Item)</h3>
-                                <span class="text-[10px] text-amber-300">Cheapest for Smart Stretch upgraded pick</span>
+                                <span class="text-[10px] text-emerald-400">Prime 1-Day Delivery & Bank Offer Included</span>
                             </div>
                         </div>
-                        <span class="text-xs font-bold text-slate-300">Subtotal: ₹369</span>
+                        <span class="text-xs font-mono-numbers font-bold text-slate-300">Subtotal: ₹369</span>
                     </div>
 
                     <!-- Item Row -->
                     <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
                         <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-xl bg-amber-950/50 flex items-center justify-center text-amber-400 shrink-0">
-                                <i data-lucide="music" class="w-7 h-7"></i>
+                            <div class="w-14 h-14 rounded-xl bg-indigo-950/50 flex items-center justify-center text-indigo-400 shrink-0">
+                                <i data-lucide="zap" class="w-7 h-7"></i>
                             </div>
                             <div>
-                                <h4 class="text-sm font-bold text-white">boAt BassHeads 100 Pro</h4>
-                                <div class="text-xs text-slate-400">₹369 <span class="line-through text-slate-500 text-[10px]">₹599</span> • Score: 91/100</div>
-                                <div class="text-[10px] text-amber-300 mt-0.5">Smart Upgrade • Prime 1-Day Dispatch</div>
+                                <h4 class="text-sm font-bold text-white">OnePlus Nord Wired 3.5mm Earphones</h4>
+                                <div class="text-xs text-slate-400">Out-of-Pocket: <span class="text-white font-mono-numbers font-bold">₹369</span> <span class="line-through text-slate-500">₹499</span></div>
                             </div>
                         </div>
-
-                        <div class="flex items-center justify-between sm:justify-end gap-4">
-                            <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-black/20 text-xs">
-                                <button class="px-2.5 py-1 hover:bg-white/10 text-slate-300">−</button>
-                                <span class="px-3 py-1 font-semibold text-white">1</span>
-                                <button class="px-2.5 py-1 hover:bg-white/10 text-slate-300">+</button>
-                            </div>
-                            <button onclick="showToast('Item removed from basket', 'info')" class="text-slate-500 hover:text-rose-400 p-1.5 transition-colors">
-                                <i data-lucide="trash-2" class="w-4 h-4"></i>
-                            </button>
+                        <div class="flex items-center gap-3 self-end sm:self-center">
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-extrabold text-[10px]">SAVE ₹130</span>
+                            <button onclick="showToast('Item removed', 'info')" class="text-slate-400 hover:text-rose-400 p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>
                     </div>
                 </div>
@@ -205,35 +214,34 @@
                 <div class="glass-panel p-6 space-y-5">
                     <h3 class="text-base font-bold text-white pb-3 border-b border-white/10">Optimized Order Summary</h3>
                     
-                    <div class="space-y-3 text-xs">
+                    <div class="space-y-3 text-xs font-mono-numbers">
                         <div class="flex justify-between text-slate-400">
                             <span>Flipkart Subtotal (1 item)</span>
-                            <span class="text-slate-200 font-semibold">₹299</span>
+                            <span class="text-slate-200 font-semibold">₹399</span>
                         </div>
                         <div class="flex justify-between text-slate-400">
                             <span>Amazon Subtotal (1 item)</span>
-                            <span class="text-slate-200 font-semibold">₹369</span>
+                            <span class="text-slate-200 font-semibold">₹269</span>
                         </div>
                         <div class="flex justify-between text-emerald-400">
-                            <span>Platform Coupon Subtractions</span>
-                            <span class="font-bold">− ₹120</span>
+                            <span>Instant Cross-Store Savings</span>
+                            <span class="font-bold">− ₹430</span>
                         </div>
                         <div class="flex justify-between text-slate-400">
                             <span>Estimated Delivery</span>
-                            <span class="text-emerald-400 font-semibold">FREE</span>
+                            <span class="text-emerald-400 font-semibold">FREE (Both Stores)</span>
                         </div>
+                    </div>
 
-                        <div class="pt-3 border-t border-white/10 flex justify-between items-baseline">
-                            <div>
-                                <span class="text-sm font-bold text-white">Total Out-of-Pocket</span>
-                                <div class="text-[10px] text-slate-400">Taxes & discounts included</div>
-                            </div>
+                    <div class="pt-3 border-t border-white/10">
+                        <div class="flex justify-between items-baseline mb-4 font-mono-numbers">
+                            <span class="text-xs font-bold text-slate-300">Total Net Amount:</span>
                             <span class="text-2xl font-black text-white">₹668</span>
                         </div>
                     </div>
 
                     <!-- 1-Click Multi-Store Checkout Routing -->
-                    <button onclick="dispatchMultiStoreCheckout()" class="w-full py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-cyan-500 hover:opacity-95 text-white font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2">
+                    <button onclick="dispatchMultiStoreCheckout()" class="w-full py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md shadow-indigo-600/30 transition-all flex items-center justify-center gap-2">
                         <i data-lucide="external-link" class="w-4 h-4"></i>
                         <span>Launch 1-Click Multi-Store Checkout</span>
                     </button>
@@ -249,42 +257,54 @@
         </div>
     </main>
 
-    <!-- Floating AI Shopping Concierge -->
+    <!-- Floating AI Shopping Assistant Concierge -->
     <div class="chat-fab" id="chatFab">
-        <i data-lucide="sparkles" class="w-5 h-5 animate-pulse"></i>
-        <span>AI Deal Concierge</span>
+        <i data-lucide="bot" class="w-5 h-5"></i>
+        <span>AI Concierge</span>
     </div>
 
-    <!-- AI Chat Drawer -->
-    <div class="chat-drawer glass-panel" id="chatDrawer">
-        <div class="p-4 border-b border-white/10 flex justify-between items-center">
+    <!-- Expandable AI Chat Drawer -->
+    <aside class="chat-drawer glass-panel p-5" id="chatDrawer">
+        <div class="flex justify-between items-center pb-3 border-b border-white/10">
             <div class="flex items-center gap-2">
-                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
-                    <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-600/30">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
                 </div>
-                <h4 class="font-bold text-sm">Faircart AI Concierge</h4>
-            </div>
-            <button id="closeChatBtn" class="p-1 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-        </div>
-
-        <div class="flex-1 p-4 overflow-y-auto" id="chatMessages">
-            <div class="flex justify-start mb-4">
-                <div class="max-w-[85%] p-3.5 rounded-2xl text-xs bg-slate-800/90 text-slate-100 border border-white/10">
-                    Hello! I've optimized your basket across Flipkart and Amazon for a total savings of ₹430!
+                <div>
+                    <h4 class="text-sm font-bold text-white">Faircart Concierge</h4>
+                    <p class="text-[10px] text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Platform Engine</p>
                 </div>
             </div>
+            <div class="flex items-center gap-2">
+                <button id="exportChatBtn" class="text-slate-400 hover:text-white p-1" title="Export conversation as CSV">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                </button>
+                <button id="closeChatBtn" class="text-slate-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
 
-        <div class="p-3 border-t border-white/10 flex items-center gap-2 bg-slate-950/50">
-            <button id="voiceChatBtn" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300" title="Voice Search">
+        <!-- Chat Message Area -->
+        <div class="flex-1 overflow-y-auto py-4 space-y-3" id="chatMessagesStream">
+            <div class="flex justify-start mb-2">
+                <div class="max-w-[85%] p-3.5 rounded-2xl glass-panel text-slate-100 text-xs shadow-lg">
+                    👋 Hello! I've optimized your basket across Flipkart and Amazon for a total savings of ₹430!
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="pt-3 border-t border-white/10 flex gap-2 items-center">
+            <input type="text" id="chatInput" placeholder="Ask AI about basket savings..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500">
+            <button id="voiceChatBtn" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors" title="Voice Input">
                 <i data-lucide="mic" class="w-4 h-4"></i>
             </button>
-            <input type="text" id="chatInput" placeholder="Ask AI about basket savings..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-500 outline-none">
-            <button id="sendChatBtn" class="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white">
+            <button id="sendChatBtn" class="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors">
                 <i data-lucide="send" class="w-4 h-4"></i>
             </button>
         </div>
-    </div>
+    </aside>
 
     <!-- Mobile Bottom Navigation -->
     <nav class="mobile-bottom-nav md:hidden">
@@ -310,17 +330,34 @@
         </a>
     </nav>
 
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
     <script src="../js/app.js"></script>
     <script>
-        lucide.createIcons();
+        function updateBasketStrategy(val) {
+            const label = document.getElementById('basketStrategyLabel');
+            if (val == 1) {
+                label.textContent = "Maximum Cost Savings (₹430 Saved)";
+                label.className = "text-xs font-extrabold text-emerald-300 bg-emerald-500/15 px-3 py-1 rounded-full border border-emerald-500/30";
+            } else if (val == 2) {
+                label.textContent = "Balanced Deliveries (₹310 Saved, 2 Couriers)";
+                label.className = "text-xs font-extrabold text-indigo-300 bg-indigo-500/15 px-3 py-1 rounded-full border border-indigo-500/30";
+            } else {
+                label.textContent = "⚡ Hyperlocal 10-Min Rush (Zepto / Blinkit)";
+                label.className = "text-xs font-extrabold text-amber-300 bg-amber-500/15 px-3 py-1 rounded-full border border-amber-500/30";
+            }
+            if (window.showToast) showToast('Switched to: ' + label.textContent, 'info');
+        }
 
         function dispatchMultiStoreCheckout() {
-            showToast("Opening optimized checkouts on Flipkart and Amazon with coupon links...", "success");
+            if (window.showToast) showToast("Opening optimized checkouts on Flipkart and Amazon with coupon links...", "success");
             setTimeout(() => {
                 window.open('https://www.flipkart.com', '_blank');
                 window.open('https://www.amazon.in', '_blank');
             }, 800);
         }
+
+        if (window.lucide) lucide.createIcons();
     </script>
 </body>
 </html>

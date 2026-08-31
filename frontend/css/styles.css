@@ -1,7 +1,7 @@
 /* ==========================================================================
-   FAIRCART ENTERPRISE DESIGN SYSTEM 2.0
-   Apple/Linear-Grade Frosted Glassmorphism, 60fps Motion Physics,
-   Interactive Sliding Bars, High-Contrast Dual Themes & Zero-Latency UI
+   FAIRCART ENTERPRISE LUXURY DESIGN SYSTEM 2.0
+   Nordic Obsidian, Warm Champagne Gold & Alpine Alabaster Palettes
+   Apple Pro & Linear-Grade Frosted Glassmorphism, 60fps Motion Physics
    ========================================================================== */
 
 @view-transition {
@@ -10,87 +10,85 @@
 
 :root {
     /* --------------------------------------------------
-       DARK THEME (Default: OLED Deep Obsidian & Glowing Mesh)
+       DARK THEME (Luxury Nordic Obsidian & Champagne Gold)
        -------------------------------------------------- */
-    --fc-bg-main: #05070E;
-    --fc-bg-gradient: radial-gradient(circle at 10% 15%, rgba(99, 102, 241, 0.22) 0%, transparent 42%),
-                      radial-gradient(circle at 90% 85%, rgba(6, 182, 212, 0.18) 0%, transparent 45%),
-                      radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 55%),
-                      radial-gradient(circle at 80% 15%, rgba(245, 158, 11, 0.08) 0%, transparent 35%),
-                      linear-gradient(160deg, #05070E 0%, #090E1A 50%, #04060B 100%);
+    --fc-bg-main: #0B0E17;
+    --fc-bg-gradient: radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 45%),
+                      radial-gradient(circle at 85% 90%, rgba(217, 119, 6, 0.06) 0%, transparent 45%),
+                      radial-gradient(circle at 50% 40%, rgba(14, 165, 233, 0.05) 0%, transparent 55%),
+                      linear-gradient(175deg, #0B0E17 0%, #0F1320 40%, #080A10 100%);
     
-    /* Frosted Glass 2.0 Surfaces */
-    --fc-glass-surface: rgba(13, 19, 36, 0.78);
-    --fc-glass-card: rgba(255, 255, 255, 0.04);
-    --fc-glass-card-hover: rgba(255, 255, 255, 0.08);
-    --fc-glass-border: rgba(255, 255, 255, 0.09);
-    --fc-glass-border-hover: rgba(99, 102, 241, 0.6);
-    --fc-glass-inner-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+    /* Frosted Glass Luxury Surfaces */
+    --fc-glass-surface: rgba(17, 22, 34, 0.72);
+    --fc-glass-card: rgba(22, 28, 44, 0.55);
+    --fc-glass-card-hover: rgba(28, 36, 56, 0.75);
+    --fc-glass-border: rgba(255, 255, 255, 0.08);
+    --fc-glass-border-hover: rgba(165, 180, 252, 0.35);
+    --fc-glass-inner-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
     
-    /* Typography & Hierarchy */
+    /* Typography & Hierarchy (Sophisticated Neutral Warmth) */
     --fc-text-primary: #F8FAFC;
-    --fc-text-secondary: #CBD5E1;
+    --fc-text-secondary: #E2E8F0;
     --fc-text-muted: #94A3B8;
     --fc-text-subtle: #64748B;
     
-    /* Vibrant Brand Accents */
-    --fc-primary: #6366F1;
-    --fc-primary-hover: #4F46E5;
-    --fc-primary-light: rgba(99, 102, 241, 0.15);
-    --fc-cyan: #06B6D4;
-    --fc-cyan-light: rgba(6, 182, 212, 0.15);
-    --fc-emerald: #10B981;
-    --fc-emerald-light: rgba(16, 185, 129, 0.15);
-    --fc-amber: #F59E0B;
-    --fc-amber-light: rgba(245, 158, 11, 0.15);
-    --fc-rose: #EF4444;
-    --fc-rose-light: rgba(239, 68, 68, 0.15);
-    --fc-violet: #8B5CF6;
-    --fc-violet-light: rgba(139, 92, 246, 0.15);
+    /* Refined Non-Neon Luxury Accents */
+    --fc-primary: #4F46E5;
+    --fc-primary-hover: #4338CA;
+    --fc-primary-light: rgba(79, 70, 229, 0.14);
+    --fc-cyan: #0284C7;
+    --fc-cyan-light: rgba(2, 132, 199, 0.14);
+    --fc-emerald: #059669;
+    --fc-emerald-light: rgba(5, 150, 105, 0.14);
+    --fc-amber: #D97706;
+    --fc-amber-light: rgba(217, 119, 6, 0.14);
+    --fc-rose: #DC2626;
+    --fc-rose-light: rgba(220, 38, 38, 0.14);
+    --fc-violet: #7C3AED;
+    --fc-violet-light: rgba(124, 58, 237, 0.14);
     
-    /* Shadows & Atmospheric Lighting */
-    --fc-blur: blur(28px) saturate(190%);
-    --fc-shadow-glass: 0 12px 36px 0 rgba(0, 0, 0, 0.55);
-    --fc-shadow-glass-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.65);
-    --fc-shadow-glow: 0 0 35px rgba(99, 102, 241, 0.35);
-    --fc-shadow-cyan-glow: 0 0 35px rgba(6, 182, 212, 0.35);
-    --fc-shadow-amber-glow: 0 0 40px rgba(245, 158, 11, 0.45);
-    --fc-slider-track: rgba(255, 255, 255, 0.1);
-    --fc-slider-fill: linear-gradient(90deg, #6366F1, #06B6D4, #10B981);
+    /* Diffused Shadows & Studio Lighting (Zero Harsh Neon) */
+    --fc-blur: blur(28px) saturate(175%);
+    --fc-shadow-glass: 0 16px 36px -8px rgba(0, 0, 0, 0.55), 0 0 1px 1px rgba(255, 255, 255, 0.06);
+    --fc-shadow-glass-lg: 0 24px 52px -12px rgba(0, 0, 0, 0.7);
+    --fc-shadow-glow: 0 8px 30px rgba(79, 70, 229, 0.22);
+    --fc-shadow-cyan-glow: 0 8px 30px rgba(2, 132, 199, 0.20);
+    --fc-shadow-amber-glow: 0 8px 32px rgba(217, 119, 6, 0.25);
+    --fc-slider-track: rgba(255, 255, 255, 0.08);
+    --fc-slider-fill: linear-gradient(90deg, #4F46E5, #0284C7, #D97706);
 }
 
 /* --------------------------------------------------
-   LIGHT THEME (Luxe Pearl White & Sapphire Accents)
+   LIGHT THEME (Alpine Alabaster & Royal Navy)
    -------------------------------------------------- */
 [data-theme="light"] {
-    --fc-bg-main: #F4F6FB;
-    --fc-bg-gradient: radial-gradient(circle at 10% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
-                      radial-gradient(circle at 90% 85%, rgba(6, 182, 212, 0.10) 0%, transparent 45%),
-                      radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
-                      linear-gradient(150deg, #F8FAFC 0%, #E8EEF5 50%, #F1F5F9 100%);
+    --fc-bg-main: #F8FAFC;
+    --fc-bg-gradient: radial-gradient(circle at 10% 10%, rgba(79, 70, 229, 0.04) 0%, transparent 45%),
+                      radial-gradient(circle at 90% 90%, rgba(217, 119, 6, 0.03) 0%, transparent 45%),
+                      linear-gradient(175deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%);
     
-    /* Frosted Glass 2.0 Surfaces Light */
-    --fc-glass-surface: rgba(255, 255, 255, 0.92);
-    --fc-glass-card: rgba(255, 255, 255, 0.88);
+    /* Frosted Glass Surfaces Light (Crisp Porcelain) */
+    --fc-glass-surface: rgba(255, 255, 255, 0.90);
+    --fc-glass-card: rgba(255, 255, 255, 0.85);
     --fc-glass-card-hover: #FFFFFF;
     --fc-glass-border: rgba(15, 23, 42, 0.08);
-    --fc-glass-border-hover: rgba(99, 102, 241, 0.5);
-    --fc-glass-inner-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.9);
+    --fc-glass-border-hover: rgba(79, 70, 229, 0.35);
+    --fc-glass-inner-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1);
     
     /* Typography & Hierarchy Light */
-    --fc-text-primary: #090D16;
-    --fc-text-secondary: #243046;
-    --fc-text-muted: #4B5563;
-    --fc-text-subtle: #6B7280;
+    --fc-text-primary: #0F172A;
+    --fc-text-secondary: #334155;
+    --fc-text-muted: #64748B;
+    --fc-text-subtle: #94A3B8;
     
-    /* Shadows & Lighting Light */
-    --fc-shadow-glass: 0 10px 30px 0 rgba(15, 23, 42, 0.07);
-    --fc-shadow-glass-lg: 0 20px 45px -10px rgba(15, 23, 42, 0.12);
-    --fc-shadow-glow: 0 0 25px rgba(99, 102, 241, 0.22);
-    --fc-shadow-cyan-glow: 0 0 25px rgba(6, 182, 212, 0.22);
-    --fc-shadow-amber-glow: 0 0 30px rgba(245, 158, 11, 0.28);
-    --fc-slider-track: rgba(15, 23, 42, 0.1);
-    --fc-slider-fill: linear-gradient(90deg, #4F46E5, #0284C7, #059669);
+    /* Shadows & Lighting Light (Subtle Apple Pro Layering) */
+    --fc-shadow-glass: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 12px 28px -4px rgba(15, 23, 42, 0.06);
+    --fc-shadow-glass-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 24px 48px -8px rgba(15, 23, 42, 0.10);
+    --fc-shadow-glow: 0 4px 20px rgba(79, 70, 229, 0.14);
+    --fc-shadow-cyan-glow: 0 4px 20px rgba(2, 132, 199, 0.14);
+    --fc-shadow-amber-glow: 0 4px 22px rgba(217, 119, 6, 0.16);
+    --fc-slider-track: rgba(15, 23, 42, 0.08);
+    --fc-slider-fill: linear-gradient(90deg, #4338CA, #0369A1, #B45309);
 }
 
 /* ==========================================================================
@@ -100,9 +98,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.02em;
 }
 
 body {
@@ -480,26 +483,29 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 
 .chat-fab {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: 28px;
+    right: 28px;
     z-index: 1040;
-    background: linear-gradient(135deg, var(--fc-primary), var(--fc-cyan));
-    color: white;
-    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--fc-primary) 0%, var(--fc-primary-hover) 100%);
+    color: #FFFFFF;
+    padding: 12px 20px;
     border-radius: 9999px;
-    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.45);
+    box-shadow: 0 10px 28px rgba(79, 70, 229, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-weight: 700;
+    font-size: 13px;
     letter-spacing: -0.01em;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .chat-fab:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 18px 40px rgba(99, 102, 241, 0.6);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 16px 36px rgba(79, 70, 229, 0.55);
 }
 
 /* ==========================================================================
@@ -533,27 +539,32 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
     }
 }
 
-/* Ambient Glowing Background Orbs */
+/* Ambient Studio Lighting (Subtle, non-neon depth) */
 .ambient-glow-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.45;
+    filter: blur(140px);
+    opacity: 0.16;
     pointer-events: none;
-    animation: floatOrb 18s ease-in-out infinite alternate;
+    animation: floatOrb 22s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .ambient-glow-orb {
+    opacity: 0.05;
+    filter: blur(160px);
 }
 
 @keyframes floatOrb {
     0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(30px, -40px) scale(1.15); }
-    100% { transform: translate(-20px, 30px) scale(0.95); }
+    50% { transform: translate(25px, -30px) scale(1.1); }
+    100% { transform: translate(-15px, 20px) scale(0.95); }
 }
 
 /* Skeleton Loading Shimmer */
 .skeleton-shimmer {
     background: linear-gradient(90deg, 
         rgba(255, 255, 255, 0.03) 25%, 
-        rgba(255, 255, 255, 0.10) 50%, 
+        rgba(255, 255, 255, 0.08) 50%, 
         rgba(255, 255, 255, 0.03) 75%);
     background-size: 200% 100%;
     animation: shimmer 1.6s infinite ease-in-out;
@@ -561,9 +572,9 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 
 [data-theme="light"] .skeleton-shimmer {
     background: linear-gradient(90deg, 
-        rgba(0, 0, 0, 0.04) 25%, 
-        rgba(0, 0, 0, 0.09) 50%, 
-        rgba(0, 0, 0, 0.04) 75%);
+        rgba(0, 0, 0, 0.03) 25%, 
+        rgba(0, 0, 0, 0.07) 50%, 
+        rgba(0, 0, 0, 0.03) 75%);
     background-size: 200% 100%;
 }
 
@@ -574,8 +585,8 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 
 /* Smooth Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -583,16 +594,16 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.14);
     border-radius: 9999px;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-thumb {
-    background: rgba(15, 23, 42, 0.18);
+    background: rgba(15, 23, 42, 0.14);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(99, 102, 241, 0.5);
+    background: rgba(79, 70, 229, 0.4);
 }
 
 /* ==========================================================================
@@ -600,11 +611,11 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
    Ensures 100% razor-sharp visibility and WCAG AAA compliance
    ========================================================================== */
 [data-theme="light"] .text-white {
-    color: #090D16 !important;
+    color: #0F172A !important;
 }
 
 [data-theme="light"] .text-slate-100 {
-    color: #090D16 !important;
+    color: #0F172A !important;
 }
 
 [data-theme="light"] .text-slate-200 {
@@ -616,19 +627,19 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 }
 
 [data-theme="light"] .text-slate-400 {
-    color: #4B5563 !important;
+    color: #475569 !important;
 }
 
 [data-theme="light"] .text-slate-500 {
-    color: #6B7280 !important;
+    color: #64748B !important;
 }
 
 [data-theme="light"] .bg-white\/5 {
-    background-color: rgba(15, 23, 42, 0.04) !important;
+    background-color: rgba(15, 23, 42, 0.03) !important;
 }
 
 [data-theme="light"] .bg-white\/10 {
-    background-color: rgba(15, 23, 42, 0.07) !important;
+    background-color: rgba(15, 23, 42, 0.06) !important;
 }
 
 [data-theme="light"] .border-white\/10 {
@@ -636,7 +647,7 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 }
 
 [data-theme="light"] .border-white\/20 {
-    border-color: rgba(15, 23, 42, 0.15) !important;
+    border-color: rgba(15, 23, 42, 0.14) !important;
 }
 
 [data-theme="light"] .bg-slate-900\/60,
@@ -648,26 +659,26 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 [data-theme="light"] .bg-slate-800\/90,
 [data-theme="light"] .bg-slate-800\/80 {
     background-color: #FFFFFF !important;
-    color: #090D16 !important;
-    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06) !important;
+    color: #0F172A !important;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05) !important;
 }
 
 [data-theme="light"] input,
 [data-theme="light"] select,
 [data-theme="light"] textarea {
-    color: #090D16 !important;
+    color: #0F172A !important;
     background-color: #FFFFFF !important;
     border-color: #CBD5E1 !important;
 }
 
 [data-theme="light"] input::placeholder {
-    color: #6B7280 !important;
+    color: #64748B !important;
 }
 
 [data-theme="light"] .chat-drawer {
     background: rgba(255, 255, 255, 0.98) !important;
     border-color: #E2E8F0 !important;
-    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15) !important;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12) !important;
 }
 
 /* Light mode header and navbar */
@@ -682,9 +693,13 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 
 /* Light mode chips and tags */
 [data-theme="light"] .chip-tag {
-    background-color: #E2E8F0 !important;
+    background-color: #F1F5F9 !important;
     color: #1E293B !important;
-    border-color: #CBD5E1 !important;
+    border-color: #E2E8F0 !important;
+}
+[data-theme="light"] .chip-tag:hover {
+    background-color: #E2E8F0 !important;
+    color: #0F172A !important;
 }
 [data-theme="light"] .chip-tag.active {
     background-color: #4F46E5 !important;
@@ -692,30 +707,35 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
     border-color: #4338CA !important;
 }
 
-/* Light mode badges */
+/* Light mode luxury badges */
 [data-theme="light"] .badge,
-[data-theme="light"] .rounded-full.bg-emerald-500\/10 {
-    background-color: #DCFCE7 !important;
-    color: #15803D !important;
-    border-color: #86EFAC !important;
+[data-theme="light"] .rounded-full.bg-emerald-500\/10,
+[data-theme="light"] .rounded-full.bg-emerald-500\/20 {
+    background-color: #ECFDF5 !important;
+    color: #047857 !important;
+    border-color: #A7F3D0 !important;
 }
-[data-theme="light"] .rounded-full.bg-indigo-500\/10 {
+[data-theme="light"] .rounded-full.bg-indigo-500\/10,
+[data-theme="light"] .rounded-full.bg-indigo-500\/20 {
     background-color: #EEF2FF !important;
     color: #4338CA !important;
     border-color: #C7D2FE !important;
 }
-[data-theme="light"] .rounded-full.bg-amber-500\/10 {
+[data-theme="light"] .rounded-full.bg-amber-500\/10,
+[data-theme="light"] .rounded-full.bg-amber-500\/20 {
     background-color: #FEF3C7 !important;
     color: #B45309 !important;
     border-color: #FDE68A !important;
 }
-[data-theme="light"] .rounded-full.bg-rose-500\/10 {
-    background-color: #FEE2E2 !important;
+[data-theme="light"] .rounded-full.bg-rose-500\/10,
+[data-theme="light"] .rounded-full.bg-rose-500\/20 {
+    background-color: #FEF2F2 !important;
     color: #B91C1C !important;
     border-color: #FECACA !important;
 }
-[data-theme="light"] .rounded-full.bg-cyan-500\/10 {
-    background-color: #E0F2FE !important;
+[data-theme="light"] .rounded-full.bg-cyan-500\/10,
+[data-theme="light"] .rounded-full.bg-cyan-500\/20 {
+    background-color: #F0F9FF !important;
     color: #0369A1 !important;
     border-color: #BAE6FD !important;
 }
@@ -723,7 +743,7 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
 [data-theme="light"] #dealNotificationDropdown {
     background-color: #FFFFFF !important;
     border-color: #CBD5E1 !important;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.10) !important;
 }
 
 [data-theme="light"] .deal-alert-card {
@@ -736,7 +756,7 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
     border-color: #CBD5E1 !important;
 }
 
-/* Primary buttons retain vibrant white text */
+/* Primary buttons retain crisp white text */
 [data-theme="light"] .bg-indigo-600,
 [data-theme="light"] .bg-indigo-600 .text-white,
 [data-theme="light"] .bg-gradient-to-r .text-white,
@@ -745,29 +765,90 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
     color: #FFFFFF !important;
 }
 
-/* Responsive Bottom Navigation Bar (< 640px) */
-@media (max-width: 640px) {
-    .chat-drawer {
-        width: 100vw;
-        height: 85vh;
-        bottom: 0;
-        right: 0;
-        border-radius: 24px 24px 0 0;
+/* Responsive Bottom Navigation Bar & Mobile Safe Spacing (<= 768px) */
+@media (max-width: 768px) {
+    /* Lift and compact AI Agent FAB on Mobile so it NEVER covers or obstructs the bottom options */
+    .chat-fab {
+        bottom: calc(64px + env(safe-area-inset-bottom, 0px) + 14px) !important;
+        right: 14px !important;
+        padding: 9px 15px !important;
+        font-size: 11px !important;
+        gap: 6px !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+        z-index: 1040 !important;
     }
-    
+
+    .chat-fab i, .chat-fab svg {
+        width: 15px !important;
+        height: 15px !important;
+    }
+
+    /* Fixed High-Priority Mobile Bottom Navigation */
     .mobile-bottom-nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 68px;
-        z-index: 1000;
-        background: var(--fc-glass-surface);
-        backdrop-filter: var(--fc-blur);
-        border-top: 1px solid var(--fc-glass-border);
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 64px !important;
+        z-index: 1050 !important;
+        background: var(--fc-glass-surface) !important;
+        backdrop-filter: var(--fc-blur) !important;
+        -webkit-backdrop-filter: var(--fc-blur) !important;
+        border-top: 1px solid var(--fc-glass-border) !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25) !important;
+        display: flex !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    }
+
+    .mobile-bottom-nav a {
+        flex: 1;
+        height: 100%;
         display: flex;
-        justify-content: space-around;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        gap: 3px;
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--fc-text-muted);
+        text-decoration: none;
+        transition: color 0.2s ease, transform 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-bottom-nav a:active {
+        transform: scale(0.92);
+    }
+
+    .mobile-bottom-nav a.active,
+    .mobile-bottom-nav a.text-indigo-400 {
+        color: var(--fc-primary) !important;
+    }
+
+    [data-theme="light"] .mobile-bottom-nav {
+        background: rgba(255, 255, 255, 0.94) !important;
+        border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+        box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08) !important;
+    }
+
+    /* Mobile Page Bottom Clearance - Prevents content cut-off */
+    body {
+        padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+
+    /* Full-Screen Drawer on Mobile */
+    .chat-drawer {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 85vh !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        border-radius: 24px 24px 0 0 !important;
+        z-index: 1100 !important;
+        padding: 16px !important;
     }
 }
 

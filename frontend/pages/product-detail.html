@@ -6,22 +6,28 @@
     <title>Product Deep Dive & Truth Box — Faircart</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="selection:bg-indigo-500 selection:text-white">
+<body class="selection:bg-indigo-500 selection:text-white relative">
+
+    <!-- Ambient Studio Lighting -->
+    <div class="ambient-glow-orb w-96 h-96 bg-indigo-900/15 top-10 left-10"></div>
+    <div class="ambient-glow-orb w-[450px] h-[450px] bg-amber-900/10 bottom-20 right-10" style="animation-delay: -6s;"></div>
 
     <!-- Floating Top Glass Navbar -->
     <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
         <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
                     <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
                 </div>
-                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+                <span class="font-['Outfit'] font-bold text-white tracking-tight">Faircart</span>
             </a>
             
             <div class="hidden md:flex items-center gap-6 text-sm font-medium">
@@ -37,7 +43,7 @@
                 <div class="relative">
                     <button id="dealNotificationBtn" class="relative p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-all flex items-center justify-center" title="AI Deal Notifications & Alerts">
                         <i data-lucide="bell" class="w-4 h-4 text-indigo-400"></i>
-                        <span id="dealBadgeCount" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-extrabold flex items-center justify-center shadow-lg shadow-rose-500/50 animate-pulse">3</span>
+                        <span id="dealBadgeCount" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-600 text-white text-[9px] font-extrabold flex items-center justify-center shadow-md">3</span>
                     </button>
 
                     <!-- Notification Dropdown Panel -->
@@ -278,10 +284,27 @@
                         <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Price Integrity Engine</div>
                         <h2 class="text-xl font-bold font-['Outfit'] text-white">90-Day Price Trend & Deal Cycle</h2>
                     </div>
-                    <div class="flex gap-4 text-xs">
-                        <div><span class="text-slate-500">90d Low:</span> <strong class="text-emerald-400" id="histLow">₹0</strong></div>
-                        <div><span class="text-slate-500">90d High:</span> <strong class="text-rose-400" id="histHigh">₹0</strong></div>
-                        <div><span class="text-slate-500">Average:</span> <strong class="text-slate-200" id="histAvg">₹0</strong></div>
+                    <div class="flex gap-4 text-xs font-mono-numbers">
+                        <div><span class="text-slate-500 font-sans">90d Low:</span> <strong class="text-emerald-400" id="histLow">₹0</strong></div>
+                        <div><span class="text-slate-500 font-sans">90d High:</span> <strong class="text-rose-400" id="histHigh">₹0</strong></div>
+                        <div><span class="text-slate-500 font-sans">Average:</span> <strong class="text-slate-200" id="histAvg">₹0</strong></div>
+                    </div>
+                </div>
+
+                <!-- Interactive Timeline Range Bar -->
+                <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-slate-300 font-bold flex items-center gap-1.5"><i data-lucide="calendar" class="w-3.5 h-3.5 text-indigo-400"></i> Historical Window Range:</span>
+                        <span id="chartTimelineLabel" class="text-cyan-400 font-mono-numbers font-bold">Past 90 Days</span>
+                    </div>
+                    <div class="fc-slider-container">
+                        <input type="range" id="timelineSlider" class="fc-range-slider" min="15" max="90" step="15" value="90" oninput="updateTimelineWindow(this.value)">
+                    </div>
+                    <div class="flex justify-between text-[10px] text-slate-400 font-mono-numbers">
+                        <span>15 Days</span>
+                        <span>30 Days</span>
+                        <span>60 Days</span>
+                        <span>90 Days</span>
                     </div>
                 </div>
 
@@ -293,66 +316,54 @@
 
     </main>
 
-    <!-- Floating AI Shopping Concierge -->
+    <!-- Floating AI Shopping Assistant Concierge -->
     <div class="chat-fab" id="chatFab">
-        <i data-lucide="sparkles" class="w-5 h-5 animate-pulse"></i>
-        <span>AI Deal Concierge</span>
+        <i data-lucide="bot" class="w-5 h-5"></i>
+        <span>AI Concierge</span>
     </div>
 
-    <!-- AI Chat Drawer -->
-    <div class="chat-drawer glass-panel" id="chatDrawer">
-        <div class="p-4 border-b border-white/10 flex justify-between items-center">
+    <!-- Expandable AI Chat Drawer -->
+    <aside class="chat-drawer glass-panel p-5" id="chatDrawer">
+        <div class="flex justify-between items-center pb-3 border-b border-white/10">
             <div class="flex items-center gap-2">
-                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
-                    <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white shadow-md">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
                 </div>
-                <h4 class="font-bold text-sm">Faircart AI Concierge</h4>
-            </div>
-            <button id="closeChatBtn" class="p-1 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
-        </div>
-
-        <div class="flex-1 p-4 overflow-y-auto" id="chatMessages">
-            <div class="flex justify-start mb-4">
-                <div class="max-w-[85%] p-3.5 rounded-2xl text-xs bg-slate-800/90 text-slate-100 border border-white/10" id="chatWelcomeMessage">
-                    Hello! Ask me any question about this product or request a direct comparison with alternatives.
+                <div>
+                    <h4 class="text-sm font-bold text-white">Faircart Concierge</h4>
+                    <p class="text-[10px] text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Platform Engine</p>
                 </div>
             </div>
+            <div class="flex items-center gap-2">
+                <button id="exportChatBtn" class="text-slate-400 hover:text-white p-1" title="Export conversation as CSV">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                </button>
+                <button id="closeChatBtn" class="text-slate-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
         </div>
 
-        <div class="p-3 border-t border-white/10 flex items-center gap-2 bg-slate-950/50">
-            <button id="voiceChatBtn" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300" title="Voice Search">
+        <!-- Chat Message Area -->
+        <div class="flex-1 overflow-y-auto py-4 space-y-3" id="chatMessagesStream">
+            <div class="flex justify-start mb-2">
+                <div class="max-w-[85%] p-3.5 rounded-2xl glass-panel text-slate-100 text-xs shadow-lg" id="chatWelcomeMessage">
+                    👋 Hello! Ask me any question about this product or request a direct comparison with alternatives.
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="pt-3 border-t border-white/10 flex gap-2 items-center">
+            <input type="text" id="chatInput" placeholder="Ask about this product..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-indigo-500">
+            <button id="voiceChatBtn" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors" title="Voice Input">
                 <i data-lucide="mic" class="w-4 h-4"></i>
             </button>
-            <input type="text" id="chatInput" placeholder="Ask about this product..." class="flex-1 bg-transparent text-xs text-white placeholder-slate-500 outline-none">
-            <button id="sendChatBtn" class="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white">
+            <button id="sendChatBtn" class="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white transition-colors">
                 <i data-lucide="send" class="w-4 h-4"></i>
             </button>
         </div>
-    </div>
-
-    <!-- Mobile Bottom Navigation -->
-    <nav class="mobile-bottom-nav md:hidden">
-        <a href="../index.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
-            <i data-lucide="home" class="w-5 h-5"></i>
-            <span>Home</span>
-        </a>
-        <a href="products.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
-            <i data-lucide="grid" class="w-5 h-5"></i>
-            <span>Catalog</span>
-        </a>
-        <a href="results.html" class="flex flex-col items-center gap-1 text-[10px] text-indigo-400 font-semibold">
-            <i data-lucide="compass" class="w-5 h-5"></i>
-            <span>Compare</span>
-        </a>
-        <a href="wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
-            <i data-lucide="bell" class="w-5 h-5"></i>
-            <span>Alerts</span>
-        </a>
-        <a href="cart.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
-            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-            <span>Basket</span>
-        </a>
-    </nav>
+    </aside>
 
     <script src="../js/catalog-data.js"></script>
     <script src="../js/app.js"></script>
@@ -526,6 +537,34 @@
                 }
             });
         }
-    </script>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="../index.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="grid" class="w-5 h-5"></i>
+            <span>Catalog</span>
+        </a>
+        <a href="results.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Compare</span>
+        </a>
+        <a href="wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span>Alerts</span>
+        </a>
+        <a href="cart.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Basket</span>
+        </a>
+    </nav>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/catalog-data.js"></script>
+    <script src="../js/app.js"></script>
 </body>
 </html>

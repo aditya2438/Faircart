@@ -8,26 +8,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://unpkg.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&family=Geist+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="selection:bg-indigo-500 selection:text-white relative">
 
-    <!-- Ambient Glowing Background Mesh Orbs -->
-    <div class="ambient-glow-orb w-96 h-96 bg-indigo-600/30 top-10 left-10"></div>
-    <div class="ambient-glow-orb w-[500px] h-[500px] bg-cyan-500/20 top-40 right-10" style="animation-delay: -5s;"></div>
-    <div class="ambient-glow-orb w-80 h-80 bg-violet-600/20 bottom-20 left-1/3" style="animation-delay: -10s;"></div>
+    <!-- Ambient Studio Lighting (Subtle luxury backdrop) -->
+    <div class="ambient-glow-orb w-96 h-96 bg-indigo-900/15 top-10 left-10"></div>
+    <div class="ambient-glow-orb w-[500px] h-[500px] bg-amber-900/10 top-40 right-10" style="animation-delay: -5s;"></div>
+    <div class="ambient-glow-orb w-80 h-80 bg-slate-800/15 bottom-20 left-1/3" style="animation-delay: -10s;"></div>
 
     <!-- Floating Top Glass Navbar -->
     <header class="fixed top-4 left-4 right-4 max-w-7xl mx-auto z-50">
         <nav class="glass-panel px-6 py-3.5 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
                     <i data-lucide="shopping-cart" class="w-5 h-5 text-white"></i>
                 </div>
-                <span class="font-['Outfit'] font-bold bg-gradient-to-r from-indigo-400 via-cyan-300 to-white bg-clip-text text-transparent">Faircart</span>
+                <span class="font-['Outfit'] font-bold text-white tracking-tight">Faircart</span>
             </a>
             
             <div class="hidden md:flex items-center gap-6 text-sm font-medium">
@@ -43,7 +43,7 @@
                 <div class="relative">
                     <button id="dealNotificationBtn" class="relative p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-all flex items-center justify-center" title="AI Deal Notifications & Alerts">
                         <i data-lucide="bell" class="w-4 h-4 text-indigo-400"></i>
-                        <span id="dealBadgeCount" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-extrabold flex items-center justify-center shadow-lg shadow-rose-500/50 animate-pulse">3</span>
+                        <span id="dealBadgeCount" class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-600 text-white text-[9px] font-extrabold flex items-center justify-center shadow-md">3</span>
                     </button>
 
                     <!-- Notification Dropdown Panel -->
@@ -86,7 +86,7 @@
                     </div>
                 </div>
 
-                <a href="pages/auth.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-lg shadow-indigo-600/30 transition-all">
+                <a href="pages/auth.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-md shadow-indigo-600/25 transition-all">
                     <i data-lucide="user" class="w-3.5 h-3.5"></i>
                     <span>Account</span>
                 </a>
@@ -98,8 +98,8 @@
     <div class="pt-28 pb-3">
         <div class="max-w-7xl mx-auto px-4">
             <div class="glass-panel py-2 px-4 flex items-center gap-3 text-xs overflow-hidden">
-                <span class="flex items-center gap-1.5 text-amber-400 font-semibold shrink-0 uppercase tracking-wider">
-                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Live Radar:
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 text-[11px] font-semibold shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Live Radar:
                 </span>
                 <div class="ticker-container">
                     <div class="ticker-track space-x-12 font-medium text-slate-300">
@@ -120,16 +120,16 @@
     <main class="max-w-7xl mx-auto px-4 py-6">
         <section class="text-center py-10 md:py-14">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-6">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> AI-Powered Multi-Platform Aggregator & Smart Stretch
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> AI Multi-Platform Aggregator & Smart Stretch Engine
             </div>
             
-            <h1 class="text-4xl sm:text-6xl font-extrabold font-['Outfit'] tracking-tight mb-5 leading-tight">
-                Shop with <span class="bg-gradient-to-r from-indigo-400 via-cyan-300 to-indigo-200 bg-clip-text text-transparent">True Intelligence</span>.<br>
+            <h1 class="text-4xl sm:text-6xl font-extrabold font-['Outfit'] tracking-tight mb-5 leading-tight text-white">
+                Shop with <span class="bg-gradient-to-r from-slate-100 via-indigo-200 to-amber-200 bg-clip-text text-transparent">True Intelligence</span>.<br>
                 Never Overpay Again.
             </h1>
             
-            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-8">
-                Faircart continuously scrapes Amazon, Flipkart, Tata Neu, Croma & Myntra, subtracts bank discounts, calculates genuine reviews, and highlights <strong>Smart Stretch Upgrades</strong> (+10–25% tier jumps).
+            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                Faircart continuously monitors Amazon, Flipkart, Tata Neu, Croma & Myntra, factors in instantaneous card discounts, audits authentic feedback, and calculates verified <strong>Smart Stretch Upgrades</strong> (+10–25% tier jumps).
             </p>
 
             <!-- Omnibar Search Terminal -->
@@ -143,7 +143,7 @@
                            class="w-full bg-transparent px-4 py-2 text-sm sm:text-base outline-none text-slate-100 placeholder-slate-500 font-medium"
                            onkeypress="if(event.key==='Enter') executeHeroSearch();">
                     <button onclick="executeHeroSearch()" 
-                            class="px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 hover:opacity-90 text-white font-semibold text-xs sm:text-sm shadow-md transition-transform active:scale-95 shrink-0 flex items-center gap-2">
+                            class="px-6 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs sm:text-sm shadow-md shadow-indigo-600/30 transition-all active:scale-95 shrink-0 flex items-center gap-2">
                         <span>Search Deals</span>
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
@@ -157,7 +157,7 @@
             <div class="max-w-2xl mx-auto mb-6 p-4 rounded-2xl glass-panel text-left">
                 <div class="flex justify-between items-center mb-1 text-xs">
                     <span class="font-bold text-slate-300 flex items-center gap-1.5"><i data-lucide="sliders" class="w-3.5 h-3.5 text-indigo-400"></i> Max Spending Budget Target</span>
-                    <span id="budgetLiveCounter" class="font-mono-numbers font-extrabold text-sm text-cyan-400 bg-cyan-500/10 px-2.5 py-0.5 rounded-lg border border-cyan-500/30">₹15,000</span>
+                    <span id="budgetLiveCounter" class="font-mono-numbers font-extrabold text-xs text-amber-300 bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/25">₹15,000</span>
                 </div>
                 <div class="fc-slider-container">
                     <input type="range" id="heroBudgetSlider" class="fc-range-slider" min="500" max="150000" step="500" value="15000" data-target-display="budgetLiveCounter">
@@ -185,7 +185,7 @@
         <section class="py-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="glass-card p-6 flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-4 border border-amber-500/30">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center mb-4 border border-amber-500/25">
                         <i data-lucide="zap" class="w-6 h-6"></i>
                     </div>
                     <h3 class="text-lg font-bold mb-2">Smart Stretch Budget Engine</h3>
@@ -200,7 +200,7 @@
 
             <div class="glass-card p-6 flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4 border border-emerald-500/30">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-4 border border-emerald-500/25">
                         <i data-lucide="shield-check" class="w-6 h-6"></i>
                     </div>
                     <h3 class="text-lg font-bold mb-2">Buy / Skip / Wait Verdict (0–100)</h3>
@@ -215,7 +215,7 @@
 
             <div class="glass-card p-6 flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-4 border border-cyan-500/30">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 text-indigo-400 flex items-center justify-center mb-4 border border-indigo-500/25">
                         <i data-lucide="message-square" class="w-6 h-6"></i>
                     </div>
                     <h3 class="text-lg font-bold mb-2">Autonomous AI Concierge</h3>
@@ -223,7 +223,7 @@
                         Natural language shopping assistant with voice recognition, speech synthesis, 1-click comparison CSV exports, and real-time deal analysis.
                     </p>
                 </div>
-                <div class="mt-4 pt-4 border-t border-white/10 text-xs text-cyan-300 font-semibold flex items-center gap-1.5">
+                <div class="mt-4 pt-4 border-t border-white/10 text-xs text-indigo-300 font-semibold flex items-center gap-1.5">
                     <i data-lucide="sparkles" class="w-4 h-4"></i> Voice & Export Ready
                 </div>
             </div>
@@ -233,10 +233,10 @@
         <section class="py-10">
             <div class="flex justify-between items-end mb-6">
                 <div>
-                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-2">
-                        <i data-lucide="flame" class="w-3.5 h-3.5 text-rose-500"></i> Trending Now
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-semibold uppercase tracking-wider mb-2">
+                        <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-400"></i> Trending Now
                     </div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold font-['Outfit']">Verified Lowest Prices Across India</h2>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold font-['Outfit'] text-white">Verified Lowest Prices Across India</h2>
                 </div>
                 <a href="pages/products.html" class="text-indigo-400 hover:text-indigo-300 text-xs font-bold flex items-center gap-1">
                     <span>View All 500+ Deals</span>
@@ -250,10 +250,10 @@
                     <div>
                         <div class="relative rounded-xl overflow-hidden mb-4 aspect-video bg-slate-900">
                             <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Sony WH-1000XM5" class="w-full h-full object-cover">
-                            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-emerald-500 text-white text-[10px] font-extrabold tracking-wide uppercase">
+                            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 text-[10px] font-extrabold tracking-wide uppercase backdrop-blur-md">
                                 BUY NOW (96/100)
                             </div>
-                            <div class="absolute top-2.5 right-2.5 px-2 py-1 rounded-lg bg-black/60 backdrop-blur-md text-slate-200 text-[10px] font-bold">
+                            <div class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-slate-200 text-[10px] font-bold">
                                 Amazon
                             </div>
                         </div>
@@ -276,10 +276,10 @@
                     <div>
                         <div class="relative rounded-xl overflow-hidden mb-4 aspect-video bg-slate-900">
                             <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500" alt="OnePlus Nord Buds 2r" class="w-full h-full object-cover">
-                            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 text-[10px] font-extrabold tracking-wide uppercase badge-shimmer">
+                            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-amber-950/80 text-amber-300 border border-amber-500/40 text-[10px] font-extrabold tracking-wide uppercase backdrop-blur-md badge-shimmer">
                                 💡 SMART STRETCH (+₹400)
                             </div>
-                            <div class="absolute top-2.5 right-2.5 px-2 py-1 rounded-lg bg-black/60 backdrop-blur-md text-slate-200 text-[10px] font-bold">
+                            <div class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-slate-200 text-[10px] font-bold">
                                 Flipkart
                             </div>
                         </div>
@@ -293,7 +293,7 @@
                     </div>
                     <div class="pt-4 border-t border-white/10 flex justify-between items-center">
                         <span class="text-xs text-amber-300 font-semibold flex items-center gap-1"><i data-lucide="award" class="w-3.5 h-3.5"></i> Tier-Jump Winner</span>
-                        <a href="pages/results.html?q=OnePlus+Buds" class="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-xs font-bold text-slate-950 transition-colors">See Upgrade</a>
+                        <a href="pages/results.html?q=OnePlus+Buds" class="px-3.5 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-xs font-bold text-white transition-colors">See Upgrade</a>
                     </div>
                 </div>
 
@@ -302,10 +302,10 @@
                     <div>
                         <div class="relative rounded-xl overflow-hidden mb-4 aspect-video bg-slate-900">
                             <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500" alt="Apple MacBook Air M3" class="w-full h-full object-cover">
-                            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-emerald-500 text-white text-[10px] font-extrabold tracking-wide uppercase">
+                            <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 text-[10px] font-extrabold tracking-wide uppercase backdrop-blur-md">
                                 BUY NOW (98/100)
                             </div>
-                            <div class="absolute top-2.5 right-2.5 px-2 py-1 rounded-lg bg-black/60 backdrop-blur-md text-slate-200 text-[10px] font-bold">
+                            <div class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/60 backdrop-blur-md text-slate-200 text-[10px] font-bold">
                                 Tata Neu
                             </div>
                         </div>
@@ -336,7 +336,7 @@
     <aside class="chat-drawer glass-panel p-5" id="chatDrawer">
         <div class="flex justify-between items-center pb-3 border-b border-white/10">
             <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white shadow-md">
+                <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-600/30">
                     <i data-lucide="sparkles" class="w-4 h-4"></i>
                 </div>
                 <div>
@@ -383,6 +383,30 @@
         </div>
         <p>&copy; 2026 Faircart Platform Inc. Engineered with Java 21/26 Virtual Threads, PostgreSQL 16, Redis 7 & Frosted Glassmorphism.</p>
     </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="index.html" class="flex flex-col items-center gap-1 text-[10px] text-indigo-400 font-semibold">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Home</span>
+        </a>
+        <a href="pages/products.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="grid" class="w-5 h-5"></i>
+            <span>Catalog</span>
+        </a>
+        <a href="pages/results.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            <span>Compare</span>
+        </a>
+        <a href="pages/wishlist.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span>Alerts</span>
+        </a>
+        <a href="pages/cart.html" class="flex flex-col items-center gap-1 text-[10px] text-slate-400">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Basket</span>
+        </a>
+    </nav>
 
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
