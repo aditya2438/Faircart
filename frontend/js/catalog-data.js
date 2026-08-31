@@ -3,15 +3,130 @@
  * FAIRCART ENTERPRISE MULTI-PLATFORM AGGREGATOR & AI INTELLIGENCE DATASET
  * Real-time platform integrations: Flipkart, Amazon, Croma, Samsung Official,
  * Apple Official, Tata Neu, Blinkit (10m), Swiggy Instamart (15m), Myntra.
+ * Universal coverage: Earbuds, Wired Earphones, Smartphones, Laptops, Shoes, Clothes, Home Tech.
  * ==============================================================================
  */
 
 window.FAIRCART_CATALOG = [
     // -------------------------------------------------------------
-    // 🍏 1. APPLE ECOSYSTEM (Flagships & Ultrabooks)
+    // 🎧 1. AUDIO: WIRED EARPHONES & TWS EARBUDS
     // -------------------------------------------------------------
     {
         id: 101,
+        slug: 'boat-bassheads-100-qc',
+        name: 'boAt BassHeads 100 Wired Earphones with In-Line Mic',
+        category: 'audio',
+        categoryName: 'Audio & Earphones',
+        subCategory: 'Wired Earphones',
+        rating: 4.3,
+        reviewCount: 42000,
+        genuineReviewsCount: 38900,
+        fakeReviewsDetected: 3100,
+        intelligenceScore: 85,
+        verdict: 'BUY NOW',
+        verdictReason: '10mm dynamic bass drivers with durable tangle-free cable at rock bottom price.',
+        bestPlatform: 'Blinkit',
+        originalPrice: 999,
+        bestPrice: 349,
+        discountPercent: 65,
+        inStock: true,
+        fastDelivery: true,
+        image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600',
+        icon: 'headphones',
+        listings: [
+            { platform: 'Blinkit', price: 349, originalPrice: 999, bankDiscount: 35, couponDiscount: 20, effectivePrice: 294, rating: 4.4, inStock: true, delivery: '⚡ 10-12 Mins Instant Delivery', url: 'https://blinkit.com' },
+            { platform: 'Instamart', price: 359, originalPrice: 999, bankDiscount: 30, couponDiscount: 25, effectivePrice: 304, rating: 4.3, inStock: true, delivery: '⚡ 15 Mins Instant Delivery', url: 'https://swiggy.com/instamart' },
+            { platform: 'Flipkart', price: 349, originalPrice: 999, bankDiscount: 35, couponDiscount: 0, effectivePrice: 314, rating: 4.3, inStock: true, delivery: 'Tomorrow by 2 PM', url: 'https://flipkart.com' },
+            { platform: 'Amazon', price: 399, originalPrice: 999, bankDiscount: 0, couponDiscount: 20, effectivePrice: 379, rating: 4.2, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
+            { platform: 'Tata Neu', price: 399, originalPrice: 999, bankDiscount: 20, couponDiscount: 0, effectivePrice: 379, rating: 4.1, inStock: true, delivery: '2 Days, NeuPass', url: 'https://tataneu.com' }
+        ],
+        smartUpgrade: {
+            title: 'Realme Buds 2 Pro Type-C',
+            priceDiff: 150,
+            percentStretch: 43,
+            targetScore: 89,
+            reason: 'Spend ₹150 more for braided kevlar cable, 11.2mm bass boost, and Type-C lossless DAC.'
+        },
+        pros: ['Deep 10mm dynamic bass', 'Instant 10-minute delivery via Blinkit/Instamart', 'Comfortable angled earbuds'],
+        cons: ['Rubber cord can tangle under pressure', 'Microphone picks wind noise outdoors']
+    },
+    {
+        id: 102,
+        slug: 'oneplus-nord-buds-2-tws',
+        name: 'OnePlus Nord Buds 2 True Wireless Earbuds (Active Noise Cancelling)',
+        category: 'audio',
+        categoryName: 'Audio & Earphones',
+        subCategory: 'TWS Earbuds',
+        rating: 4.5,
+        reviewCount: 18200,
+        genuineReviewsCount: 17100,
+        fakeReviewsDetected: 1100,
+        intelligenceScore: 91,
+        verdict: 'SMART PICK',
+        verdictReason: '25dB ANC and 36-hour battery life under ₹2,500 with Dirac Audio tuning.',
+        bestPlatform: 'Amazon',
+        originalPrice: 3299,
+        bestPrice: 2499,
+        discountPercent: 24,
+        inStock: true,
+        fastDelivery: true,
+        image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600',
+        icon: 'volume-2',
+        listings: [
+            { platform: 'Amazon', price: 2499, originalPrice: 3299, bankDiscount: 250, couponDiscount: 100, effectivePrice: 2149, rating: 4.5, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
+            { platform: 'Flipkart', price: 2599, originalPrice: 3299, bankDiscount: 200, couponDiscount: 0, effectivePrice: 2399, rating: 4.4, inStock: true, delivery: 'Tomorrow, VIP', url: 'https://flipkart.com' },
+            { platform: 'Croma', price: 2699, originalPrice: 3299, bankDiscount: 150, couponDiscount: 50, effectivePrice: 2499, rating: 4.5, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
+            { platform: 'Blinkit', price: 2699, originalPrice: 3299, bankDiscount: 200, couponDiscount: 100, effectivePrice: 2399, rating: 4.6, inStock: true, delivery: '⚡ 10-15 Mins Instant Delivery', url: 'https://blinkit.com' },
+            { platform: 'Instamart', price: 2799, originalPrice: 3299, bankDiscount: 200, couponDiscount: 100, effectivePrice: 2499, rating: 4.5, inStock: true, delivery: '⚡ 15-20 Mins Instant Delivery', url: 'https://swiggy.com/instamart' }
+        ],
+        smartUpgrade: {
+            title: 'Sony WH-1000XM5 Studio ANC',
+            priceDiff: 19000,
+            percentStretch: 750,
+            targetScore: 97,
+            reason: 'Audiophile flagbearer: 8-mic ANC with LDAC wireless studio master audio.'
+        },
+        pros: ['25dB Active Noise Cancellation', 'BassWave bass enhancement', 'Fast charging (10 mins = 5 hrs)'],
+        cons: ['Case finish prone to micro scratches', 'No wireless charging']
+    },
+    {
+        id: 103,
+        slug: 'sony-wh-1000xm5-anc',
+        name: 'Sony WH-1000XM5 Wireless Industry Leading Noise Canceling Headphones',
+        category: 'audio',
+        categoryName: 'Audio & Earphones',
+        subCategory: 'Over-Ear Headphones',
+        rating: 4.8,
+        reviewCount: 9800,
+        genuineReviewsCount: 9450,
+        fakeReviewsDetected: 350,
+        intelligenceScore: 97,
+        verdict: 'FLAGSHIP CHOICE',
+        verdictReason: 'Auto NC Optimizer, 8 microphones, 30-hour battery life and Hi-Res Wireless Audio (LDAC).',
+        bestPlatform: 'Amazon',
+        originalPrice: 34990,
+        bestPrice: 26990,
+        discountPercent: 23,
+        inStock: true,
+        fastDelivery: true,
+        image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600',
+        icon: 'headphones',
+        listings: [
+            { platform: 'Amazon', price: 26990, originalPrice: 34990, bankDiscount: 2500, couponDiscount: 1000, effectivePrice: 23490, rating: 4.8, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
+            { platform: 'Croma', price: 27990, originalPrice: 34990, bankDiscount: 3000, couponDiscount: 500, effectivePrice: 24490, rating: 4.7, inStock: true, delivery: 'Same-Day Store Pickup', url: 'https://croma.com' },
+            { platform: 'Flipkart', price: 28490, originalPrice: 34990, bankDiscount: 2000, couponDiscount: 0, effectivePrice: 26490, rating: 4.7, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' },
+            { platform: 'Tata Neu', price: 28990, originalPrice: 34990, bankDiscount: 2500, couponDiscount: 500, effectivePrice: 25990, rating: 4.6, inStock: true, delivery: '2 Days, NeuPass', url: 'https://tataneu.com' }
+        ],
+        smartUpgrade: null,
+        pros: ['World-class noise cancellation', 'Ultra-comfortable soft-fit leather headband', 'Crystal clear speak-to-chat auto-pause'],
+        cons: ['Earcups do not fold inward like XM4', 'Requires case for safe transport']
+    },
+
+    // -------------------------------------------------------------
+    // 📱 2. SMARTPHONES & FLAGSHIPS
+    // -------------------------------------------------------------
+    {
+        id: 201,
         slug: 'apple-iphone-15-pro',
         name: 'Apple iPhone 15 Pro (128GB, Natural Titanium)',
         category: 'smartphones',
@@ -45,44 +160,7 @@ window.FAIRCART_CATALOG = [
         cons: ['Base storage is 128GB', '20W charging speed compared to Android flagships']
     },
     {
-        id: 102,
-        slug: 'apple-macbook-air-m3',
-        name: 'Apple MacBook Air M3 (13.6-inch, 16GB RAM, 512GB SSD, Space Grey)',
-        category: 'laptops',
-        categoryName: 'Laptops & Computing',
-        subCategory: 'Ultrabooks',
-        rating: 4.9,
-        reviewCount: 7100,
-        genuineReviewsCount: 6950,
-        fakeReviewsDetected: 150,
-        intelligenceScore: 98,
-        verdict: 'TOP RATED',
-        verdictReason: '18-hour fanless battery life, Liquid Retina display, dual external monitor support.',
-        bestPlatform: 'Amazon',
-        originalPrice: 134900,
-        bestPrice: 119900,
-        discountPercent: 11,
-        inStock: true,
-        fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600',
-        icon: 'laptop',
-        listings: [
-            { platform: 'Amazon', price: 119900, originalPrice: 134900, bankDiscount: 7500, couponDiscount: 1000, effectivePrice: 111400, rating: 4.9, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
-            { platform: 'Croma', price: 121990, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 500, effectivePrice: 113490, rating: 4.8, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
-            { platform: 'Apple', price: 134900, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 0, effectivePrice: 126900, rating: 4.9, inStock: true, delivery: 'Free Express Shipping + Student Pricing Available', url: 'https://apple.com/in' },
-            { platform: 'Flipkart', price: 124900, originalPrice: 134900, bankDiscount: 5000, couponDiscount: 0, effectivePrice: 119900, rating: 4.8, inStock: true, delivery: '2 Days VIP Delivery', url: 'https://flipkart.com' },
-            { platform: 'Tata Neu', price: 123990, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 1000, effectivePrice: 116990, rating: 4.7, inStock: true, delivery: '2 Days, NeuPass', url: 'https://tataneu.com' }
-        ],
-        smartUpgrade: null,
-        pros: ['Massive 18-hour real-world battery life', '100% silent fanless thermal design', 'Industry-leading trackpad and keyboard'],
-        cons: ['RAM & SSD soldered', 'Two Thunderbolt ports only']
-    },
-
-    // -------------------------------------------------------------
-    // 🌌 2. SAMSUNG ECOSYSTEM (Galaxy Flagships & Displays)
-    // -------------------------------------------------------------
-    {
-        id: 201,
+        id: 202,
         slug: 'samsung-galaxy-s24-ultra',
         name: 'Samsung Galaxy S24 Ultra 5G (12GB RAM, 256GB Storage, Titanium Gray)',
         category: 'smartphones',
@@ -115,122 +193,119 @@ window.FAIRCART_CATALOG = [
         cons: ['Bulky 232g frame in pocket', '45W max charging speed']
     },
     {
-        id: 202,
-        slug: 'samsung-55-neo-qled-4k',
-        name: 'Samsung 55" Neo QLED 4K Smart TV (QA55QN85D)',
-        category: 'home',
-        categoryName: 'Home & Smart Tech',
-        subCategory: 'Smart LED TVs',
-        rating: 4.8,
-        reviewCount: 3900,
-        genuineReviewsCount: 3750,
-        fakeReviewsDetected: 150,
-        intelligenceScore: 95,
-        verdict: 'SMART BUY',
-        verdictReason: 'Quantum Matrix Mini-LED tech with NQ4 AI Gen2 Processor and Dolby Atmos.',
-        bestPlatform: 'Croma',
-        originalPrice: 134900,
-        bestPrice: 94990,
-        discountPercent: 30,
+        id: 203,
+        slug: 'nothing-phone-2a-5g',
+        name: 'Nothing Phone (2a) 5G (8GB RAM, 128GB Storage, Black Glyph Edition)',
+        category: 'smartphones',
+        categoryName: 'Smartphones & Gadgets',
+        subCategory: 'Mid-Range Smartphones',
+        rating: 4.6,
+        reviewCount: 22400,
+        genuineReviewsCount: 21600,
+        fakeReviewsDetected: 800,
+        intelligenceScore: 93,
+        verdict: 'TOP VALUE',
+        verdictReason: 'Custom Dimensity 7200 Pro chipset, clean Nothing OS 2.5 with zero bloatware, iconic Glyph interface.',
+        bestPlatform: 'Flipkart',
+        originalPrice: 25999,
+        bestPrice: 19999,
+        discountPercent: 23,
         inStock: true,
         fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600',
-        icon: 'tv',
+        image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600',
+        icon: 'smartphone',
         listings: [
-            { platform: 'Croma', price: 94990, originalPrice: 134900, bankDiscount: 7500, couponDiscount: 1000, effectivePrice: 86490, rating: 4.8, inStock: true, delivery: 'Same-Day Delivery & Free Wall Mount Installation', url: 'https://croma.com' },
-            { platform: 'Samsung', price: 99990, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 2000, effectivePrice: 89990, rating: 4.9, inStock: true, delivery: 'Samsung Official 3-Year Comprehensive Warranty', url: 'https://samsung.com/in' },
-            { platform: 'Amazon', price: 97990, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 0, effectivePrice: 91990, rating: 4.7, inStock: true, delivery: '2 Days, Prime Delivery', url: 'https://amazon.in' },
-            { platform: 'Flipkart', price: 98990, originalPrice: 134900, bankDiscount: 5000, couponDiscount: 500, effectivePrice: 93490, rating: 4.6, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' }
+            { platform: 'Flipkart', price: 19999, originalPrice: 25999, bankDiscount: 1500, couponDiscount: 500, effectivePrice: 17999, rating: 4.6, inStock: true, delivery: 'Tomorrow by 12 PM', url: 'https://flipkart.com' },
+            { platform: 'Croma', price: 21990, originalPrice: 25999, bankDiscount: 2000, couponDiscount: 0, effectivePrice: 19990, rating: 4.5, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
+            { platform: 'Amazon', price: 22499, originalPrice: 25999, bankDiscount: 1000, couponDiscount: 0, effectivePrice: 21499, rating: 4.4, inStock: true, delivery: '2 Days, Prime', url: 'https://amazon.in' }
         ],
-        smartUpgrade: null,
-        pros: ['Mini-LED quantum backlighting produces deep ink blacks', '120Hz refresh rate with 4x HDMI 2.1 gaming ports', 'SolarCell remote control (no disposable batteries)'],
-        cons: ['No Dolby Vision (uses HDR10+ Adaptive)', 'Premium price tag']
+        smartUpgrade: {
+            title: 'OnePlus 12R 5G Flagship',
+            priceDiff: 16000,
+            percentStretch: 80,
+            targetScore: 95,
+            reason: 'Upgrade to Snapdragon 8 Gen 2, 100W SuperVOOC charger in-box, and ProXDR 1.5K display.'
+        },
+        pros: ['Zero bloatware clean software experience', 'Unique Glyph light notifications', '120Hz flexible AMOLED with thin uniform bezels'],
+        cons: ['No charger included in retail box', 'Plastic back panel is prone to micro swirls']
     },
 
     // -------------------------------------------------------------
-    // ⚡ 3. QUICK COMMERCE & INSTANT ESSENTIALS (Blinkit & Instamart)
+    // 💻 3. LAPTOPS & COMPUTING
     // -------------------------------------------------------------
     {
         id: 301,
-        slug: 'boat-bassheads-100-qc',
-        name: 'boAt BassHeads 100 Wired Earphones with In-Line Mic',
-        category: 'audio',
-        categoryName: 'Audio & Earphones',
-        subCategory: 'Wired Earphones',
-        rating: 4.3,
-        reviewCount: 42000,
-        genuineReviewsCount: 38900,
-        fakeReviewsDetected: 3100,
-        intelligenceScore: 85,
-        verdict: 'BUY NOW',
-        verdictReason: '10mm dynamic bass drivers with durable tangle-free cable at rock bottom price.',
-        bestPlatform: 'Blinkit',
-        originalPrice: 999,
-        bestPrice: 349,
-        discountPercent: 65,
+        slug: 'apple-macbook-air-m3',
+        name: 'Apple MacBook Air M3 (13.6-inch, 16GB RAM, 512GB SSD, Space Grey)',
+        category: 'laptops',
+        categoryName: 'Laptops & Computing',
+        subCategory: 'Ultrabooks',
+        rating: 4.9,
+        reviewCount: 7100,
+        genuineReviewsCount: 6950,
+        fakeReviewsDetected: 150,
+        intelligenceScore: 98,
+        verdict: 'TOP RATED',
+        verdictReason: '18-hour fanless battery life, Liquid Retina display, dual external monitor support.',
+        bestPlatform: 'Amazon',
+        originalPrice: 134900,
+        bestPrice: 119900,
+        discountPercent: 11,
         inStock: true,
         fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600',
-        icon: 'headphones',
+        image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600',
+        icon: 'laptop',
         listings: [
-            { platform: 'Blinkit', price: 349, originalPrice: 999, bankDiscount: 35, couponDiscount: 20, effectivePrice: 294, rating: 4.4, inStock: true, delivery: '⚡ 10-12 Mins Instant Delivery', url: 'https://blinkit.com' },
-            { platform: 'Instamart', price: 359, originalPrice: 999, bankDiscount: 30, couponDiscount: 25, effectivePrice: 304, rating: 4.3, inStock: true, delivery: '⚡ 15 Mins Instant Delivery', url: 'https://swiggy.com/instamart' },
-            { platform: 'Flipkart', price: 349, originalPrice: 999, bankDiscount: 35, couponDiscount: 0, effectivePrice: 314, rating: 4.3, inStock: true, delivery: 'Tomorrow by 2 PM', url: 'https://flipkart.com' },
-            { platform: 'Amazon', price: 399, originalPrice: 999, bankDiscount: 0, couponDiscount: 20, effectivePrice: 379, rating: 4.2, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
-            { platform: 'Tata Neu', price: 399, originalPrice: 999, bankDiscount: 20, couponDiscount: 0, effectivePrice: 379, rating: 4.1, inStock: true, delivery: '2 Days, NeuPass', url: 'https://tataneu.com' }
+            { platform: 'Amazon', price: 119900, originalPrice: 134900, bankDiscount: 7500, couponDiscount: 1000, effectivePrice: 111400, rating: 4.9, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
+            { platform: 'Croma', price: 121990, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 500, effectivePrice: 113490, rating: 4.8, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
+            { platform: 'Apple', price: 134900, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 0, effectivePrice: 126900, rating: 4.9, inStock: true, delivery: 'Free Express Shipping + Student Pricing Available', url: 'https://apple.com/in' },
+            { platform: 'Flipkart', price: 124900, originalPrice: 134900, bankDiscount: 5000, couponDiscount: 0, effectivePrice: 119900, rating: 4.8, inStock: true, delivery: '2 Days VIP Delivery', url: 'https://flipkart.com' },
+            { platform: 'Tata Neu', price: 123990, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 1000, effectivePrice: 116990, rating: 4.7, inStock: true, delivery: '2 Days, NeuPass', url: 'https://tataneu.com' }
         ],
-        smartUpgrade: {
-            title: 'OnePlus Nord Buds 2 TWS',
-            priceDiff: 1800,
-            percentStretch: 500,
-            targetScore: 91,
-            reason: 'Cut the wire: Upgrade to 25dB ANC, Dirac Audio, and 36-hour battery.'
-        },
-        pros: ['Deep 10mm dynamic bass', 'Instant 10-minute delivery via Blinkit/Instamart', 'Comfortable angled earbuds'],
-        cons: ['Rubber cord can tangle under pressure', 'Microphone picks wind noise outdoors']
+        smartUpgrade: null,
+        pros: ['Massive 18-hour real-world battery life', '100% silent fanless thermal design', 'Industry-leading trackpad and keyboard'],
+        cons: ['RAM & SSD soldered', 'Two Thunderbolt ports only']
     },
     {
         id: 302,
-        slug: 'oneplus-nord-buds-2-tws',
-        name: 'OnePlus Nord Buds 2 True Wireless Earbuds (Active Noise Cancelling)',
-        category: 'audio',
-        categoryName: 'Audio & Earphones',
-        subCategory: 'TWS Earbuds',
-        rating: 4.5,
-        reviewCount: 18200,
-        genuineReviewsCount: 17100,
-        fakeReviewsDetected: 1100,
-        intelligenceScore: 91,
-        verdict: 'SMART PICK',
-        verdictReason: '25dB ANC and 36-hour battery life under ₹2,500 with Dirac Audio tuning.',
+        slug: 'lenovo-ideapad-slim-3',
+        name: 'Lenovo IdeaPad Slim 3 (15.6" FHD, Core i5 13th Gen, 16GB RAM, 512GB SSD)',
+        category: 'laptops',
+        categoryName: 'Laptops & Computing',
+        subCategory: 'Productivity Laptops',
+        rating: 4.4,
+        reviewCount: 5200,
+        genuineReviewsCount: 4900,
+        fakeReviewsDetected: 300,
+        intelligenceScore: 88,
+        verdict: 'SMART VALUE',
+        verdictReason: '13th Gen Intel Core i5 with 16GB dual-channel RAM, rapid charge 80% in 60 mins.',
         bestPlatform: 'Amazon',
-        originalPrice: 3299,
-        bestPrice: 2499,
-        discountPercent: 24,
+        originalPrice: 68990,
+        bestPrice: 48990,
+        discountPercent: 29,
         inStock: true,
         fastDelivery: true,
-        image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600',
-        icon: 'volume-2',
+        image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600',
+        icon: 'laptop',
         listings: [
-            { platform: 'Amazon', price: 2499, originalPrice: 3299, bankDiscount: 250, couponDiscount: 100, effectivePrice: 2149, rating: 4.5, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
-            { platform: 'Flipkart', price: 2599, originalPrice: 3299, bankDiscount: 200, couponDiscount: 0, effectivePrice: 2399, rating: 4.4, inStock: true, delivery: 'Tomorrow, VIP', url: 'https://flipkart.com' },
-            { platform: 'Croma', price: 2699, originalPrice: 3299, bankDiscount: 150, couponDiscount: 50, effectivePrice: 2499, rating: 4.5, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' },
-            { platform: 'Blinkit', price: 2699, originalPrice: 3299, bankDiscount: 200, couponDiscount: 100, effectivePrice: 2399, rating: 4.6, inStock: true, delivery: '⚡ 10-15 Mins Instant Delivery', url: 'https://blinkit.com' },
-            { platform: 'Instamart', price: 2799, originalPrice: 3299, bankDiscount: 200, couponDiscount: 100, effectivePrice: 2499, rating: 4.5, inStock: true, delivery: '⚡ 15-20 Mins Instant Delivery', url: 'https://swiggy.com/instamart' }
+            { platform: 'Amazon', price: 48990, originalPrice: 68990, bankDiscount: 3500, couponDiscount: 1000, effectivePrice: 44490, rating: 4.4, inStock: true, delivery: 'Tomorrow, Prime', url: 'https://amazon.in' },
+            { platform: 'Flipkart', price: 49990, originalPrice: 68990, bankDiscount: 3000, couponDiscount: 500, effectivePrice: 46490, rating: 4.3, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' },
+            { platform: 'Croma', price: 51990, originalPrice: 68990, bankDiscount: 4000, couponDiscount: 0, effectivePrice: 47990, rating: 4.4, inStock: true, delivery: 'Same Day Store Pickup', url: 'https://croma.com' }
         ],
         smartUpgrade: {
-            title: 'Sony WH-1000XM5 ANC',
-            priceDiff: 19000,
-            percentStretch: 750,
-            targetScore: 97,
-            reason: 'Audiophile flagbearer: 8-mic ANC with LDAC wireless studio master audio.'
+            title: 'Apple MacBook Air M3',
+            priceDiff: 70000,
+            percentStretch: 140,
+            targetScore: 98,
+            reason: 'Upgrade to all-day 18hr battery, 4.5x faster neural engine, and liquid retina screen.'
         },
-        pros: ['25dB Active Noise Cancellation', 'BassWave bass enhancement', 'Fast charging (10 mins = 5 hrs)'],
-        cons: ['Case finish prone to micro scratches', 'No wireless charging']
+        pros: ['Full keyboard with dedicated numpad', 'Privacy camera shutter', 'Military grade MIL-STD-810H durability'],
+        cons: ['TN/IPS panel max brightness is 300 nits', 'Battery lasts around 6-7 hours on mixed load']
     },
 
     // -------------------------------------------------------------
-    // 👟 4. FOOTWEAR & RUNNING SHOES (Myntra, Tata Neu, Amazon)
+    // 👟 4. FOOTWEAR & RUNNING SHOES
     // -------------------------------------------------------------
     {
         id: 401,
@@ -298,7 +373,7 @@ window.FAIRCART_CATALOG = [
     },
 
     // -------------------------------------------------------------
-    // 👕 5. FASHION & APPAREL (Myntra, Amazon, Flipkart)
+    // 👕 5. FASHION & CLOTHES
     // -------------------------------------------------------------
     {
         id: 501,
@@ -331,9 +406,40 @@ window.FAIRCART_CATALOG = [
         pros: ['Perfect modern slim cut from hip to ankle', 'Levi’s Red Tab authenticity verified', 'Color holds over 50+ machine washes'],
         cons: ['Slight dye bleed on first wash (wash inside out)', 'Fitted waist requires exact size selection']
     },
+    {
+        id: 502,
+        slug: 'allen-solly-oxford-shirt',
+        name: 'Allen Solly Mens 100% Pure Oxford Cotton Slim Fit Formal Shirt',
+        category: 'fashion',
+        categoryName: 'Fashion & Apparel',
+        subCategory: 'Formal Shirts',
+        rating: 4.5,
+        reviewCount: 7800,
+        genuineReviewsCount: 7400,
+        fakeReviewsDetected: 400,
+        intelligenceScore: 90,
+        verdict: 'SMART PICK',
+        verdictReason: 'Breathable 100% long-staple cotton with wrinkle-resistant finish and classic button-down collar.',
+        bestPlatform: 'Myntra',
+        originalPrice: 2299,
+        bestPrice: 1149,
+        discountPercent: 50,
+        inStock: true,
+        fastDelivery: true,
+        image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600',
+        icon: 'shirt',
+        listings: [
+            { platform: 'Myntra', price: 1149, originalPrice: 2299, bankDiscount: 115, couponDiscount: 100, effectivePrice: 934, rating: 4.5, inStock: true, delivery: 'Tomorrow Express', url: 'https://myntra.com' },
+            { platform: 'Amazon', price: 1299, originalPrice: 2299, bankDiscount: 100, couponDiscount: 0, effectivePrice: 1199, rating: 4.4, inStock: true, delivery: '2 Days, Prime', url: 'https://amazon.in' },
+            { platform: 'Flipkart', price: 1399, originalPrice: 2299, bankDiscount: 150, couponDiscount: 0, effectivePrice: 1249, rating: 4.3, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' }
+        ],
+        smartUpgrade: null,
+        pros: ['100% Premium Oxford cotton', 'Reinforced collar stays', 'Crisp all-day corporate look'],
+        cons: ['Requires light steam iron after wash', 'Slim fit is snug on muscular chest']
+    },
 
     // -------------------------------------------------------------
-    // 🏠 6. HOME & SMART APPLIANCES (Amazon, Croma, Blinkit)
+    // 🏠 6. HOME APPLIANCES & SMART TECH
     // -------------------------------------------------------------
     {
         id: 601,
@@ -366,5 +472,37 @@ window.FAIRCART_CATALOG = [
         smartUpgrade: null,
         pros: ['90% less oil consumption with Rapid Air vortex', 'Dishwasher-safe non-stick basket', 'NutriU App with 500+ Indian healthy recipes'],
         cons: ['4.1L capacity ideal for 2-3 persons (larger families need 6.2L)', 'Outer body gets warm during 200°C roasting']
+    },
+    {
+        id: 602,
+        slug: 'samsung-55-neo-qled-4k',
+        name: 'Samsung 55" Neo QLED 4K Smart TV (QA55QN85D)',
+        category: 'home',
+        categoryName: 'Home & Smart Tech',
+        subCategory: 'Smart LED TVs',
+        rating: 4.8,
+        reviewCount: 3900,
+        genuineReviewsCount: 3750,
+        fakeReviewsDetected: 150,
+        intelligenceScore: 95,
+        verdict: 'SMART BUY',
+        verdictReason: 'Quantum Matrix Mini-LED tech with NQ4 AI Gen2 Processor and Dolby Atmos.',
+        bestPlatform: 'Croma',
+        originalPrice: 134900,
+        bestPrice: 94990,
+        discountPercent: 30,
+        inStock: true,
+        fastDelivery: true,
+        image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=600',
+        icon: 'tv',
+        listings: [
+            { platform: 'Croma', price: 94990, originalPrice: 134900, bankDiscount: 7500, couponDiscount: 1000, effectivePrice: 86490, rating: 4.8, inStock: true, delivery: 'Same-Day Delivery & Free Wall Mount Installation', url: 'https://croma.com' },
+            { platform: 'Samsung', price: 99990, originalPrice: 134900, bankDiscount: 8000, couponDiscount: 2000, effectivePrice: 89990, rating: 4.9, inStock: true, delivery: 'Samsung Official 3-Year Comprehensive Warranty', url: 'https://samsung.com/in' },
+            { platform: 'Amazon', price: 97990, originalPrice: 134900, bankDiscount: 6000, couponDiscount: 0, effectivePrice: 91990, rating: 4.7, inStock: true, delivery: '2 Days, Prime Delivery', url: 'https://amazon.in' },
+            { platform: 'Flipkart', price: 98990, originalPrice: 134900, bankDiscount: 5000, couponDiscount: 500, effectivePrice: 93490, rating: 4.6, inStock: true, delivery: '2 Days', url: 'https://flipkart.com' }
+        ],
+        smartUpgrade: null,
+        pros: ['Mini-LED quantum backlighting produces deep ink blacks', '120Hz refresh rate with 4x HDMI 2.1 gaming ports', 'SolarCell remote control (no disposable batteries)'],
+        cons: ['No Dolby Vision (uses HDR10+ Adaptive)', 'Premium price tag']
     }
 ];

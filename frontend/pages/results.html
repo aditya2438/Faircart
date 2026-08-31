@@ -173,12 +173,59 @@
 
             <!-- Main Comparison Arena -->
             <section class="lg:col-span-3 space-y-6">
+                <!-- Amazon & Flipkart Style Top Quick Filter Pills -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar text-xs font-semibold whitespace-nowrap">
+                    <span class="text-slate-400 py-1 flex items-center gap-1 shrink-0"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-400"></i> Quick Filters:</span>
+                    <button onclick="applyArenaPill('instant')" id="arena-pill-instant" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-amber-300 transition-colors flex items-center gap-1 shrink-0">
+                        ⚡ 10-15 Min Delivery
+                    </button>
+                    <button onclick="applyArenaPill('discount40')" id="arena-pill-discount40" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-emerald-400 transition-colors flex items-center gap-1 shrink-0">
+                        🔥 40%+ Off Deals
+                    </button>
+                    <button onclick="applyArenaPill('rating45')" id="arena-pill-rating45" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-yellow-300 transition-colors flex items-center gap-1 shrink-0">
+                        ⭐ 4.5+ Top Rated
+                    </button>
+                    <button onclick="applyArenaPill('score90')" id="arena-pill-score90" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 transition-colors flex items-center gap-1 shrink-0">
+                        🏆 90+ Flagship Score
+                    </button>
+                    <button onclick="applyArenaPill('under1k')" id="arena-pill-under1k" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 transition-colors shrink-0">
+                        💸 Under ₹1,000
+                    </button>
+                    <button onclick="applyArenaPill('upgrades')" id="arena-pill-upgrades" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-amber-400 transition-colors flex items-center gap-1 shrink-0">
+                        💡 Smart Stretch Picks
+                    </button>
+                </div>
+
                 <!-- Smart Stretch Upsell Banner Container -->
                 <div id="smartStretchBannerContainer"></div>
 
                 <!-- Verified Recommendations Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="arenaComparisonGrid">
                     <!-- Populated dynamically by script -->
+                </div>
+
+                <!-- AI Multi-Product Side-by-Side Comparison Matrix Table -->
+                <div class="glass-panel p-5 overflow-hidden" id="aiComparisonTableContainer">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-lg bg-indigo-600/30 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+                                <i data-lucide="table" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">AI Multi-Product Comparison Matrix</h3>
+                                <p class="text-[11px] text-slate-400">Side-by-side spec, quality score, review authenticity & multi-platform price audit</p>
+                            </div>
+                        </div>
+                        <span class="text-[11px] font-semibold text-emerald-400 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                            Enterprise Comparison Engine
+                        </span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse" id="comparisonTable">
+                            <!-- Populated dynamically -->
+                        </table>
+                    </div>
                 </div>
 
                 <!-- 90-Day Price History Visualizer -->
@@ -217,8 +264,48 @@
             document.getElementById('scoreRange').value = 0;
             document.getElementById('scoreValue').textContent = '0+';
             document.querySelectorAll('.arena-store-cb').forEach(cb => cb.checked = true);
+            document.querySelectorAll('[id^="arena-pill-"]').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-white/5');
+            });
             updateArena();
             showToast("Comparison filters reset", "info");
+        }
+
+        function applyArenaPill(type) {
+            document.querySelectorAll('[id^="arena-pill-"]').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-white/5');
+            });
+
+            const activeBtn = document.getElementById('arena-pill-' + type);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white/5');
+                activeBtn.classList.add('bg-indigo-600', 'text-white');
+            }
+
+            if (type === 'instant') {
+                document.querySelectorAll('.arena-store-cb').forEach(cb => {
+                    cb.checked = (cb.value === 'Blinkit' || cb.value === 'Instamart');
+                });
+                showToast("Refined by ⚡ 10-15 Min Instant Delivery (Blinkit & Instamart)", "info");
+            } else if (type === 'score90') {
+                document.getElementById('scoreRange').value = 90;
+                document.getElementById('scoreValue').textContent = '90+';
+                showToast("Refined by 90+ Flagship & Gold Standard Intelligence", "info");
+            } else if (type === 'under1k') {
+                document.getElementById('budgetRange').value = 1000;
+                document.getElementById('budgetValue').textContent = '₹1,000';
+                showToast("Refined by Under ₹1,000 Budget Picks", "info");
+            } else if (type === 'discount40') {
+                showToast("Refined by 40%+ Mega Discounts", "info");
+            } else if (type === 'rating45') {
+                showToast("Refined by 4.5★+ Top Customer Ratings", "info");
+            } else if (type === 'upgrades') {
+                showToast("Highlighting Smart Stretch Upgrades", "success");
+            }
+
+            updateArena();
         }
 
         function updateArena() {
@@ -238,7 +325,7 @@
             if (idsParam) {
                 const idsList = idsParam.split(',').map(id => Number(id.trim()));
                 matchedItems = window.FAIRCART_CATALOG.filter(item => idsList.includes(item.id));
-                document.getElementById('queryDisplay').textContent = `Custom Comparison (${matchedItems.length} Products)`;
+                document.getElementById('queryDisplay').textContent = `AI Multi-Product Comparison (${matchedItems.length} Products)`;
             } else if (queryParam) {
                 const qLower = queryParam.toLowerCase().trim();
                 matchedItems = window.FAIRCART_CATALOG.filter(item => 
@@ -253,7 +340,7 @@
                 document.getElementById('queryDisplay').textContent = categoryParam.toUpperCase();
             } else {
                 matchedItems = window.FAIRCART_CATALOG.slice(0, 4);
-                document.getElementById('queryDisplay').textContent = 'Top Verified Picks';
+                document.getElementById('queryDisplay').textContent = 'All Categories & Top Picks';
             }
 
             // If no match found by search, fallback to catalog
@@ -267,6 +354,7 @@
 
             renderSmartStretchBanner(displayItems[0]);
             renderArenaCards(displayItems, selectedStores);
+            renderComparisonTable(displayItems, selectedStores);
             renderPriceChart(displayItems);
 
             if (window.lucide) lucide.createIcons();
@@ -397,6 +485,99 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        function renderComparisonTable(items, selectedStores) {
+            const table = document.getElementById('comparisonTable');
+            if (!table || items.length === 0) return;
+
+            let html = `
+                <thead>
+                    <tr class="border-b border-white/10 text-slate-400 text-[11px]">
+                        <th class="py-3 px-4 font-bold uppercase w-1/4">Comparison Metric</th>
+                        ${items.map(item => `
+                            <th class="py-3 px-4 font-bold text-white">
+                                <div class="flex items-center gap-2">
+                                    <img src="${item.image}" class="w-8 h-8 rounded-lg object-cover border border-white/10">
+                                    <div>
+                                        <div class="font-bold line-clamp-1">${item.name}</div>
+                                        <div class="text-[10px] text-indigo-400">${item.categoryName}</div>
+                                    </div>
+                                </div>
+                            </th>
+                        `).join('')}
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                    <tr>
+                        <td class="py-3 px-4 text-slate-400 font-semibold">AI Intelligence Score</td>
+                        ${items.map(item => `
+                            <td class="py-3 px-4">
+                                <span class="px-2.5 py-1 rounded-md ${item.intelligenceScore >= 94 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'} font-bold">
+                                    ${item.intelligenceScore}/100 • ${item.verdict}
+                                </span>
+                            </td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 text-slate-400 font-semibold">Best Live Out-of-Pocket</td>
+                        ${items.map(item => `
+                            <td class="py-3 px-4 font-extrabold text-sm text-white">
+                                ₹${Number(item.bestPrice).toLocaleString('en-IN')}
+                                <span class="text-[10px] text-emerald-400 font-semibold ml-1">(${item.discountPercent}% Off on ${item.bestPlatform})</span>
+                            </td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 text-slate-400 font-semibold">Live Monitored Stores</td>
+                        ${items.map(item => `
+                            <td class="py-3 px-4">
+                                <div class="space-y-1">
+                                    ${item.listings.filter(l => selectedStores.includes(l.platform)).slice(0, 3).map(l => `
+                                        <div class="flex justify-between items-center text-[11px] text-slate-300">
+                                            <span>${l.platform}:</span>
+                                            <span class="font-bold text-white">₹${Number(l.effectivePrice).toLocaleString('en-IN')}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 text-slate-400 font-semibold">Anti-Fake Review Audit</td>
+                        ${items.map(item => `
+                            <td class="py-3 px-4 text-[11px] text-emerald-300">
+                                <span class="font-bold">${Math.round((item.genuineReviewsCount / item.reviewCount) * 100)}% Genuine</span>
+                                <span class="text-slate-500 text-[10px] block">(${Number(item.reviewCount).toLocaleString()} total analyzed)</span>
+                            </td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 text-slate-400 font-semibold">Smart Stretch Upgrade</td>
+                        ${items.map(item => `
+                            <td class="py-3 px-4 text-[11px]">
+                                ${item.smartUpgrade ? `
+                                    <span class="text-amber-300 font-bold block">💡 ${item.smartUpgrade.title}</span>
+                                    <span class="text-slate-400 text-[10px]">${item.smartUpgrade.reason}</span>
+                                ` : `<span class="text-slate-500">Gold Standard (No upgrade needed)</span>`}
+                            </td>
+                        `).join('')}
+                    </tr>
+                    <tr>
+                        <td class="py-3 px-4 text-slate-400 font-semibold">Direct Platform Checkout</td>
+                        ${items.map(item => `
+                            <td class="py-3 px-4">
+                                <a href="${item.listings[0].url}" target="_blank" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs inline-flex items-center gap-1">
+                                    <span>Buy on ${item.listings[0].platform}</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </td>
+                        `).join('')}
+                    </tr>
+                </tbody>
+            `;
+
+            table.innerHTML = html;
         }
 
         function renderPriceChart(items) {

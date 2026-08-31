@@ -311,6 +311,29 @@
 
             <!-- Product Grid Arena -->
             <div class="lg:col-span-3">
+                <!-- Amazon & Flipkart Style Top Horizontal Quick-Filter Pills -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-4 no-scrollbar text-xs font-semibold whitespace-nowrap">
+                    <span class="text-slate-400 py-1 flex items-center gap-1 shrink-0"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-400"></i> Quick Filters:</span>
+                    <button onclick="applyQuickPill('instant')" id="pill-instant" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-amber-300 transition-colors flex items-center gap-1 shrink-0">
+                        ⚡ 10-15 Min Delivery
+                    </button>
+                    <button onclick="applyQuickPill('discount40')" id="pill-discount40" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-emerald-400 transition-colors flex items-center gap-1 shrink-0">
+                        🔥 40%+ Off Deals
+                    </button>
+                    <button onclick="applyQuickPill('rating45')" id="pill-rating45" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-yellow-300 transition-colors flex items-center gap-1 shrink-0">
+                        ⭐ 4.5+ Top Rated
+                    </button>
+                    <button onclick="applyQuickPill('score90')" id="pill-score90" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 transition-colors flex items-center gap-1 shrink-0">
+                        🏆 90+ Flagship Quality
+                    </button>
+                    <button onclick="applyQuickPill('under1k')" id="pill-under1k" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 transition-colors shrink-0">
+                        💸 Under ₹1,000
+                    </button>
+                    <button onclick="applyQuickPill('upgrades')" id="pill-upgrades" class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-amber-400 transition-colors flex items-center gap-1 shrink-0">
+                        💡 Smart Stretch Picks
+                    </button>
+                </div>
+
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                     <div>
                         <span class="text-xs font-semibold text-slate-400" id="resultCountText">Loading products...</span>
@@ -320,7 +343,7 @@
                     <div class="flex items-center gap-2">
                         <button onclick="compareSelected()" class="px-3.5 py-2 rounded-xl bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-500/40 text-indigo-300 text-xs font-semibold transition-all flex items-center gap-1.5 shadow-lg shadow-indigo-600/20">
                             <i data-lucide="git-compare" class="w-4 h-4"></i>
-                            <span>Compare Selected (<span id="compareCount">0</span>)</span>
+                            <span>AI Compare Selected (<span id="compareCount">0</span>)</span>
                         </button>
                     </div>
                 </div>
@@ -333,6 +356,31 @@
 
         </div>
     </main>
+
+    <!-- Floating Multi-Product AI Comparison Dock (Amazon & Flipkart style) -->
+    <div id="floatingCompareDock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-2xl w-[92%] glass-panel p-3.5 shadow-2xl border border-indigo-500/40 hidden flex-col sm:flex-row items-center justify-between gap-3 animate-in slide-in-from-bottom duration-300">
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+            <div class="w-9 h-9 rounded-xl bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center text-indigo-400 shrink-0">
+                <i data-lucide="git-compare" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold text-white flex items-center gap-1.5">
+                    <span>AI Comparison Dock</span>
+                    <span id="dockBadge" class="px-1.5 py-0.2 rounded bg-indigo-500 text-[10px] font-bold">2 items</span>
+                </h4>
+                <div class="flex items-center gap-2 mt-1" id="dockProductThumbnails"></div>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <button onclick="clearCompareDock()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 text-xs font-semibold">
+                Clear
+            </button>
+            <button onclick="compareSelected()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 hover:opacity-95 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 flex items-center gap-1.5">
+                <span>Launch AI Matrix</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- Floating AI Shopping Concierge -->
     <div class="chat-fab" id="chatFab">
@@ -539,15 +587,89 @@
             if (window.lucide) lucide.createIcons();
         }
 
+        function applyQuickPill(type) {
+            // Reset active styles on all pills
+            document.querySelectorAll('[id^="pill-"]').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-white/5');
+            });
+
+            const activeBtn = document.getElementById('pill-' + type);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white/5');
+                activeBtn.classList.add('bg-indigo-600', 'text-white');
+            }
+
+            if (type === 'instant') {
+                document.querySelectorAll('.platform-filter').forEach(cb => {
+                    cb.checked = (cb.value === 'Blinkit' || cb.value === 'Instamart');
+                });
+                showToast("Filtered by ⚡ 10-15 Min Instant Delivery (Blinkit & Instamart)", "info");
+            } else if (type === 'discount40') {
+                document.querySelector('input[name="discountFilter"][value="40"]').checked = true;
+                showToast("Filtered by 40%+ Mega Discounts", "info");
+            } else if (type === 'rating45') {
+                document.querySelector('input[name="ratingFilter"][value="4.5"]').checked = true;
+                showToast("Filtered by 4.5★+ Top Customer Ratings", "info");
+            } else if (type === 'score90') {
+                document.getElementById('scoreSelect').value = '94';
+                showToast("Filtered by 90+ Flagship & Gold Standard Intelligence", "info");
+            } else if (type === 'under1k') {
+                setPriceBracket('under-1k');
+                showToast("Filtered by Under ₹1,000 Budget Picks", "info");
+                return;
+            } else if (type === 'upgrades') {
+                // Filter only products that have smart upgrade opportunities
+                const grid = document.getElementById('productsGrid');
+                const upgradeItems = window.FAIRCART_CATALOG.filter(item => item.smartUpgrade !== null);
+                showToast(`Showing ${upgradeItems.length} Smart Stretch Upgrade Recommendations`, "success");
+            }
+
+            renderFilteredCatalog();
+        }
+
         function updateCompareCount() {
-            const checked = document.querySelectorAll('.compare-checkbox:checked').length;
-            document.getElementById('compareCount').textContent = checked;
+            const checkedBoxes = Array.from(document.querySelectorAll('.compare-checkbox:checked'));
+            const count = checkedBoxes.length;
+            document.getElementById('compareCount').textContent = count;
+
+            const dock = document.getElementById('floatingCompareDock');
+            const thumbContainer = document.getElementById('dockProductThumbnails');
+            const badge = document.getElementById('dockBadge');
+
+            if (count > 0) {
+                dock.classList.remove('hidden');
+                dock.classList.add('flex');
+                badge.textContent = `${count} selected`;
+
+                const selectedItems = checkedBoxes.map(cb => {
+                    const id = Number(cb.value);
+                    return window.FAIRCART_CATALOG.find(i => i.id === id);
+                }).filter(Boolean);
+
+                thumbContainer.innerHTML = selectedItems.map(item => `
+                    <div class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/10 text-[11px] text-slate-200 border border-white/10">
+                        <img src="${item.image}" class="w-4 h-4 rounded object-cover">
+                        <span class="truncate max-w-[100px] font-semibold">${item.name}</span>
+                        <span class="text-amber-400 font-bold">₹${Number(item.bestPrice).toLocaleString('en-IN')}</span>
+                    </div>
+                `).join('');
+                if (window.lucide) lucide.createIcons();
+            } else {
+                dock.classList.add('hidden');
+                dock.classList.remove('flex');
+            }
+        }
+
+        function clearCompareDock() {
+            document.querySelectorAll('.compare-checkbox:checked').forEach(cb => cb.checked = false);
+            updateCompareCount();
         }
 
         function compareSelected() {
             const checked = Array.from(document.querySelectorAll('.compare-checkbox:checked')).map(c => c.value);
             if (checked.length < 2) {
-                showToast("Select at least 2 products to launch Comparison Arena", "warning");
+                showToast("Select at least 2 products across any category to launch AI Multi-Product Comparison Matrix", "warning");
                 return;
             }
             window.location.href = `results.html?ids=${checked.join(',')}`;
@@ -564,6 +686,10 @@
             document.getElementById('scoreSelect').value = '0';
             document.getElementById('sortSelect').value = 'ai-best';
             document.getElementById('catalogSearchInput').value = '';
+            document.querySelectorAll('[id^="pill-"]').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-white/5');
+            });
             renderFilteredCatalog();
             showToast("All filters reset", "info");
         }
