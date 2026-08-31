@@ -3,7 +3,14 @@ spring:
     name: faircart-backend
   profiles:
     active: dev
-
+  mail:
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME:your-real-email@gmail.com}
+    password: ${SPRING_MAIL_PASSWORD:hfps pupq daab phmm}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
 server:
   port: 8080
   servlet:

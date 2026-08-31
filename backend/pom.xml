@@ -106,6 +106,12 @@
             <version>${redisson.version}</version>
         </dependency>
 
+        <!-- Mail & Real OTP Dispatch -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <!-- Security & JWT -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

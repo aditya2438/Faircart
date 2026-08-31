@@ -1,8 +1,10 @@
 package com.faircart.service.auth;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -13,8 +15,11 @@ import java.util.Optional;
 public class RedisOtpService {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(RedisOtpService.class);
 
-    @org.springframework.beans.factory.annotation.Autowired(required = false)
+    @Autowired(required = false)
     private StringRedisTemplate redisTemplate;
+
+    @Autowired(required = false)
+    private JavaMailSender mailSender;
 
     private static final String OTP_PREFIX = "faircart:otp:";
     private static final String ATTEMPTS_PREFIX = "faircart:otp:attempts:";
@@ -24,10 +29,17 @@ public class RedisOtpService {
 
     public RedisOtpService() {
         this.redisTemplate = null;
+        this.mailSender = null;
     }
 
     public RedisOtpService(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
+        this.mailSender = null;
+    }
+
+    public RedisOtpService(StringRedisTemplate redisTemplate, JavaMailSender mailSender) {
+        this.redisTemplate = redisTemplate;
+        this.mailSender = mailSender;
     }
 
     // In-memory fallback if Redis is not currently connected in local dev
@@ -116,6 +128,19 @@ public class RedisOtpService {
     private void dispatchOtp(String destination, String otp, OtpChannel channel) {
         if (channel == OtpChannel.EMAIL) {
             log.info("[MFA EMAIL OTP] Dispatched OTP [{}] to email address: {}", otp, destination);
+            if (mailSender != null) {
+                try {
+                    SimpleMailMessage message = new SimpleMailMessage();
+                    message.setFrom("Faircart Security <no-reply@faircart.com>");
+                    message.setTo(destination);
+                    message.setSubject("Your Faircart Verification Code: " + otp);
+                    message.setText("Hello,\n\nYour Faircart 6-digit verification code is: " + otp + "\n\nThis code will expire in 5 minutes.\n\nBest regards,\nFaircart Team");
+                    mailSender.send(message);
+                    log.info("[MFA EMAIL OTP] Real Gmail SMTP email dispatched successfully to: {}", destination);
+                } catch (Exception e) {
+                    log.warn("[MFA EMAIL OTP] Failed to send real email via SMTP: {}", e.getMessage());
+                }
+            }
         } else if (channel == OtpChannel.PHONE_SMS) {
             log.info("[MFA PHONE SMS OTP] Dispatched OTP [{}] via SMS to phone: {}", otp, destination);
         }
