@@ -373,12 +373,13 @@
             if (isUrlMode) {
                 switchComparisonMode('url');
                 const inputs = document.querySelectorAll('.compare-url-input');
-                const firstUrl = u1 || rawQuery;
+                const firstUrl = u1 || (rawQuery.startsWith('http') ? rawQuery : '');
                 if (firstUrl && inputs[0]) inputs[0].value = firstUrl;
                 if (u2 && inputs[1]) inputs[1].value = u2;
 
-                if (firstUrl) {
-                    executeSingleOrMultiUrlCompare(firstUrl, u2);
+                const activeUrls = [firstUrl, u2].filter(Boolean);
+                if (activeUrls.length > 0) {
+                    executeSingleOrMultiUrlCompare(activeUrls);
                     return;
                 }
             }
@@ -440,29 +441,40 @@
             comparePastedUrls();
         }
 
-        function executeSingleOrMultiUrlCompare(url1, url2) {
+        function executeSingleOrMultiUrlCompare(urls) {
             if (!window.parseProductUrl) return;
 
-            const res1 = window.parseProductUrl(url1);
+            const urlList = Array.isArray(urls) ? urls : [urls];
             let products = [];
-            if (res1 && res1.product) products.push(res1.product);
 
-            if (url2) {
-                const res2 = window.parseProductUrl(url2);
-                if (res2 && res2.product) products.push(res2.product);
-            }
+            urlList.forEach(u => {
+                if (!u || typeof u !== 'string') return;
+                const trimmed = u.trim();
+                if (!trimmed) return;
+                const res = window.parseProductUrl(trimmed);
+                if (res && res.product) {
+                    products.push(res.product);
+                }
+            });
 
-            // If only 1 URL pasted, find cross-platform price beats or related upgrades
+            // If only 1 URL pasted, find cross-platform price beats or related category upgrades
             if (products.length === 1 && window.FAIRCART_CATALOG) {
                 const mainItem = products[0];
                 const matchingCat = window.FAIRCART_CATALOG.filter(c => c.category === mainItem.category && c.id !== mainItem.id).slice(0, 2);
-                products = [mainItem, ...matchingCat];
+                if (matchingCat.length > 0) {
+                    products = [mainItem, ...matchingCat];
+                }
+            }
+
+            if (products.length === 0) {
+                if (window.showToast) showToast("Could not parse product URL. Please check the link.", "error");
+                return;
             }
 
             const selectedStores = Array.from(document.querySelectorAll('.arena-store-cb:checked')).map(cb => cb.value);
 
-            document.getElementById('queryDisplay').textContent = `Live Scraped URL Deal (${products[0].name})`;
-            document.getElementById('resultsSubtitle').textContent = `Aggregating real-time discounts across 12 platforms`;
+            const qEl = document.getElementById('queryDisplay');
+            if (qEl) qEl.textContent = `URL Comparison (${products.map(p => p.name.substring(0, 32)).join(' vs ')})`;
 
             renderSmartStretchBanner(products[0]);
             renderArenaCards(products, selectedStores);
@@ -470,7 +482,7 @@
             renderPriceChart(products);
 
             if (window.lucide) lucide.createIcons();
-            if (window.showToast) showToast(`Parsed live product link & compared across 12 platforms!`, "success");
+            if (window.showToast) showToast(`Parsed & compared ${products.length} live product deals!`, "success");
         }
 
         function comparePastedUrls() {
@@ -482,7 +494,7 @@
                 return;
             }
 
-            executeSingleOrMultiUrlCompare(urls[0], urls[1]);
+            executeSingleOrMultiUrlCompare(urls);
         }
 
         function resetArenaFilters() {
